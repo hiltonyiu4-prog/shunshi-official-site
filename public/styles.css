@@ -712,6 +712,65 @@ textarea:focus {
   padding-left: 22px;
 }
 
+.dimension-list,
+.roadmap-list {
+  display: grid;
+  gap: 10px;
+}
+
+.dimension-item {
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #dce4ee;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.dimension-item strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #202a3a;
+}
+
+.dimension-item span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  border-radius: 8px;
+  background: #eef6f3;
+  color: var(--accent-dark);
+  font-weight: 800;
+}
+
+.dimension-item span[data-priority="高"] {
+  background: #fff1ed;
+  color: var(--warm);
+}
+
+.roadmap-item {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: #f8fafb;
+}
+
+.roadmap-item h4,
+.roadmap-period {
+  margin: 0;
+}
+
+.roadmap-period {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .meta {
   color: var(--muted);
   font-size: 13px;
@@ -1037,6 +1096,14 @@ textarea:focus {
   .diagnosis-body .report-section li {
     font-size: 14px;
     line-height: 1.65;
+  }
+
+  .diagnosis-body .dimension-item {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnosis-body .dimension-item span {
+    width: 52px;
   }
 }
 

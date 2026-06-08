@@ -80,6 +80,52 @@ function listItems(items = []) {
   return items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
 }
 
+function renderDimensions(dimensions = []) {
+  if (!dimensions.length) return "";
+  return `
+    <section class="report-section">
+      <h3>六类诊断</h3>
+      <div class="dimension-list">
+        ${dimensions
+          .map(
+            (item) => `
+              <div class="dimension-item">
+                <div>
+                  <strong>${escapeHtml(item.name)}</strong>
+                  <p>${escapeHtml(item.conclusion)}</p>
+                </div>
+                <span data-priority="${escapeHtml(item.priority)}">${escapeHtml(item.priority)}</span>
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderRoadmap(path = []) {
+  if (!path.length) return "";
+  return `
+    <section class="report-section">
+      <h3>30 / 60 / 90 天路径</h3>
+      <div class="roadmap-list">
+        ${path
+          .map(
+            (item) => `
+              <div class="roadmap-item">
+                <p class="roadmap-period">${escapeHtml(item.period)}</p>
+                <h4>${escapeHtml(item.title)}</h4>
+                <ul>${listItems(item.actions)}</ul>
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
 function showStep(step) {
   currentStep = Math.max(1, Math.min(totalSteps, step));
 
@@ -146,14 +192,23 @@ function renderReport(report, jobId) {
       <ul>${listItems(report.findings)}</ul>
     </section>
 
+    ${renderDimensions(report.dimensions)}
+
     <section class="report-section">
       <h3>建议方向</h3>
       <ol>${listItems(report.recommendations)}</ol>
     </section>
 
+    ${renderRoadmap(report.path)}
+
     <section class="report-section">
       <h3>下一步</h3>
       <ul>${listItems(report.nextSteps)}</ul>
+    </section>
+
+    <section class="report-section">
+      <h3>边界说明</h3>
+      <ul>${listItems(report.boundaries)}</ul>
     </section>
   `;
 
@@ -250,7 +305,7 @@ async function downloadPdf() {
   const fileName = `${currentReport.title || "brand-diagnosis"}-${currentJobId.slice(0, 8)}.pdf`;
   const target = reportView.cloneNode(true);
   target.style.padding = "24px";
-  target.style.width = "760px";
+  target.style.width = "780px";
   target.style.background = "#ffffff";
 
   if (window.html2pdf) {

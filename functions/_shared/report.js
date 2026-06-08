@@ -134,6 +134,9 @@ function mockReport({ jobId, submission }) {
   const score = Math.max(38, Math.min(88, 78 - issueCount * 3 + proofBonus + assetBonus));
   const firstPriority = inferFirstPriority(submission);
   const mode = inferCooperationMode(submission, cooperationModes);
+  const dimensions = buildDimensions(submission);
+  const path = buildRoadmap(firstPriority, submission);
+  const boundaries = buildBoundaries(submission);
 
   return normalizeReport(
     {
@@ -173,6 +176,13 @@ function mockReport({ jobId, submission }) {
         "由 SHUNSE 内部完成六类诊断：市场人群、产品品牌、内容触点、销售转化、资料库 AI、出海语境。",
         "输出问题清单、优先级判断、30/60/90 天路径和推荐合作模式。",
       ],
+      dimensions,
+      path,
+      boundaries,
+      downloadable: {
+        format: "html-pdf",
+        rationale: "报告先以 HTML 呈现，用户确认后本地生成 PDF。50 人沙龙体量下不占用服务器 CPU，也不会因为单点 PDF 服务排队。",
+      },
       metadata: {
         source: "shunse-brief-mock-v1",
         jobId,
@@ -224,6 +234,105 @@ function inferCooperationMode(submission, selectedModes) {
   return labels.cooperationModes["30-day-foundation"];
 }
 
+function buildDimensions(submission) {
+  return [
+    dimension(
+      "市场与人群判断",
+      !submission.customerSegments || asArray(submission.trustConcerns).length >= 3 ? "高" : "中",
+      submission.customerSegments
+        ? `已描述目标客户，但仍需验证购买动机与成交证据。`
+        : "目标客户画像不足，容易导致内容和销售动作失焦。",
+    ),
+    dimension(
+      "产品与品牌表达",
+      asArray(submission.brandIssues).length >= 2 ? "高" : "中",
+      asArray(submission.brandIssues).length
+        ? `当前表达问题包括：${mapLabels("brandIssues", submission.brandIssues).slice(0, 3).join("、")}。`
+        : "需要结合企业介绍、案例和官网进一步判断表达清晰度。",
+    ),
+    dimension(
+      "内容与全域触点",
+      asArray(submission.contentProblems).includes("no-mainline") ? "高" : "中",
+      asArray(submission.touchpoints).length
+        ? "已有触点需要统一主线，避免平台各自为战。"
+        : "触点基础不足，建议先建立官网/私域/资料的基本承接。",
+    ),
+    dimension(
+      "销售与转化承接",
+      asArray(submission.salesAssets).length < 2 ? "高" : "中",
+      asArray(submission.salesAssets).length
+        ? `已有资产：${mapLabels("salesAssets", submission.salesAssets).join("、")}。`
+        : "销售话术、FAQ、案例证据和线索记录需要优先补齐。",
+    ),
+    dimension(
+      "资料库与 AI 工作流",
+      asArray(submission.aiStatus).includes("want-shunse-pulse") ? "高" : "中",
+      asArray(submission.aiStatus).length
+        ? `AI/资料库现状：${mapLabels("aiStatus", submission.aiStatus).slice(0, 3).join("、")}。`
+        : "AI 使用和资料沉淀信息不足，暂不建议直接上复杂自动化。",
+    ),
+    dimension(
+      "出海 / 国家语境",
+      submission.overseasNeed === "yes" ? "高" : "低",
+      submission.overseasNeed === "yes"
+        ? "需要从目标国家客户的理解方式和信任成本重构表达。"
+        : "当前优先级不高，先把国内表达和承接跑顺。",
+    ),
+  ];
+}
+
+function dimension(name, priority, conclusion) {
+  return { name, priority, conclusion };
+}
+
+function buildRoadmap(firstPriority, submission) {
+  return [
+    {
+      period: "0-30 天",
+      title: "表达打底",
+      actions: [
+        `围绕「${firstPriority}」完成问题定义和第一版价值主线。`,
+        "整理企业介绍、产品优势、客户案例和常见异议。",
+        "形成官网/销售资料/私域话术可共用的一页式表达框架。",
+      ],
+    },
+    {
+      period: "31-60 天",
+      title: "承接完善",
+      actions: [
+        "补齐客户 FAQ、案例证据、销售话术和线索记录字段。",
+        "建立内容复盘表，判断哪些主题带来有效咨询。",
+        submission.overseasNeed === "yes"
+          ? "同步重构目标市场的英文/多语种资料。"
+          : "先跑通国内主要触点的统一表达。",
+      ],
+    },
+    {
+      period: "61-90 天",
+      title: "顺势引擎",
+      actions: [
+        "沉淀企业资料库、行业知识库和复盘库。",
+        "将高频内容、销售问答和案例沉淀为可复用 AI 工作流。",
+        "按月更新 SHUNSE Pulse，持续校准市场、人群和表达。",
+      ],
+    },
+  ];
+}
+
+function buildBoundaries(submission) {
+  const boundaries = [
+    "本报告是沙龙初诊，不替代深度访谈和资料审计。",
+    "不承诺立即爆单，优先解决判断、表达、信任和承接问题。",
+    "如果缺少真实案例、销售记录和客户反馈，诊断结论需要后续复核。",
+  ];
+
+  if (submission.overseasNeed === "yes") {
+    boundaries.push("出海表达不能只翻译中文资料，需要按目标国家语境重写信任证据。");
+  }
+
+  return boundaries;
+}
+
 function buildFinding(title, text, tags, tagTitle) {
   const parts = [];
   if (text) parts.push(text);
@@ -248,6 +357,10 @@ function normalizeReport(report, context) {
     findings: normalizeList(report.findings),
     recommendations: normalizeList(report.recommendations),
     nextSteps: normalizeList(report.nextSteps),
+    dimensions: Array.isArray(report.dimensions) ? report.dimensions : [],
+    path: Array.isArray(report.path) ? report.path : [],
+    boundaries: normalizeList(report.boundaries),
+    downloadable: report.downloadable || null,
     generatedAt: report.generatedAt || new Date().toISOString(),
     metadata: {
       ...(report.metadata || {}),

@@ -72,6 +72,23 @@ FEISHU_DOC_TOKEN=KdIydqVjIoRJwUxayescdZNPnTd
 4. Cloudflare Pages 会自动识别 `functions/` 目录作为后端 API。
 5. 在 Cloudflare Pages 的 Settings → Environment variables 添加上面的变量。
 
+## 沙龙报告与 PDF 方案
+
+当前报告生成方式适合 50 人左右沙龙 MVP：
+
+- 后端同步生成结构化文字报告，避免长队列和复杂任务系统。
+- 前端立即展示 HTML 报告，用户先看到结果。
+- PDF 在用户点击下载时由浏览器本地生成，`html2pdf` 已自托管在 `public/vendor/`，避免依赖外部 CDN。
+- 如果后续单场超过 200 人，或报告包含大量图片/复杂排版，再升级为队列 + 服务端 PDF 渲染。
+
+正式诊断入口路径：
+
+```txt
+https://shunse.com/diagnosis
+```
+
+注意：`shunse.com` 已添加到 Cloudflare Pages 自定义域，但仍需要把域名 DNS 接入当前 Cloudflare 账号，否则会保持 `CNAME record not set`。
+
 ## 域名绑定
 
 在 Cloudflare Pages 项目的 Custom domains 里添加你的域名，例如：
