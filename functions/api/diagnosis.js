@@ -143,10 +143,25 @@ const TEXT_FIELDS = [
   "mainOffering",
   "currentCustomerTypes",
   "contactName",
+  "contactRole",
   "contactMethod",
+  "acquisitionMethods",
+  "businessGoal",
+  "newMarketPlan",
   "overseasNeed",
   "targetMarkets",
+  "shunseQuestion",
   "primaryProblem",
+  "selfCheck1",
+  "selfCheck2",
+  "selfCheck3",
+  "selfCheck4",
+  "selfCheck5",
+  "selfCheck6",
+  "selfCheck7",
+  "selfCheck8",
+  "selfCheck9",
+  "selfCheck10",
   "customerSegments",
   "priorityOffering",
   "productStrength",
@@ -166,6 +181,8 @@ const TEXT_FIELDS = [
 ];
 
 const LONG_TEXT_FIELDS = new Set([
+  "businessGoal",
+  "shunseQuestion",
   "primaryProblem",
   "customerSegments",
   "currentIntro",
@@ -175,6 +192,7 @@ const LONG_TEXT_FIELDS = new Set([
 ]);
 
 const ARRAY_FIELDS = [
+  "businessIntentions",
   "quickProblems",
   "expectedChanges",
   "purchaseMotivations",

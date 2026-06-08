@@ -3,23 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>顺世品牌诊断</title>
+    <title>顺世线上认知自测</title>
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body class="diagnosis-body">
     <main class="shell">
-      <section class="workspace" aria-label="品牌诊断工作台">
+      <section class="workspace" aria-label="企业线上认知自测工作台">
         <div class="intro">
-          <p class="eyebrow">SHUNSE BRIEF DIAGNOSIS</p>
-          <h1>SHUNSE 甲方需求诊断</h1>
+          <p class="eyebrow">SHUNSE ONLINE COGNITION CHECK</p>
+          <h1>企业线上认知自测</h1>
           <p class="lede">
-            先看清市场、人群、产品价值和信任障碍，再判断从内容、AI、出海或顺势引擎哪里开始。
+            判断真实实力是否已经变成客户看得懂、愿意信、知道怎么选择，并能被团队和 AI 反复调用的线上认知资产。
           </p>
         </div>
 
         <div class="status-strip" id="statusStrip" role="status" aria-live="polite">
           <span class="status-dot"></span>
-          <span id="statusText">等待提交问卷</span>
+          <span id="statusText">等待提交自测</span>
         </div>
 
         <section class="grid" id="diagnosisGrid">
@@ -27,24 +27,25 @@
             <div class="panel-head sticky-head">
               <div>
                 <p class="section-label">01 / INPUT</p>
-                <h2>需求收集表</h2>
+                <h2>线上认知自测表</h2>
               </div>
               <button class="ghost-button" type="reset">清空</button>
             </div>
 
             <div class="wizard-progress" aria-label="问卷进度">
               <button class="wizard-step active" type="button" data-step-button="1">基础</button>
-              <button class="wizard-step" type="button" data-step-button="2">市场</button>
-              <button class="wizard-step" type="button" data-step-button="3">产品</button>
-              <button class="wizard-step" type="button" data-step-button="4">转化</button>
-              <button class="wizard-step" type="button" data-step-button="5">适配</button>
+              <button class="wizard-step" type="button" data-step-button="2">意图</button>
+              <button class="wizard-step" type="button" data-step-button="3">认知</button>
+              <button class="wizard-step" type="button" data-step-button="4">承接</button>
+              <button class="wizard-step" type="button" data-step-button="5">AI</button>
             </div>
 
             <section class="question-section" data-step="1">
               <div class="question-heading">
                 <p class="section-label">BASIC</p>
-                <h3>基础信息</h3>
+                <h3>企业基础信息</h3>
               </div>
+
               <div class="field-grid">
                 <label>
                   <span>企业名称</span>
@@ -52,28 +53,13 @@
                 </label>
 
                 <label>
-                  <span>所在行业</span>
-                  <input name="industry" placeholder="例如：制造业 / 科技 / 消费品" />
+                  <span>填写人</span>
+                  <input name="contactName" autocomplete="name" required placeholder="姓名" />
                 </label>
 
                 <label>
-                  <span>所在城市 / 国家</span>
-                  <input name="location" placeholder="例如：杭州 / 中国" />
-                </label>
-
-                <label>
-                  <span>主营产品 / 服务</span>
-                  <input name="mainOffering" placeholder="优先写当前最重要的产品或服务" />
-                </label>
-
-                <label>
-                  <span>当前主要客户类型</span>
-                  <input name="currentCustomerTypes" placeholder="例如：B2B 采购商 / 经销商 / C 端消费者" />
-                </label>
-
-                <label>
-                  <span>联系人 / 职位</span>
-                  <input name="contactName" autocomplete="name" required placeholder="姓名 / 职位" />
+                  <span>职务</span>
+                  <input name="contactRole" placeholder="例如：创始人 / 市场负责人 / 业务负责人" />
                 </label>
 
                 <label>
@@ -82,276 +68,196 @@
                 </label>
 
                 <label>
-                  <span>是否有出海需求</span>
-                  <select name="overseasNeed">
+                  <span>所在行业</span>
+                  <input name="industry" placeholder="例如：制造业 / 文旅 / 农特产 / 企业服务" />
+                </label>
+
+                <label>
+                  <span>所在城市 / 国家</span>
+                  <input name="location" placeholder="例如：昆明 / 中国" />
+                </label>
+
+                <label>
+                  <span>主营产品 / 服务 / 项目</span>
+                  <input name="mainOffering" placeholder="当前最希望被客户理解的业务" />
+                </label>
+
+                <label>
+                  <span>当前主要客户 / 用户 / 合作方</span>
+                  <input name="currentCustomerTypes" placeholder="例如：本地高端客户 / 渠道商 / 企业客户" />
+                </label>
+              </div>
+
+              <label class="wide-field">
+                <span>当前主要获客 / 成交 / 触达方式</span>
+                <input name="acquisitionMethods" placeholder="例如：熟人介绍、线下门店、活动、短视频、小红书、官网、渠道合作" />
+              </label>
+
+              <label class="wide-field">
+                <span>目前最想突破的经营目标</span>
+                <textarea name="businessGoal" rows="3" placeholder="例如：提升咨询转化、让外地客户看懂、把老板经验沉淀成可复制资料。"></textarea>
+              </label>
+            </section>
+
+            <section class="question-section" data-step="2">
+              <div class="question-heading">
+                <p class="section-label">INTENT</p>
+                <h3>先选当前经营意图</h3>
+              </div>
+
+              <fieldset class="checkbox-group compact-options">
+                <legend>请选择最接近真实目标的 1-2 项</legend>
+                <label><input type="checkbox" name="businessIntentions" value="intent-a" /> 产品、服务或项目不错，但客户线上看不懂、记不住、分不清</label>
+                <label><input type="checkbox" name="businessIntentions" value="intent-b" /> 想把老板经验、企业积累、产品优势整理成品牌资产</label>
+                <label><input type="checkbox" name="businessIntentions" value="intent-c" /> 想做内容、短视频、直播、私域或官网，但结果不稳定</label>
+                <label><input type="checkbox" name="businessIntentions" value="intent-d" /> 想提升咨询、到店、成交、复购、转介绍或合作拓展</label>
+                <label><input type="checkbox" name="businessIntentions" value="intent-e" /> 想进入新城市、新圈层、新平台或海外市场</label>
+                <label><input type="checkbox" name="businessIntentions" value="intent-f" /> 想用 AI 提效，但 AI 写出来空、乱、像别人</label>
+              </fieldset>
+
+              <div class="field-grid">
+                <label>
+                  <span>是否有新城市 / 新圈层 / 海外市场计划</span>
+                  <select name="newMarketPlan">
                     <option value="uncertain">不确定</option>
-                    <option value="yes">是</option>
-                    <option value="no">否</option>
+                    <option value="none">暂时没有</option>
+                    <option value="new-city">有新城市计划</option>
+                    <option value="new-circle">有新圈层计划</option>
+                    <option value="new-platform">有新平台计划</option>
+                    <option value="overseas">有海外市场计划</option>
                   </select>
                 </label>
+
+                <label>
+                  <span>目标国家 / 地区（如有）</span>
+                  <input name="targetMarkets" placeholder="例如：东南亚、欧洲、中东、北美" />
+                </label>
               </div>
 
               <label class="wide-field">
-                <span>目标国家 / 地区（如有）</span>
-                <input name="targetMarkets" placeholder="例如：美国、东南亚、欧洲、中东" />
+                <span>当前最想让 SHUNSE 帮你判断的问题</span>
+                <textarea name="shunseQuestion" rows="4" placeholder="例如：我们到底该先补品牌表达、信任证据、内容主线，还是销售承接？"></textarea>
               </label>
-            </section>
-
-            <section class="question-section" data-step="1">
-              <div class="question-heading">
-                <p class="section-label">CORE ISSUE</p>
-                <h3>如果只解决一个问题，会是什么？</h3>
-              </div>
-
-              <label class="wide-field">
-                <span>一句话描述当前最想解决的问题</span>
-                <textarea name="primaryProblem" rows="4" placeholder="例如：产品很好，但客户线上看不懂我们到底强在哪里。"></textarea>
-              </label>
-
-              <fieldset class="checkbox-group">
-                <legend>可选方向</legend>
-                <label><input type="checkbox" name="quickProblems" value="product-not-understood" /> 产品好，但客户线上看不懂</label>
-                <label><input type="checkbox" name="quickProblems" value="content-no-mainline" /> 内容做了不少，但没有主线</label>
-                <label><input type="checkbox" name="quickProblems" value="ai-not-operational" /> AI 工具用过，但没有真正进入业务</label>
-                <label><input type="checkbox" name="quickProblems" value="sales-hard-to-copy" /> 销售承接靠个人经验，难复制</label>
-                <label><input type="checkbox" name="quickProblems" value="overseas-translation-only" /> 想出海，但资料只是翻译</label>
-                <label><input type="checkbox" name="quickProblems" value="no-review" /> 投了钱做内容 / 投放，但没有复盘</label>
-              </fieldset>
-            </section>
-
-            <section class="question-section" data-step="2">
-              <div class="question-heading">
-                <p class="section-label">90 DAYS</p>
-                <h3>90 天后，希望看到什么变化？</h3>
-              </div>
-
-              <fieldset class="checkbox-group compact-options">
-                <legend>建议勾选 1-3 项</legend>
-                <label><input type="checkbox" name="expectedChanges" value="product-value-clear" /> 产品价值被讲清楚</label>
-                <label><input type="checkbox" name="expectedChanges" value="brand-more-trusted" /> 品牌表达更可信</label>
-                <label><input type="checkbox" name="expectedChanges" value="content-less-similar" /> 内容不再自嗨和同质</label>
-                <label><input type="checkbox" name="expectedChanges" value="touchpoints-mainline" /> 官网 / 短视频 / 图文 / 直播 / 私域有统一主线</label>
-                <label><input type="checkbox" name="expectedChanges" value="sales-assets-complete" /> 销售话术、客户 FAQ、案例证据更完整</label>
-                <label><input type="checkbox" name="expectedChanges" value="lead-review-built" /> 线索记录和复盘机制建立</label>
-                <label><input type="checkbox" name="expectedChanges" value="knowledge-base-built" /> 企业资料库 / 行业知识库搭起来</label>
-                <label><input type="checkbox" name="expectedChanges" value="ai-workflow-working" /> AI 工作流真正辅助内容、销售和复盘</label>
-                <label><input type="checkbox" name="expectedChanges" value="overseas-trust" /> 出海资料能被目标国家客户理解和信任</label>
-                <label><input type="checkbox" name="expectedChanges" value="shunse-pulse" /> 初步形成 SHUNSE Pulse</label>
-              </fieldset>
-            </section>
-
-            <section class="question-section" data-step="2">
-              <div class="question-heading">
-                <p class="section-label">MARKET</p>
-                <h3>市场与消费人群判断</h3>
-              </div>
-
-              <label class="wide-field">
-                <span>谁最可能购买 / 合作？为什么是他们？</span>
-                <textarea name="customerSegments" rows="4" placeholder="写 1-3 类目标客户，以及当前是否已经成交。"></textarea>
-              </label>
-
-              <fieldset class="checkbox-group compact-options">
-                <legend>他们为什么会动心？</legend>
-                <label><input type="checkbox" name="purchaseMotivations" value="function" /> 功能需求</label>
-                <label><input type="checkbox" name="purchaseMotivations" value="emotion" /> 情绪价值</label>
-                <label><input type="checkbox" name="purchaseMotivations" value="identity" /> 身份表达</label>
-                <label><input type="checkbox" name="purchaseMotivations" value="social-topic" /> 社交谈资</label>
-                <label><input type="checkbox" name="purchaseMotivations" value="value-for-money" /> 性价比</label>
-                <label><input type="checkbox" name="purchaseMotivations" value="trust" /> 信任安全感</label>
-                <label><input type="checkbox" name="purchaseMotivations" value="professionalism" /> 专业度 / 稳定交付</label>
-              </fieldset>
-
-              <fieldset class="checkbox-group compact-options">
-                <legend>购买 / 合作前最担心什么？</legend>
-                <label><input type="checkbox" name="trustConcerns" value="price" /> 价格</label>
-                <label><input type="checkbox" name="trustConcerns" value="effect" /> 效果</label>
-                <label><input type="checkbox" name="trustConcerns" value="quality" /> 品质</label>
-                <label><input type="checkbox" name="trustConcerns" value="delivery" /> 交付</label>
-                <label><input type="checkbox" name="trustConcerns" value="aesthetic" /> 审美</label>
-                <label><input type="checkbox" name="trustConcerns" value="risk" /> 风险</label>
-                <label><input type="checkbox" name="trustConcerns" value="brand-trust" /> 品牌可信度</label>
-                <label><input type="checkbox" name="trustConcerns" value="supply-stability" /> 供应稳定性</label>
-                <label><input type="checkbox" name="trustConcerns" value="compliance" /> 合规 / 资质</label>
-                <label><input type="checkbox" name="trustConcerns" value="cross-border-trust" /> 跨境信任成本</label>
-              </fieldset>
             </section>
 
             <section class="question-section" data-step="3">
               <div class="question-heading">
-                <p class="section-label">PRODUCT</p>
-                <h3>产品与业务现状</h3>
+                <p class="section-label">CHECK 01-04</p>
+                <h3>客户是否看得懂、记得住、知道为什么选你？</h3>
               </div>
 
-              <div class="field-grid">
-                <label>
-                  <span>最想优先打透的产品 / 服务</span>
-                  <input name="priorityOffering" />
-                </label>
-
-                <label>
-                  <span>产品最大优势</span>
-                  <input name="productStrength" />
-                </label>
-
-                <label>
-                  <span>和同行最大的不同</span>
-                  <input name="differentiation" />
-                </label>
-
-                <label>
-                  <span>过往客户为什么选择你</span>
-                  <input name="whyChooseUs" />
-                </label>
-
-                <label>
-                  <span>最能证明实力的案例</span>
-                  <input name="proofCase" />
-                </label>
-
-                <label>
-                  <span>价格 / 利润 / 交付是否稳定</span>
-                  <input name="operationStability" />
-                </label>
-              </div>
-            </section>
-
-            <section class="question-section" data-step="3">
-              <div class="question-heading">
-                <p class="section-label">BRAND</p>
-                <h3>品牌与表达现状</h3>
-              </div>
-
-              <fieldset class="checkbox-group compact-options">
-                <legend>请勾选现状</legend>
-                <label><input type="checkbox" name="brandIssues" value="intro-old" /> 企业介绍比较旧</label>
-                <label><input type="checkbox" name="brandIssues" value="value-unclear" /> 产品价值说不清</label>
-                <label><input type="checkbox" name="brandIssues" value="claim-unclear" /> 品牌主张不明确</label>
-                <label><input type="checkbox" name="brandIssues" value="visual-inconsistent" /> 视觉风格不统一</label>
-                <label><input type="checkbox" name="brandIssues" value="proof-insufficient" /> 案例证据不足</label>
-                <label><input type="checkbox" name="brandIssues" value="sales-inconsistent" /> 销售说法不统一</label>
-                <label><input type="checkbox" name="brandIssues" value="team-cannot-explain" /> 老板懂，但团队讲不清</label>
-                <label><input type="checkbox" name="brandIssues" value="customer-not-convinced" /> 客户看完资料仍不知道为什么选我们</label>
+              <fieldset class="radio-group">
+                <legend>1. 陌生客户第一次看到你们时，最可能是什么反应？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck1" value="q1-a" required /><span>“你们到底是做什么的？”需要销售重新解释。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck1" value="q1-b" /><span>“看起来不错，但和别人差不多。”没有留下明确记忆点。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck1" value="q1-c" /><span>“有什么案例、资质、评价、复购？”客户不够放心。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck1" value="q1-d" /><span>“有点兴趣，但下一步该怎么咨询、预约、购买、到店、留资或合作？”</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck1" value="q1-e" /><span>客户能很快明白你是谁、适合谁、为什么值得继续看。</span></label>
               </fieldset>
 
-              <label class="wide-field">
-                <span>当前一句话介绍企业</span>
-                <textarea name="currentIntro" rows="3"></textarea>
-              </label>
-
-              <label class="wide-field">
-                <span>希望未来别人如何理解你</span>
-                <textarea name="desiredPerception" rows="3"></textarea>
-              </label>
-            </section>
-
-            <section class="question-section" data-step="4">
-              <div class="question-heading">
-                <p class="section-label">TOUCHPOINTS</p>
-                <h3>内容与全域触点现状</h3>
-              </div>
-
-              <fieldset class="checkbox-group compact-options">
-                <legend>当前已有触点</legend>
-                <label><input type="checkbox" name="touchpoints" value="website" /> 官网 / 独立站</label>
-                <label><input type="checkbox" name="touchpoints" value="wechat" /> 公众号 / 视频号</label>
-                <label><input type="checkbox" name="touchpoints" value="douyin" /> 抖音</label>
-                <label><input type="checkbox" name="touchpoints" value="xiaohongshu" /> 小红书</label>
-                <label><input type="checkbox" name="touchpoints" value="bilibili" /> B站</label>
-                <label><input type="checkbox" name="touchpoints" value="live" /> 直播</label>
-                <label><input type="checkbox" name="touchpoints" value="private-domain" /> 私域 / 社群 / 微信</label>
-                <label><input type="checkbox" name="touchpoints" value="seo-geo" /> 搜索 / SEO / GEO</label>
-                <label><input type="checkbox" name="touchpoints" value="overseas-social" /> LinkedIn / Google / 海外社媒</label>
-                <label><input type="checkbox" name="touchpoints" value="exhibition-materials" /> 展会资料 / 招商资料</label>
+              <fieldset class="radio-group">
+                <legend>2. 如果想做自有品牌或品牌升级，最卡的是什么？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck2" value="q2-a" required /><span>还在从“我有什么产品”出发，没有真正想清“谁为什么会买”。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck2" value="q2-b" /><span>有品牌名、包装或故事，但客户记不住品牌到底代表什么。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck2" value="q2-c" /><span>产品确实不错，但讲出来还是“好品质、原生态、匠心、性价比”。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck2" value="q2-d" /><span>包装、账号、宣传册、官网、直播、私域各做各的，品牌感不统一。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck2" value="q2-e" /><span>已经知道先打哪类人、靠什么被记住、用什么证据建立信任。</span></label>
               </fieldset>
 
-              <fieldset class="checkbox-group compact-options">
-                <legend>当前内容最大问题</legend>
-                <label><input type="checkbox" name="contentProblems" value="too-little" /> 内容少</label>
-                <label><input type="checkbox" name="contentProblems" value="similar" /> 内容多但同质</label>
-                <label><input type="checkbox" name="contentProblems" value="self-talking" /> 内容自嗨，客户没感觉</label>
-                <label><input type="checkbox" name="contentProblems" value="no-mainline" /> 没有统一主线</label>
-                <label><input type="checkbox" name="contentProblems" value="siloed-platforms" /> 平台各做各的</label>
-                <label><input type="checkbox" name="contentProblems" value="no-review" /> 没有复盘</label>
-                <label><input type="checkbox" name="contentProblems" value="unknown-effective" /> 不知道什么内容有效</label>
+              <fieldset class="radio-group">
+                <legend>3. 客户问“为什么我应该选你，而不是选别人？”时，你们通常怎么回答？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck3" value="q3-a" required /><span>主要靠老板或销售现场发挥，讲得好不好看个人状态。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck3" value="q3-b" /><span>会讲产地、工艺、团队、历史、资源，但客户不一定知道和自己有什么关系。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck3" value="q3-c" /><span>会发很多资料过去，但没有一条清楚的选择逻辑。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck3" value="q3-d" /><span>最后常常还是靠价格、关系、熟人介绍或反复沟通推动。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck3" value="q3-e" /><span>能讲清楚：适合谁、解决什么问题、凭什么信、下一步怎么开始。</span></label>
+              </fieldset>
+
+              <fieldset class="radio-group">
+                <legend>4. 你们对目标客户的判断，最接近哪种状态？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck4" value="q4-a" required /><span>目标客户说得比较泛，比如“年轻人、中高端客户、老板、家庭用户、新中产、外地客户”。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck4" value="q4-b" /><span>知道客户是谁，但不知道他在哪个场景会被触发。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck4" value="q4-c" /><span>知道客户画像，但内容、产品页、销售话术没有围绕他的顾虑展开。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck4" value="q4-d" /><span>本地客户、外地客户、高端客户、合作方或海外客户都用同一套表达。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck4" value="q4-e" /><span>能按不同人群、场景、平台和购买顾虑组织表达。</span></label>
               </fieldset>
             </section>
 
             <section class="question-section" data-step="4">
               <div class="question-heading">
-                <p class="section-label">CONVERSION</p>
-                <h3>销售与转化现状</h3>
+                <p class="section-label">CHECK 05-08</p>
+                <h3>信任、内容和转化是否能承接客户兴趣？</h3>
               </div>
 
-              <div class="field-grid">
-                <label>
-                  <span>线索主要来自哪里</span>
-                  <input name="leadSources" />
-                </label>
+              <fieldset class="radio-group">
+                <legend>5. 你们现在最缺哪一种“让客户相信”的东西？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck5" value="q5-a" required /><span>缺真实案例：做过、卖过、服务过，但没有可复述的案例。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck5" value="q5-b" /><span>缺过程证据：选品、生产、服务、交付、体验、团队能力没有被看见。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck5" value="q5-c" /><span>缺结果证据：复购、口碑、评价、转介绍、项目成果或客户反馈没有沉淀。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck5" value="q5-d" /><span>证据其实不少，但散在聊天记录、相册、PPT、销售个人经验里。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck5" value="q5-e" /><span>已有案例、过程、结果和客户反馈，并能按不同客户场景调用。</span></label>
+              </fieldset>
 
-                <label>
-                  <span>客户最常问的问题</span>
-                  <input name="commonQuestions" />
-                </label>
+              <fieldset class="radio-group">
+                <legend>6. 你们的内容现在最像哪一种？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck6" value="q6-a" required /><span>老板想到什么发什么，内容靠灵感和临时安排。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck6" value="q6-b" /><span>每个平台都在做，但没有统一品牌主线。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck6" value="q6-c" /><span>内容看起来不错，但客户看完没有咨询、预约、购买、到店、留资或合作动作。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck6" value="q6-d" /><span>内容越做越像同行，甚至越用 AI 越像模板。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck6" value="q6-e" /><span>内容能持续回答客户问题，并把客户带向明确下一步。</span></label>
+              </fieldset>
 
-                <label>
-                  <span>客户最常见异议</span>
-                  <input name="commonObjections" />
-                </label>
+              <fieldset class="radio-group">
+                <legend>7. 线索、咨询或客户兴趣来了以后，最常见的问题是什么？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck7" value="q7-a" required /><span>客户问的问题反复出现，但没有形成 FAQ 和标准话术。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck7" value="q7-b" /><span>线索来了以后，主要靠老板、销售、客服、门店或项目负责人的个人能力承接。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck7" value="q7-c" /><span>内容、客服、销售、门店、合作沟通或项目介绍拿出去的说法不一致。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck7" value="q7-d" /><span>有咨询、有沟通，但没有线索记录、复盘和下一轮内容优化。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck7" value="q7-e" /><span>已有咨询路径、话术、资料包、记录和复盘机制。</span></label>
+              </fieldset>
 
-                <label>
-                  <span>当前是否定期复盘内容 / 线索</span>
-                  <input name="reviewCadence" placeholder="例如：没有 / 每月 / 不固定" />
-                </label>
-              </div>
-
-              <fieldset class="checkbox-group compact-options">
-                <legend>已有销售承接资产</legend>
-                <label><input type="checkbox" name="salesAssets" value="standard-script" /> 标准销售话术</label>
-                <label><input type="checkbox" name="salesAssets" value="customer-faq" /> 客户 FAQ</label>
-                <label><input type="checkbox" name="salesAssets" value="lead-source-record" /> 线索来源记录</label>
-                <label><input type="checkbox" name="salesAssets" value="case-proof" /> 案例证据 / 客户评价</label>
+              <fieldset class="radio-group">
+                <legend>8. 如果现在给你一笔品牌预算，你第一步最可能做什么？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck8" value="q8-a" required /><span>先投广告、找达人、做矩阵、铺平台，看哪个能跑出来。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck8" value="q8-b" /><span>先升级包装、拍宣传片、做视觉，让品牌看起来更高级。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck8" value="q8-c" /><span>先多发内容、多做账号、多直播或多铺触点，把声量做起来。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck8" value="q8-d" /><span>其实不知道该先打人群、补资料、做内容、做承接，还是进新市场。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck8" value="q8-e" /><span>先判断目标人群、品牌主线、信任证据和承接路径，再决定投哪里。</span></label>
               </fieldset>
             </section>
 
             <section class="question-section" data-step="5">
               <div class="question-heading">
-                <p class="section-label">AI / DATA</p>
-                <h3>AI 与资料库现状</h3>
+                <p class="section-label">CHECK 09-10</p>
+                <h3>AI 底盘和新市场语境是否准备好？</h3>
               </div>
 
-              <fieldset class="checkbox-group compact-options">
-                <legend>当前状态</legend>
-                <label><input type="checkbox" name="aiStatus" value="not-used" /> 没怎么用 AI</label>
-                <label><input type="checkbox" name="aiStatus" value="copywriting" /> 用 AI 写过文案</label>
-                <label><input type="checkbox" name="aiStatus" value="image-video" /> 用 AI 做过图片 / 视频</label>
-                <label><input type="checkbox" name="aiStatus" value="prompts-unsystematic" /> 有提示词，但不系统</label>
-                <label><input type="checkbox" name="aiStatus" value="company-knowledge-base" /> 有企业资料库</label>
-                <label><input type="checkbox" name="aiStatus" value="industry-knowledge-base" /> 有行业资料库</label>
-                <label><input type="checkbox" name="aiStatus" value="faq-script-base" /> 有客户 FAQ / 话术库</label>
-                <label><input type="checkbox" name="aiStatus" value="review-base" /> 有复盘库</label>
-                <label><input type="checkbox" name="aiStatus" value="want-shunse-pulse" /> 希望搭建 SHUNSE Pulse</label>
+              <fieldset class="radio-group">
+                <legend>9. 如果让 AI 现在帮你们做内容、资料、脚本或销售话术，最大问题是什么？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck9" value="q9-a" required /><span>AI 不懂我们，因为企业资料、案例、话术和产品信息没有整理好。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck9" value="q9-b" /><span>AI 写出来很顺，但都是空话，缺少真实判断和品牌味道。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck9" value="q9-c" /><span>AI 做了很多内容，但平台、销售、私域和复盘没有接上。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck9" value="q9-d" /><span>AI 容易写错、编造或夸大，因为缺少证据和审核标准。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck9" value="q9-e" /><span>已有资料库、内容标准和审核流程，AI 能在团队判断下提高效率。</span></label>
               </fieldset>
 
-              <label class="wide-field">
-                <span>AI 当前最大问题</span>
-                <textarea name="aiBiggestProblem" rows="3"></textarea>
-              </label>
-            </section>
-
-            <section class="question-section" data-step="5">
-              <div class="question-heading">
-                <p class="section-label">FIT</p>
-                <h3>希望 SHUNSE 参与的深度</h3>
-              </div>
+              <fieldset class="radio-group">
+                <legend>10. 如果涉及新城市、新圈层、新平台、跨省或海外市场，最可能卡在哪里？</legend>
+                <label class="choice-card"><input type="radio" name="selfCheck10" value="q10-skip" required /><span>暂时完全不涉及。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck10" value="q10-a" /><span>只是把原有资料翻译、改写或换个平台发布，没有按目标人群和场景重组。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck10" value="q10-b" /><span>不同城市、圈层、平台、客户角色都用同一套卖点。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck10" value="q10-c" /><span>对方关心的合作流程、价格逻辑、体验保障、交付稳定、案例或售后没有讲清。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck10" value="q10-d" /><span>有展会、活动、平台、独立站或海外社媒动作，但咨询承接和资料复用不稳定。</span></label>
+                <label class="choice-card"><input type="radio" name="selfCheck10" value="q10-e" /><span>能按目标市场、客户角色、信任路径和行动流程组织表达。</span></label>
+              </fieldset>
 
               <fieldset class="checkbox-group compact-options">
-                <legend>合作模式倾向</legend>
+                <legend>希望 SHUNSE 参与的深度</legend>
                 <label><input type="checkbox" name="cooperationModes" value="online-diagnosis" /> 只做线上认知诊断</label>
                 <label><input type="checkbox" name="cooperationModes" value="30-day-foundation" /> 30 天表达打底</label>
                 <label><input type="checkbox" name="cooperationModes" value="90-day-engine" /> 90 天顺势引擎搭建</label>
                 <label><input type="checkbox" name="cooperationModes" value="monthly-pulse" /> 月度 SHUNSE Pulse 更新</label>
-                <label><input type="checkbox" name="cooperationModes" value="overseas-rebuild" /> 出海品牌线上认知重构</label>
+                <label><input type="checkbox" name="cooperationModes" value="overseas-rebuild" /> 新市场 / 出海认知重构</label>
                 <label><input type="checkbox" name="cooperationModes" value="ecosystem-support" /> 生态共创 / 高阶支持</label>
                 <label><input type="checkbox" name="cooperationModes" value="need-shunse-judge" /> 不确定，希望 SHUNSE 先判断</label>
               </fieldset>
@@ -384,7 +290,7 @@
 
             <article class="report-empty" id="emptyState">
               <h3>提交后这里会显示报告</h3>
-              <p>问卷原始数据会先保存，报告生成失败也可以回溯和重试。</p>
+              <p>自测数据会先提交保存，再生成可下载的诊断报告。</p>
             </article>
 
             <article class="report" id="reportView" hidden></article>

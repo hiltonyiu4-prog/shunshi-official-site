@@ -49,6 +49,9 @@ FEISHU_APP_ID=飞书应用 App ID，可选
 FEISHU_APP_SECRET=飞书应用 App Secret，可选
 FEISHU_DOC_TOKEN=飞书文档 token，可选
 FEISHU_OPEN_BASE_URL=https://open.feishu.cn
+DEEPSEEK_API_KEY=DeepSeek API Key，可选
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-v4-pro
 ```
 
 GitHub token 权限建议只给这个仓库的 Issues 读写权限。
@@ -63,6 +66,8 @@ FEISHU_DOC_TOKEN=KdIydqVjIoRJwUxayescdZNPnTd
 ```
 
 如果飞书写入失败，不会影响用户生成和下载报告。
+
+大模型优化是可选增强：配置 `DEEPSEEK_API_KEY` 后，系统会先生成规则诊断初稿，再调用 DeepSeek 对报告表达做会后咨询导向优化。DeepSeek 超时或失败时会自动回退到规则报告，避免用户提交卡住。
 
 ## 推荐部署路径
 

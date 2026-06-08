@@ -37,15 +37,11 @@ export function extractRecord(body = "") {
 export function buildIssueBody(record) {
   const submission = record.submission || {};
   const report = record.report || {};
-  const quickProblems = list(submission.quickProblems);
-  const expectedChanges = list(submission.expectedChanges);
-  const trustConcerns = list(submission.trustConcerns);
-  const brandIssues = list(submission.brandIssues);
-  const contentProblems = list(submission.contentProblems);
+  const metadata = report.metadata || {};
 
   return `<!-- ${MARKER}:${encodeRecord(record)} -->
 
-# SHUNSE 甲方需求诊断线索
+# SHUNSE 企业线上认知自测线索
 
 - 状态：${record.status}
 - 企业：${submission.companyName || ""}
@@ -53,29 +49,40 @@ export function buildIssueBody(record) {
 - 城市 / 国家：${submission.location || ""}
 - 主营产品 / 服务：${submission.mainOffering || ""}
 - 主要客户类型：${submission.currentCustomerTypes || ""}
-- 联系人：${submission.contactName || ""}
+- 主要获客 / 触达方式：${submission.acquisitionMethods || ""}
+- 联系人：${[submission.contactName, submission.contactRole].filter(Boolean).join(" / ")}
 - 联系方式：${submission.contactMethod || ""}
-- 是否出海：${submission.overseasNeed || ""}
+- 经营目标：${submission.businessGoal || ""}
+- 经营意图：${list(metadata.businessIntentions) || list(submission.businessIntentions)}
+- 新市场计划：${metadata.newMarketPlan || submission.newMarketPlan || ""}
 - 目标市场：${submission.targetMarkets || ""}
 - 提交时间：${record.createdAt}
 - 更新时间：${record.updatedAt}
 
-## 需求摘要
+## 自测摘要
 
-- 只解决一个问题：${submission.primaryProblem || ""}
-- 可选问题：${quickProblems}
-- 90 天目标：${expectedChanges}
-- 信任障碍：${trustConcerns}
-- 品牌表达问题：${brandIssues}
-- 内容问题：${contentProblems}
+- 希望 SHUNSE 判断的问题：${submission.shunseQuestion || submission.primaryProblem || ""}
+- 标签分布：${metadata.tagSummary || ""}
+- 自测选择：${list(metadata.selfCheckChoices)}
 
 ## 报告摘要
 
 - 标题：${report.title || ""}
 - 分数：${report.score || ""}
 - 等级：${report.level || ""}
+- 主诊断：${metadata.firstPriority || ""}
+- 次诊断：${metadata.secondaryPriority || ""}
+- 咨询信号：${metadata.consultationSignal || ""}
+- 组合诊断：${report.comboDiagnosis?.name || ""}
+- 建议进入：${report.servicePath?.enter || ""}
+- 大模型优化：${metadata.llm?.optimized ? "已优化" : metadata.llm?.fallback ? "失败后回退规则报告" : "未启用"}
 
 ${report.executiveSummary || ""}
+
+## 会后跟进
+
+- 适合继续咨询的问题：${list(report.consultingHooks)}
+- 建议补充材料：${list(report.materialRequests)}
 `;
 }
 

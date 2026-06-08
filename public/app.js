@@ -16,6 +16,7 @@ let currentReport = null;
 let currentJobId = null;
 let currentStep = 1;
 const totalSteps = 5;
+const selfCheckFields = Array.from({ length: 10 }, (_, index) => `selfCheck${index + 1}`);
 
 function setStatus(message, state = "idle") {
   statusText.textContent = message;
@@ -34,11 +35,16 @@ function collectPayload() {
     mainOffering: get("mainOffering"),
     currentCustomerTypes: get("currentCustomerTypes"),
     contactName: get("contactName"),
+    contactRole: get("contactRole"),
     contactMethod: get("contactMethod"),
-    overseasNeed: formData.get("overseasNeed"),
+    acquisitionMethods: get("acquisitionMethods"),
+    businessGoal: get("businessGoal"),
+    newMarketPlan: formData.get("newMarketPlan"),
+    overseasNeed: formData.get("newMarketPlan") === "overseas" ? "yes" : "uncertain",
     targetMarkets: get("targetMarkets"),
-    primaryProblem: get("primaryProblem"),
-    quickProblems: getAll("quickProblems"),
+    shunseQuestion: get("shunseQuestion"),
+    primaryProblem: get("shunseQuestion"),
+    businessIntentions: getAll("businessIntentions"),
     expectedChanges: getAll("expectedChanges"),
     customerSegments: get("customerSegments"),
     purchaseMotivations: getAll("purchaseMotivations"),
@@ -63,7 +69,8 @@ function collectPayload() {
     aiBiggestProblem: get("aiBiggestProblem"),
     cooperationModes: getAll("cooperationModes"),
     supportingMaterials: get("supportingMaterials"),
-    source: "official-site-diagnosis",
+    ...Object.fromEntries(selfCheckFields.map((field) => [field, formData.get(field) || ""])),
+    source: "official-site-cognition-check",
   };
 }
 
@@ -126,6 +133,105 @@ function renderRoadmap(path = []) {
   `;
 }
 
+function renderTagProfile(tags = []) {
+  if (!tags.length) return "";
+  return `
+    <section class="report-section">
+      <h3>认知标签画像</h3>
+      <div class="tag-profile">
+        ${tags
+          .map(
+            (tag) => `
+              <div class="tag-chip">
+                <strong>${escapeHtml(tag.name)}</strong>
+                <span>${Number(tag.count || 0)}</span>
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderAnalysisSummary(items = []) {
+  if (!items.length) return "";
+  return `
+    <section class="report-section">
+      <h3>一句话诊断</h3>
+      <div class="insight-cards">
+        ${items
+          .map(
+            (item) => `
+              <div class="insight-card">
+                <span>${escapeHtml(item.label)}</span>
+                <strong>${escapeHtml(item.value)}</strong>
+                <p>${escapeHtml(item.detail)}</p>
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderComboDiagnosis(combo) {
+  if (!combo) return "";
+  return `
+    <section class="report-section">
+      <h3>组合诊断</h3>
+      <div class="combo-box">
+        <p class="section-label">${escapeHtml(combo.key || "COMBO")}</p>
+        <h4>${escapeHtml(combo.name)}</h4>
+        <p>${escapeHtml(combo.summary)}</p>
+        <strong>建议切入：${escapeHtml(combo.action)}</strong>
+      </div>
+    </section>
+  `;
+}
+
+function renderTextSection(title, content) {
+  if (!content) return "";
+  return `
+    <section class="report-section">
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(content)}</p>
+    </section>
+  `;
+}
+
+function renderListSection(title, items = []) {
+  if (!items.length) return "";
+  return `
+    <section class="report-section">
+      <h3>${escapeHtml(title)}</h3>
+      <ul>${listItems(items)}</ul>
+    </section>
+  `;
+}
+
+function renderServicePath(servicePath) {
+  if (!servicePath) return "";
+  return `
+    <section class="report-section">
+      <h3>建议服务路径</h3>
+      <div class="service-path">
+        <div>
+          <span>不建议先做</span>
+          <strong>${escapeHtml(servicePath.notFirst || "继续零散执行")}</strong>
+        </div>
+        <div>
+          <span>建议先进入</span>
+          <strong>${escapeHtml(servicePath.enter || "线上认知诊断")}</strong>
+        </div>
+      </div>
+      <p>${escapeHtml(servicePath.why || "")}</p>
+      <ul>${listItems(servicePath.actions || [])}</ul>
+    </section>
+  `;
+}
+
 function showStep(step) {
   currentStep = Math.max(1, Math.min(totalSteps, step));
 
@@ -170,6 +276,8 @@ function renderReport(report, jobId) {
   const generatedAt = report.generatedAt
     ? new Date(report.generatedAt).toLocaleString("zh-CN")
     : new Date().toLocaleString("zh-CN");
+  const llm = report.metadata?.llm;
+  const llmBadge = llm?.optimized ? "DeepSeek 已优化终版" : "规则报告终版";
 
   reportView.innerHTML = `
     <div class="report-cover">
@@ -179,7 +287,7 @@ function renderReport(report, jobId) {
         <div class="score">${Number(report.score || 0)}<span>/100</span></div>
         <div class="level">${escapeHtml(report.level || "待评估")}</div>
       </div>
-      <p class="meta">报告编号：${escapeHtml(jobId)} · 生成时间：${escapeHtml(generatedAt)}</p>
+      <p class="meta">报告编号：${escapeHtml(jobId)} · 生成时间：${escapeHtml(generatedAt)} · ${escapeHtml(llmBadge)}</p>
     </div>
 
     <section class="report-section">
@@ -187,10 +295,20 @@ function renderReport(report, jobId) {
       <p>${escapeHtml(report.executiveSummary || "暂无摘要。")}</p>
     </section>
 
+    ${renderAnalysisSummary(report.analysisSummary)}
+
+    ${renderComboDiagnosis(report.comboDiagnosis)}
+
+    ${renderTextSection("客户可能的真实感受", report.customerFeeling)}
+
+    ${renderTextSection("为什么这是品牌管理问题", report.brandManagementInsight)}
+
     <section class="report-section">
       <h3>初步发现</h3>
       <ul>${listItems(report.findings)}</ul>
     </section>
+
+    ${renderTagProfile(report.metadata?.dominantTags)}
 
     ${renderDimensions(report.dimensions)}
 
@@ -200,6 +318,14 @@ function renderReport(report, jobId) {
     </section>
 
     ${renderRoadmap(report.path)}
+
+    ${renderServicePath(report.servicePath)}
+
+    ${renderListSection("不建议先做", report.notRecommended)}
+
+    ${renderListSection("会后建议补充材料", report.materialRequests)}
+
+    ${renderListSection("适合继续咨询的问题", report.consultingHooks)}
 
     <section class="report-section">
       <h3>下一步</h3>
@@ -270,7 +396,7 @@ async function submitDiagnosis(event) {
   const payload = collectPayload();
   submitButton.disabled = true;
   downloadButton.disabled = true;
-  setStatus("正在保存问卷并生成报告...", "working");
+  setStatus("正在保存问卷、生成并优化报告...", "working");
 
   try {
     const response = await fetch("/api/diagnosis", {
@@ -287,9 +413,12 @@ async function submitDiagnosis(event) {
     rememberResult(data);
     renderReport(data.report, data.jobId);
 
-    const storageText = data.storage?.saved
-      ? "问卷和报告已保存到 GitHub Issues"
-      : "已生成报告；当前未配置 GitHub 存储，仅保存在本机浏览器";
+    const feishu = data.integrations?.feishu;
+    const storageText = feishu?.saved
+      ? "报告已生成，可下载 PDF；信息已同步给 SHUNSE"
+      : data.storage?.saved
+        ? "报告已生成，可下载 PDF；信息已进入后续跟进"
+        : "报告已生成，可下载 PDF";
     setStatus(storageText, "ready");
   } catch (error) {
     console.error(error);
