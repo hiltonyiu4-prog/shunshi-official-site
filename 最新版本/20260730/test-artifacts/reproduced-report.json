@@ -1,0 +1,151 @@
+{
+  "jobId": "c6edf51c-5a98-4eee-8b9a-cb0bdf226ff9",
+  "submission": {
+    "companyName": "顺世沙龙测试企业",
+    "industry": "品牌咨询",
+    "location": "杭州 / 中国",
+    "mainOffering": "品牌增长咨询",
+    "currentCustomerTypes": "增长期 B2B 企业",
+    "contactName": "沙龙测试 / 市场负责人",
+    "contactMethod": "test@example.com",
+    "overseasNeed": "uncertain",
+    "primaryProblem": "产品价值没有被目标客户正确理解，内容缺少统一主线。",
+    "quickProblems": [
+      "product-not-understood",
+      "content-no-mainline"
+    ],
+    "expectedChanges": [
+      "product-value-clear",
+      "touchpoints-mainline"
+    ],
+    "customerSegments": "有增长压力的 B2B 企业创始人和市场负责人。",
+    "trustConcerns": [
+      "effect",
+      "brand-trust"
+    ],
+    "priorityOffering": "品牌增长诊断",
+    "productStrength": "能把品牌表达和获客承接连起来",
+    "brandIssues": [
+      "value-unclear",
+      "customer-not-convinced"
+    ],
+    "touchpoints": [
+      "website",
+      "private-domain"
+    ],
+    "contentProblems": [
+      "no-mainline"
+    ],
+    "leadSources": "沙龙、官网、朋友介绍",
+    "salesAssets": [
+      "case-proof"
+    ],
+    "aiStatus": [
+      "prompts-unsystematic",
+      "want-shunse-pulse"
+    ],
+    "cooperationModes": [
+      "30-day-foundation"
+    ]
+  },
+  "report": {
+    "title": "顺世沙龙测试企业 SHUNSE 甲方需求初诊报告",
+    "score": 59,
+    "level": "建议优先补齐判断与信任底盘",
+    "executiveSummary": "顺世沙龙测试企业当前更适合先围绕「产品价值主线与品牌表达」建立清晰判断。重点不是马上多做内容或工具，而是先把市场、人群、产品价值和信任承接看清楚，再决定是否进入 30 天表达打底、90 天顺势引擎或月度 SHUNSE Pulse。",
+    "findings": [
+      "当前最想解决的问题：产品价值没有被目标客户正确理解，内容缺少统一主线。",
+      "市场与人群判断：有增长压力的 B2B 企业创始人和市场负责人。；客户担心点：效果、品牌可信度。",
+      "品牌与表达层面存在：产品价值说不清、客户看完资料仍不知道为什么选我们。",
+      "内容与触点层面存在：没有统一主线。",
+      "AI 与资料库现状：有提示词，但不系统、希望搭建 SHUNSE Pulse。"
+    ],
+    "recommendations": [
+      "第一阶段优先解决：产品价值主线与品牌表达。",
+      "90 天目标建议围绕：产品价值被讲清楚、全域触点有统一主线。",
+      "建议合作模式：30 天表达打底。",
+      "如果暂不出海，先把国内目标客户、产品主线和线索承接打通。"
+    ],
+    "nextSteps": [
+      "补充企业介绍、产品手册、官网/账号链接、客户案例和销售话术。",
+      "由 SHUNSE 内部完成六类诊断：市场人群、产品品牌、内容触点、销售转化、资料库 AI、出海语境。",
+      "输出问题清单、优先级判断、30/60/90 天路径和推荐合作模式。"
+    ],
+    "dimensions": [
+      {
+        "name": "市场与人群判断",
+        "priority": "中",
+        "conclusion": "已描述目标客户，但仍需验证购买动机与成交证据。"
+      },
+      {
+        "name": "产品与品牌表达",
+        "priority": "高",
+        "conclusion": "当前表达问题包括：产品价值说不清、客户看完资料仍不知道为什么选我们。"
+      },
+      {
+        "name": "内容与全域触点",
+        "priority": "高",
+        "conclusion": "已有触点需要统一主线，避免平台各自为战。"
+      },
+      {
+        "name": "销售与转化承接",
+        "priority": "高",
+        "conclusion": "已有资产：案例证据 / 客户评价。"
+      },
+      {
+        "name": "资料库与 AI 工作流",
+        "priority": "高",
+        "conclusion": "AI/资料库现状：有提示词，但不系统、希望搭建 SHUNSE Pulse。"
+      },
+      {
+        "name": "出海 / 国家语境",
+        "priority": "低",
+        "conclusion": "当前优先级不高，先把国内表达和承接跑顺。"
+      }
+    ],
+    "path": [
+      {
+        "period": "0-30 天",
+        "title": "表达打底",
+        "actions": [
+          "围绕「产品价值主线与品牌表达」完成问题定义和第一版价值主线。",
+          "整理企业介绍、产品优势、客户案例和常见异议。",
+          "形成官网/销售资料/私域话术可共用的一页式表达框架。"
+        ]
+      },
+      {
+        "period": "31-60 天",
+        "title": "承接完善",
+        "actions": [
+          "补齐客户 FAQ、案例证据、销售话术和线索记录字段。",
+          "建立内容复盘表，判断哪些主题带来有效咨询。",
+          "先跑通国内主要触点的统一表达。"
+        ]
+      },
+      {
+        "period": "61-90 天",
+        "title": "顺势引擎",
+        "actions": [
+          "沉淀企业资料库、行业知识库和复盘库。",
+          "将高频内容、销售问答和案例沉淀为可复用 AI 工作流。",
+          "按月更新 SHUNSE Pulse，持续校准市场、人群和表达。"
+        ]
+      }
+    ],
+    "boundaries": [
+      "本报告是沙龙初诊，不替代深度访谈和资料审计。",
+      "不承诺立即爆单，优先解决判断、表达、信任和承接问题。",
+      "如果缺少真实案例、销售记录和客户反馈，诊断结论需要后续复核。"
+    ],
+    "downloadable": {
+      "format": "html-pdf",
+      "rationale": "报告先以 HTML 呈现，用户确认后本地生成 PDF。50 人沙龙体量下不占用服务器 CPU，也不会因为单点 PDF 服务排队。"
+    },
+    "generatedAt": "2026-06-08T16:07:35.741Z",
+    "metadata": {
+      "source": "shunse-brief-mock-v1",
+      "jobId": "c6edf51c-5a98-4eee-8b9a-cb0bdf226ff9",
+      "firstPriority": "产品价值主线与品牌表达"
+    }
+  }
+}

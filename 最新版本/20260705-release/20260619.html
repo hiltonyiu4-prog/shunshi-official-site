@@ -1,0 +1,562 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SHUNSE 顺世 | 线上认知与增长系统</title>
+    <meta name="description" content="SHUNSE 顺世为实业企业建立可持续的线上认知与增长系统。">
+    <link rel="stylesheet" href="./styles.css?v=20260704-seamless-slide-bg">
+    <style>
+      .universe-stage {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.66;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 88% 62% at 50% 48%, rgba(120, 20, 23, 0.10), transparent 74%),
+          radial-gradient(ellipse 130% 82% at 50% 90%, rgba(70, 10, 12, 0.16), transparent 70%),
+          linear-gradient(180deg, rgba(24, 5, 6, 0.05), rgba(58, 8, 10, 0.08));
+        mix-blend-mode: screen;
+        transition: opacity 120ms linear;
+        will-change: opacity;
+      }
+
+      .page-shell {
+        position: relative;
+      }
+
+      .hero-content,
+      .statement-slide .statement-composition {
+        position: relative;
+        z-index: 3;
+      }
+
+      .universe-stage canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .statement-slide .image-bg-one {
+        opacity: 0.012;
+      }
+
+      .statement-slide .soft-layer {
+        background:
+          radial-gradient(ellipse 132% 96% at 50% -8%, rgba(12, 4, 5, 0.46), transparent 66%),
+          radial-gradient(ellipse 118% 80% at 50% 48%, rgba(120, 20, 23, 0.10), transparent 80%),
+          radial-gradient(ellipse 126% 92% at 50% 106%, rgba(80, 11, 13, 0.20), transparent 72%),
+          linear-gradient(180deg, rgba(18, 5, 6, 0.18) 0%, rgba(42, 7, 9, 0.04) 48%, rgba(22, 5, 6, 0.22) 100%);
+      }
+
+      .statement-slide .statement-composition {
+        width: min(1500px, calc(100vw - 112px));
+        min-height: 64dvh;
+        grid-template-columns: minmax(260px, 0.76fr) minmax(280px, 0.78fr);
+        gap: clamp(500px, 41vw, 720px);
+        align-items: center;
+      }
+
+      .statement-slide .statement-copy {
+        width: min(420px, 100%);
+      }
+
+      .statement-slide .statement-kicker {
+        display: block;
+        margin-bottom: 18px;
+        color: rgb(120, 20, 23);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .statement-slide .statement-copy h2 {
+        font-size: clamp(24px, 2.55vw, 42px);
+        line-height: 1.28;
+        letter-spacing: 0.07em;
+        text-align: left;
+      }
+
+      .statement-slide .statement-copy p {
+        margin: 22px 0 0;
+        color: rgb(255 246 238 / 0.74);
+        font-size: clamp(12px, 0.92vw, 15px);
+        line-height: 1.85;
+        letter-spacing: 0.06em;
+        text-align: left;
+      }
+
+      .statement-slide .method-copy {
+        width: min(430px, 100%);
+        margin: 0;
+        padding: 0 0 0 34px;
+        border-left: 1px solid rgb(255 246 238 / 0.16);
+      }
+
+      .statement-slide .method-copy h2 {
+        font-size: clamp(22px, 2vw, 34px);
+        line-height: 1.28;
+        letter-spacing: 0.08em;
+      }
+
+      .statement-slide .method-copy p {
+        font-size: clamp(12px, 0.86vw, 14px);
+        line-height: 1.75;
+        letter-spacing: 0.06em;
+      }
+
+      @media (max-width: 980px) {
+        .statement-slide .statement-composition {
+          width: calc(100vw - 40px);
+          min-height: auto;
+          grid-template-columns: 1fr;
+          gap: 42dvh;
+        }
+
+        .statement-slide .statement-copy h2,
+        .statement-slide .method-copy {
+          text-align: center;
+        }
+
+        .statement-slide .statement-copy p {
+          text-align: center;
+        }
+
+        .statement-slide .method-copy {
+          padding: 24px 0 0;
+          border-left: 0;
+          border-top: 1px solid rgb(255 246 238 / 0.2);
+        }
+      }
+    </style>
+  </head>
+  <body class="home-page">
+    <header class="site-header" aria-label="主导航">
+      <div class="nav-inner">
+        <a class="brand" href="./index.html#home" aria-label="SHUNSE 首页">SHUNSE</a>
+        <nav class="primary-nav" aria-label="页面导航">
+          <a href="./index.html#home">首页</a>
+          <a href="./about.html">关于顺世</a>
+          <a href="./index.html#core-business">核心业务</a>
+          <a href="./shunse-pulse.html">顺势引擎</a>
+          <a href="./index.html#contact">联系我们</a>
+        </nav>
+        <div class="nav-side">
+          <span class="pulse-mark">SHUNSE Pulse</span>
+          <a class="lang" href="#" aria-label="English version">English</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="scroll-unfold-stage universe-stage" id="universeStage" aria-hidden="true"></div>
+
+    <main class="page-shell" id="pageShell">
+      <section class="slide hero-slide" id="home">
+        <div class="hero-ambient" aria-hidden="true"><span></span><span></span></div>
+        <div class="red-layer"></div>
+        <div class="hero-content">
+          <p class="brand-line">SHUNSE 顺世</p>
+          <h1>SHUNSE</h1>
+          <p class="hero-cn">为实业企业建立可持续的线上认知与增长系统。</p>
+          <p class="hero-en">A focused brand cognition and AI workflow team for real-world businesses.</p>
+        </div>
+        <button class="arrow-down" type="button" aria-label="进入下一屏">
+          <img src="./assets/arrow-down.png" alt="">
+        </button>
+      </section>
+
+      <section class="slide statement-slide" id="judgement">
+        <div class="slide-bg judgement-field"></div>
+        <div class="image-bg image-bg-one"></div>
+        <div class="red-layer soft-layer"></div>
+        <span class="method-anchor" id="method" aria-hidden="true"></span>
+
+        <div class="statement-composition">
+          <div class="center-copy narrow-copy statement-copy">
+            <span class="statement-kicker">Online Cognition</span>
+            <h2>被看见，被理解，被信任，被选择</h2>
+            <p>AI 让内容越来越多，也让真正有判断的品牌表达越来越稀缺。企业需要的不只是更多内容，而是一套能让真实产品力被准确看见、持续理解、建立信任并走向选择的线上认知系统。</p>
+          </div>
+          <div class="method-copy">
+            <h2>把真实产品力转化为线上品牌认知。</h2>
+            <p>
+              SHUNSE 顺世基于核心成员长期一线市场洞察，结合品牌内容构建、数字内容增长与 AI 工作流，帮助实业企业把真实产品力转化为线上品牌认知，并沉淀为企业专属的顺势引擎。
+            </p>
+          </div>
+        </div>
+
+      </section>
+      <section class="slide business-detail-slide" id="core-business">
+        <div class="business-detail-copy">
+          <span class="business-detail-index">01 / 04</span>
+          <span class="business-detail-kicker">Online Brand Cognition</span>
+          <h2>品牌线上认知</h2>
+          <p>提供市场判断、消费人群洞察、品牌主张、产品价值主线、官网表达、内容方向、FAQ 与销售话术等服务，帮助企业把“内行懂”的实力翻译成“目标客户懂”的表达。</p>
+          <a class="business-detail-link" href="./brand-cognition.html">了解品牌线上认知</a>
+        </div>
+      </section>
+      <section class="slide business-detail-slide" id="marketing-growth">
+        <div class="business-detail-copy">
+          <span class="business-detail-index">02 / 04</span>
+          <span class="business-detail-kicker">Marketing Growth</span>
+          <h2>营销增长</h2>
+          <p>围绕官网、公众号、视频号、抖音、小红书、直播、私域、搜索与 GEO / AEO 等触点，组织内容矩阵、发布包、线索承接与复盘机制。</p>
+          <a class="business-detail-link" href="./marketing-growth.html">了解营销增长</a>
+        </div>
+      </section>
+      <section class="slide business-detail-slide" id="pulse">
+        <div class="business-detail-copy">
+          <span class="business-detail-index">03 / 04</span>
+          <span class="business-detail-kicker">SHUNSE Pulse</span>
+          <h2>顺势引擎</h2>
+          <p>基于企业资料库、行业知识库、案例库、话术库、内容模板、复盘表与 AI 工作流，帮助企业把有效判断和经验沉淀为可持续调用的系统。</p>
+          <a class="business-detail-link" href="./shunse-pulse.html">了解顺势引擎</a>
+        </div>
+      </section>
+      <section class="slide business-detail-slide" id="global-expression">
+        <div class="business-detail-copy">
+          <span class="business-detail-index">04 / 04</span>
+          <span class="business-detail-kicker">Global Expression</span>
+          <h2>出海表达与国际化传播</h2>
+          <p>围绕目标国家、目标客户、海外信任路径与平台语境，重组企业介绍、独立站、LinkedIn、Google、海外社媒与询盘承接。</p>
+          <a class="business-detail-link" href="./global-expression.html">了解出海表达</a>
+        </div>
+      </section>
+      <section class="slide final-slide" id="contact">
+        <div class="slide-bg final-field"></div>
+        <div class="center-copy final-copy">
+          <h2>真实实力，不该被同质内容淹没。</h2>
+          <p class="cta-lines">
+            让产品被正确理解。<br>
+            让品牌被建立信任。<br>
+            让内容接上转化和复盘。<br>
+            让经验沉淀成企业自己的顺势引擎。
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="./diagnosis/">预约线上认知诊断</a>
+            <a class="button secondary" href="#footer">发送企业资料给我们</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer" id="footer" aria-label="网站底部">
+      <div class="site-footer-inner">
+        <a class="footer-logo" href="#home" aria-label="返回首页">SHUNSE</a>
+        <div class="footer-nav-row">
+          <a class="footer-top-link" href="#home">TOP△</a>
+          <nav class="footer-nav" aria-label="底部导航">
+            <a href="./about.html">关于顺世</a>
+            <a href="./index.html#core-business">核心业务</a>
+            <a href="./shunse-pulse.html">顺势引擎</a>
+            <a href="./index.html#contact">联系我们</a>
+            <a href="#">隐私政策</a>
+          </nav>
+        </div>
+        <div class="footer-info">
+          <div class="footer-contact">
+            <p>地址：待补充</p>
+            <p>电话：18127015520　邮箱：shunse001@sina.com</p>
+            <p>合作联系：SHUNSE0-1</p>
+            <p>备案信息：待补充</p>
+          </div>
+          <div class="footer-qr">
+            <img src="./assets/qrcode-wechat.jpg" alt="SHUNSE 微信公众号二维码">
+            <span>微信公众号</span>
+          </div>
+          <p class="footer-copyright">Copyright © 2026 SHUNSE. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <nav class="page-dots" aria-label="首页分页">
+      <a class="dot is-active" href="#home"><span>首屏</span></a>
+      <a class="dot" href="#judgement"><span>品牌判断</span></a>
+      <a class="dot" href="#core-business"><span>品牌线上认知</span></a>
+      <a class="dot" href="#marketing-growth"><span>营销增长</span></a>
+      <a class="dot" href="#pulse"><span>顺势引擎</span></a>
+      <a class="dot" href="#global-expression"><span>出海表达</span></a>
+      <a class="dot" href="#contact"><span>联系顺世</span></a>
+    </nav>
+
+    <script src="./main.js?v=20260630-language-toggle-subpages"></script>
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script>
+      (() => {
+        const stage = document.querySelector("#universeStage");
+        if (!stage || !window.THREE) return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+        camera.position.z = 15.6;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setClearColor(0x160506, 0);
+        stage.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.autoRotate = false;
+        controls.enableDamping = true;
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.enableRotate = false;
+
+        const earthGroup = new THREE.Group();
+        scene.add(earthGroup);
+
+        const radius = 5;
+        const morphItems = [];
+        const flowParticles = [];
+        const smallNodes = [];
+        const glowNodes = [];
+        let targetMorph = 0;
+        let morph = 0;
+        let baseRotation = -0.24;
+
+        const composer = new THREE.EffectComposer(renderer);
+        composer.addPass(new THREE.RenderPass(scene, camera));
+        const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(1, 1), 1.48, 0.32, 0.16);
+        composer.addPass(bloomPass);
+
+        function clamp(value, min, max) {
+          return Math.max(min, Math.min(max, value));
+        }
+
+        function smoothstep(value) {
+          return value * value * (3 - 2 * value);
+        }
+
+        function resizeUniverse() {
+          const rect = stage.getBoundingClientRect();
+          const width = Math.max(1, Math.floor(rect.width));
+          const height = Math.max(1, Math.floor(rect.height));
+          renderer.setSize(width, height, false);
+          composer.setSize(width, height);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+        }
+
+        function updateScrollMorph() {
+          const vh = window.innerHeight || 1;
+          const statementSection = document.querySelector("#judgement");
+          const contactSection = document.querySelector("#contact");
+          const statementTop = statementSection ? statementSection.offsetTop : vh;
+          const contactTop = contactSection ? contactSection.offsetTop : vh * 3.4;
+
+          targetMorph = smoothstep(clamp((window.scrollY - vh * 0.04) / (vh * 1.14), 0, 1));
+
+          const statementTravel = statementSection ? Math.max(1, statementSection.offsetHeight - vh) : vh;
+          const statementProgress = clamp((window.scrollY - statementTop) / statementTravel, 0, 1);
+          document.documentElement.style.setProperty("--statement-copy-opacity", "1");
+          document.documentElement.style.setProperty("--statement-copy-y", "0px");
+
+          document.documentElement.style.setProperty("--business-cards-reveal", "1");
+          document.documentElement.style.setProperty("--business-cards-y", "0px");
+          document.documentElement.style.setProperty("--business-cards-scale", "1");
+          document.documentElement.style.setProperty("--business-head-opacity", "1");
+          document.documentElement.style.setProperty("--business-line-opacity", "0");
+
+          const fadeStart = contactTop - vh * 0.46;
+          const fadeEnd = contactTop - vh * 0.10;
+          const fade = clamp((window.scrollY - fadeStart) / Math.max(1, fadeEnd - fadeStart), 0, 1);
+          stage.style.opacity = String(0.66 * (1 - fade));
+          stage.style.visibility = fade > 0.98 ? "hidden" : "visible";
+        }
+
+        function latLonToVector3(lat, lon, r) {
+          const phi = (90 - lat) * (Math.PI / 180);
+          const theta = (lon + 180) * (Math.PI / 180);
+          return new THREE.Vector3(
+            -(r * Math.sin(phi) * Math.cos(theta)),
+            r * Math.cos(phi),
+            r * Math.sin(phi) * Math.sin(theta),
+          );
+        }
+
+        function latLonToMapVector3(lat, lon, z = 0) {
+          return new THREE.Vector3((lon / 180) * 7.1, (lat / 90) * 3.45, z);
+        }
+
+        function blendVector(from, to, amount, out = new THREE.Vector3()) {
+          return out.copy(from).lerp(to, amount);
+        }
+
+        function addMorphNode(lat, lon, size, color, z = 0.02) {
+          const sphere = latLonToVector3(lat, lon, radius + 0.08);
+          const flat = latLonToMapVector3(lat, lon, z);
+          const mesh = new THREE.Mesh(
+            new THREE.SphereGeometry(size, 16, 16),
+            new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.96 }),
+          );
+          mesh.position.copy(sphere);
+          mesh.userData.sphereScale = size;
+          earthGroup.add(mesh);
+          morphItems.push({ type: "mesh", mesh, sphere, flat });
+          return mesh;
+        }
+
+        function addMorphLine(points, color, opacity) {
+          const spherePoints = points.map((item) => latLonToVector3(item[0], item[1], radius + 0.015));
+          const flatPoints = points.map((item) => latLonToMapVector3(item[0], item[1], -0.01));
+          const geo = new THREE.BufferGeometry().setFromPoints(spherePoints);
+          const line = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color, transparent: true, opacity }));
+          earthGroup.add(line);
+          morphItems.push({ type: "line", line, spherePoints, flatPoints });
+          return line;
+        }
+
+        function addConnection(startLatLon, endLatLon) {
+          const sphereA = latLonToVector3(startLatLon[0], startLatLon[1], radius + 0.04);
+          const sphereB = latLonToVector3(endLatLon[0], endLatLon[1], radius + 0.08);
+          const flatA = latLonToMapVector3(startLatLon[0], startLatLon[1], 0.03);
+          const flatB = latLonToMapVector3(endLatLon[0], endLatLon[1], 0.03);
+          return { sphereA, sphereB, flatA, flatB };
+        }
+
+        function updateMorphItems(amount) {
+          morphItems.forEach((item) => {
+            if (item.type === "mesh") {
+              blendVector(item.sphere, item.flat, amount, item.mesh.position);
+              const scale = 1 - amount * 0.22;
+              item.mesh.scale.set(scale, scale, scale);
+              return;
+            }
+
+            const positions = item.line.geometry.attributes.position.array;
+            for (let i = 0; i < item.spherePoints.length; i += 1) {
+              const point = blendVector(item.spherePoints[i], item.flatPoints[i], amount);
+              positions[i * 3] = point.x;
+              positions[i * 3 + 1] = point.y;
+              positions[i * 3 + 2] = point.z;
+            }
+            item.line.geometry.attributes.position.needsUpdate = true;
+          });
+        }
+
+        for (let i = 0; i < 34; i += 1) {
+          const angle = Math.random() * Math.PI * 2;
+          const distance = radius + 0.72 + Math.random() * 1.45;
+          const y = (Math.random() - 0.5) * 5.2;
+          const speed = 0.001 + Math.random() * 0.0018;
+          const material = new THREE.MeshBasicMaterial({
+            color: 0xfff2ee,
+            transparent: true,
+            opacity: 0.24 + Math.random() * 0.30,
+            depthWrite: false,
+          });
+          const node = new THREE.Mesh(new THREE.SphereGeometry(0.014 + Math.random() * 0.018, 8, 8), material);
+          node.position.set(Math.cos(angle) * distance, y, Math.sin(angle) * distance * 0.3);
+          earthGroup.add(node);
+          glowNodes.push({ node, material, angle, distance, y, speed, phase: Math.random() * Math.PI * 2, baseOpacity: material.opacity });
+        }
+
+        const particleGeo = new THREE.SphereGeometry(0.02, 8, 8);
+        const particleMat = new THREE.MeshBasicMaterial({ color: 0xfff2e8, transparent: true, opacity: 0.78 });
+        const regions = [
+          { main: [45, -100], subs: [[35, -115], [55, -85]] },
+          { main: [-15, -60], subs: [[-5, -75], [-30, -50]] },
+          { main: [50, 15], subs: [[40, -5], [60, 30]] },
+          { main: [5, 20], subs: [[25, 10], [-15, 30]] },
+          { main: [35, 100], subs: [[20, 80], [45, 120]] },
+          { main: [-25, 140], subs: [[-15, 125], [-35, 150]] },
+        ];
+
+        regions.forEach((reg) => {
+          addMorphNode(reg.main[0], reg.main[1], 0.07, 0x8a171b, 0.06);
+          reg.subs.forEach((s) => {
+            const node = addMorphNode(s[0], s[1], 0.018, 0xfff2e8, 0.05);
+            smallNodes.push(node);
+            const connection = addConnection(s, reg.main);
+            const particle = new THREE.Mesh(particleGeo, particleMat);
+            earthGroup.add(particle);
+            flowParticles.push({ mesh: particle, connection, progress: Math.random() });
+          });
+        });
+
+        fetch("https://fastly.jsdelivr.net/gh/nvkelso/natural-earth-vector@master/geojson/ne_110m_land.geojson")
+          .then((res) => res.json())
+          .then((data) => {
+            data.features.forEach((feature) => {
+              const geometry = feature.geometry;
+              const polygons = geometry.type === "MultiPolygon" ? geometry.coordinates.flat() : geometry.coordinates;
+              polygons.forEach((ring) => {
+                const segments = [];
+                for (let i = 0; i < ring.length - 1; i += 1) {
+                  segments.push([ring[i][1], ring[i][0]], [ring[i + 1][1], ring[i + 1][0]]);
+                }
+                addMorphLine(segments, 0xb5282d, 0.88);
+              });
+            });
+          })
+          .catch(() => {});
+
+        function animateUniverse() {
+          requestAnimationFrame(animateUniverse);
+          const time = Date.now() * 0.003;
+          morph += (targetMorph - morph) * 0.028;
+          updateMorphItems(morph);
+
+          baseRotation += 0.001 * (1 - morph);
+          earthGroup.rotation.y = baseRotation * (1 - morph);
+          earthGroup.rotation.x = -0.08 * (1 - morph);
+          earthGroup.rotation.z = 0;
+          earthGroup.scale.set(1 + morph * 0.14, 1 + morph * 0.04, 1);
+          earthGroup.position.y = -0.95 + morph * 0.78;
+          camera.position.z = 15.6 - morph * 1.6;
+          camera.updateProjectionMatrix();
+
+          smallNodes.forEach((node, index) => {
+            const scale = 1 + Math.sin(time + index) * 0.36;
+            node.scale.set(scale, scale, scale);
+          });
+
+          const glowOpacity = Math.max(0, 1 - morph * 1.25);
+          glowNodes.forEach((item) => {
+            item.angle += item.speed * glowOpacity;
+            item.node.position.set(
+              Math.cos(item.angle) * item.distance,
+              item.y + Math.sin(time * 0.35 + item.phase) * 0.16,
+              Math.sin(item.angle) * item.distance * 0.3,
+            );
+            const pulse = 0.72 + Math.sin(time * 0.8 + item.phase) * 0.28;
+            item.material.opacity = item.baseOpacity * pulse * glowOpacity;
+          });
+
+          const speed = Math.sin(time * 0.6) * 0.001 + 0.0022;
+          flowParticles.forEach((particle) => {
+            particle.progress += speed;
+            if (particle.progress >= 1) particle.progress = 0;
+            const sphereA = particle.connection.sphereA.clone().lerp(particle.connection.sphereB, particle.progress);
+            const flatA = particle.connection.flatA.clone().lerp(particle.connection.flatB, particle.progress);
+            particle.mesh.position.copy(sphereA.lerp(flatA, morph));
+          });
+
+          controls.update();
+          composer.render();
+        }
+
+        resizeUniverse();
+        updateScrollMorph();
+        window.addEventListener("resize", () => {
+          resizeUniverse();
+          updateScrollMorph();
+        });
+        window.addEventListener("scroll", updateScrollMorph, { passive: true });
+        animateUniverse();
+      })();
+    </script>
+  </body>
+</html>
+
+

@@ -1,0 +1,248 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3D 地理网络粒子动画</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #0a0202;
+        color: #fff;
+        font-family:
+          "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      }
+
+      canvas {
+        display: block;
+      }
+
+      .copy {
+        position: fixed;
+        left: clamp(28px, 5vw, 86px);
+        top: clamp(28px, 8vh, 86px);
+        z-index: 2;
+        width: min(520px, calc(100vw - 56px));
+        pointer-events: none;
+      }
+
+      .copy small {
+        display: block;
+        margin-bottom: 18px;
+        color: #52f5ff;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .copy h1 {
+        margin: 0;
+        font-size: clamp(40px, 5.6vw, 86px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .copy p {
+        margin: 26px 0 0;
+        max-width: 420px;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: clamp(15px, 1.35vw, 19px);
+        line-height: 1.7;
+      }
+
+      .hint {
+        position: fixed;
+        right: clamp(24px, 4vw, 68px);
+        bottom: clamp(24px, 5vh, 64px);
+        z-index: 2;
+        color: rgba(255, 255, 255, 0.52);
+        font-size: 13px;
+        pointer-events: none;
+      }
+
+      @media (max-width: 720px) {
+        .copy {
+          top: 36px;
+        }
+
+        .copy p {
+          max-width: 330px;
+        }
+
+        .hint {
+          left: 28px;
+          right: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="copy">
+      <small>Global Intelligence Network</small>
+      <h1>数据节点<br />连接全球</h1>
+      <p>
+        地理网络、发光节点与流动粒子构成主视觉，用于表达全球化传播、数据链路与智能营销服务能力。
+      </p>
+    </div>
+    <div class="hint">拖拽可旋转视角</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 16;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x0a0202, 1);
+      document.body.appendChild(renderer.domElement);
+
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.autoRotate = false;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.enableZoom = false;
+
+      const earthGroup = new THREE.Group();
+      scene.add(earthGroup);
+      const radius = 5;
+
+      const composer = new THREE.EffectComposer(renderer);
+      composer.addPass(new THREE.RenderPass(scene, camera));
+      const bloomPass = new THREE.UnrealBloomPass(
+        new THREE.Vector2(window.innerWidth, window.innerHeight),
+        1.5,
+        0.4,
+        0.2,
+      );
+      composer.addPass(bloomPass);
+
+      function latLonToVector3(lat, lon, r) {
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lon + 180) * (Math.PI / 180);
+        return new THREE.Vector3(
+          -(r * Math.sin(phi) * Math.cos(theta)),
+          r * Math.cos(phi),
+          r * Math.sin(phi) * Math.sin(theta),
+        );
+      }
+
+      const flowParticles = [];
+      const smallNodes = [];
+      const particleGeo = new THREE.SphereGeometry(0.02, 8, 8);
+      const particleMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+      const regions = [
+        { main: [45, -100], subs: [[35, -115], [55, -85]] },
+        { main: [-15, -60], subs: [[-5, -75], [-30, -50]] },
+        { main: [50, 15], subs: [[40, -5], [60, 30]] },
+        { main: [5, 20], subs: [[25, 10], [-15, 30]] },
+        { main: [35, 100], subs: [[20, 80], [45, 120]] },
+        { main: [-25, 140], subs: [[-15, 125], [-35, 150]] },
+      ];
+
+      regions.forEach((region) => {
+        const mainPosition = latLonToVector3(region.main[0], region.main[1], radius + 0.08);
+        const mainMesh = new THREE.Mesh(
+          new THREE.SphereGeometry(0.07, 16, 16),
+          new THREE.MeshBasicMaterial({ color: 0x8b0000 }),
+        );
+        mainMesh.position.copy(mainPosition);
+        earthGroup.add(mainMesh);
+
+        region.subs.forEach((sub) => {
+          const subPosition = latLonToVector3(sub[0], sub[1], radius + 0.04);
+          const subMesh = new THREE.Mesh(
+            new THREE.SphereGeometry(0.015, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0x00ffff }),
+          );
+          subMesh.position.copy(subPosition);
+          earthGroup.add(subMesh);
+          smallNodes.push(subMesh);
+
+          const lineGeo = new THREE.BufferGeometry().setFromPoints([subPosition, mainPosition]);
+          earthGroup.add(
+            new THREE.Line(
+              lineGeo,
+              new THREE.LineBasicMaterial({ color: 0x333333, transparent: true, opacity: 0.4 }),
+            ),
+          );
+
+          const curve = new THREE.QuadraticBezierCurve3(
+            subPosition,
+            subPosition.clone().multiplyScalar(1.02),
+            mainPosition,
+          );
+          const particle = new THREE.Mesh(particleGeo, particleMat);
+          earthGroup.add(particle);
+          flowParticles.push({ mesh: particle, curve, progress: Math.random() });
+        });
+      });
+
+      fetch("https://fastly.jsdelivr.net/gh/nvkelso/natural-earth-vector@master/geojson/ne_110m_land.geojson")
+        .then((res) => res.json())
+        .then((data) => {
+          const points = [];
+          data.features.forEach((feature) => {
+            const coords = feature.geometry.coordinates[0];
+            for (let i = 0; i < coords.length - 1; i++) {
+              const p1 = latLonToVector3(coords[i][1], coords[i][0], radius + 0.01);
+              const p2 = latLonToVector3(coords[i + 1][1], coords[i + 1][0], radius + 0.01);
+              points.push(p1, p2);
+            }
+          });
+          const geo = new THREE.BufferGeometry().setFromPoints(points);
+          const mat = new THREE.LineBasicMaterial({ color: 0x00ffff, transparent: true, opacity: 1 });
+          earthGroup.add(new THREE.LineSegments(geo, mat));
+        });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const time = Date.now() * 0.003;
+        earthGroup.rotation.y += 0.001;
+
+        smallNodes.forEach((node, index) => {
+          const scale = 1 + Math.sin(time + index) * 0.5;
+          node.scale.set(scale, scale, scale);
+        });
+
+        const breath = Math.sin(time * 0.6) * 0.0015 + 0.003;
+        flowParticles.forEach((particle) => {
+          particle.progress += breath;
+          if (particle.progress >= 1) particle.progress = 0;
+          particle.mesh.position.copy(particle.curve.getPointAt(particle.progress));
+        });
+
+        controls.update();
+        composer.render();
+      }
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      animate();
+    </script>
+  </body>
+</html>

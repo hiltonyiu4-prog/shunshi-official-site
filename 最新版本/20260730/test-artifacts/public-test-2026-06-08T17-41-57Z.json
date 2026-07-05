@@ -1,0 +1,210 @@
+{
+  "startedAt": "2026-06-08T17:41:57.348Z",
+  "baseUrl": "https://shun-se.com",
+  "checks": [
+    {
+      "name": "diagnosis_page_head",
+      "ok": true,
+      "elapsedMs": 342,
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "api_health",
+      "ok": true,
+      "elapsedMs": 298,
+      "status": 200,
+      "data": {
+        "ok": true,
+        "message": "Use POST /api/diagnosis to create a diagnosis report."
+      }
+    },
+    {
+      "name": "api_submit_single",
+      "ok": true,
+      "elapsedMs": 789,
+      "status": 200,
+      "jobId": "77c23cf5-cbf1-41c6-9c0d-b1d89a77077f",
+      "reportTitle": "单次公网测试企业 SHUNSE 企业线上认知自测报告",
+      "score": 52,
+      "primary": "内容主线断层",
+      "combo": "AI 放大混乱",
+      "enter": "线上认知诊断",
+      "llm": {
+        "optimized": false,
+        "skipped": true,
+        "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+      },
+      "feishu": {
+        "provider": "feishu-doc",
+        "saved": true,
+        "mode": "docs-ai",
+        "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+      }
+    },
+    {
+      "name": "browser_mobile_form_pdf",
+      "ok": true,
+      "elapsedMs": 13479,
+      "status": 200,
+      "jobId": "35bd0a27-4968-4b3f-85c4-81363d88237a",
+      "downloadName": "浏览器公网测试企业 SHUNSE 企业线上认知自测报告-35bd0a27.pdf",
+      "rendered": {
+        "combo": true,
+        "servicePath": true,
+        "pdfBadge": true
+      },
+      "horizontalOverflow": false,
+      "errors": [],
+      "llm": {
+        "optimized": false,
+        "skipped": true,
+        "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+      },
+      "feishu": {
+        "provider": "feishu-doc",
+        "saved": true,
+        "mode": "docs-ai",
+        "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+      }
+    },
+    {
+      "name": "api_submit_10_concurrent",
+      "ok": true,
+      "elapsedMs": 2366,
+      "okCount": 10,
+      "total": 10,
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "minMs": 771,
+      "medianMs": 1027,
+      "maxMs": 2365,
+      "llmStates": [
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        }
+      ],
+      "feishuStates": [
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": true,
+          "mode": "docs-ai",
+          "documentId": "KdIydqVjIoRJwUxayescdZNPnTd"
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-06-08T17:42:14.623Z",
+  "ok": true
+}

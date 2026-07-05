@@ -1,0 +1,1817 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>椤轰笘 SHUNSE VI Manual</title>
+    <style>
+      :root {
+        --red: #781417;
+        --red-2: #a71921;
+        --black: #050505;
+        --paper: #f5f4f0;
+        --white: #fff;
+        --gray: #e5e3dc;
+        --muted: rgba(5, 5, 5, 0.56);
+        --muted-light: rgba(245, 244, 240, 0.58);
+        --line: rgba(5, 5, 5, 0.14);
+        --line-light: rgba(245, 244, 240, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #d6d4ce;
+        color: var(--black);
+        font-family:
+          "Inter", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei",
+          sans-serif;
+        letter-spacing: 0;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .manual {
+        width: min(100%, 1280px);
+        margin: 0 auto;
+        background: var(--paper);
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.24);
+      }
+
+      .page {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        padding: clamp(28px, 4.8vw, 64px);
+      }
+
+      .red {
+        background: var(--red);
+      }
+
+      .black {
+        color: var(--paper);
+        background: var(--black);
+      }
+
+      .white {
+        background: var(--paper);
+      }
+
+      .paper {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.035) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.03) 1px, transparent 1px),
+          var(--paper);
+        background-size: 44px 44px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 1.05fr 0.72fr 0.78fr;
+        gap: clamp(22px, 4vw, 56px);
+        align-items: start;
+        margin-bottom: clamp(52px, 9vw, 128px);
+        font-size: 12px;
+        line-height: 1.42;
+        text-transform: uppercase;
+      }
+
+      .header b {
+        display: block;
+        font-size: 18px;
+        letter-spacing: 0.03em;
+      }
+
+      .black .header,
+      .black .meta,
+      .black .small {
+        color: var(--muted-light);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .cn {
+        margin-left: 8px;
+        font-weight: 700;
+      }
+
+      .logo-original {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        background: var(--paper);
+      }
+
+      .logo-frame {
+        display: grid;
+        place-items: center;
+        background: var(--paper);
+        border: 1px solid rgba(5, 5, 5, 0.06);
+        overflow: hidden;
+      }
+
+      .logo-frame img {
+        width: min(78%, 620px);
+      }
+
+      .cover {
+        min-height: 100vh;
+      }
+
+      .cover-title {
+        position: absolute;
+        left: clamp(28px, 4.8vw, 64px);
+        right: clamp(28px, 4.8vw, 64px);
+        top: 26%;
+      }
+
+      .cover-title span {
+        display: block;
+        color: var(--black);
+        font-size: clamp(84px, 16vw, 210px);
+        font-weight: 900;
+        line-height: 0.82;
+        letter-spacing: 0.08em;
+      }
+
+      .cover-card {
+        position: absolute;
+        right: clamp(28px, 7vw, 96px);
+        top: 18%;
+        width: min(32vw, 360px);
+        min-width: 230px;
+        padding: 20px;
+        background: var(--paper);
+        box-shadow: 0 20px 54px rgba(0, 0, 0, 0.18);
+      }
+
+      .intro {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 48vh;
+        display: grid;
+        place-items: center;
+        padding: 52px 28px;
+        color: var(--red);
+        background: var(--black);
+        text-align: center;
+      }
+
+      .intro h2 {
+        margin-bottom: 24px;
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .intro p {
+        max-width: 760px;
+        color: var(--red-2);
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.8;
+      }
+
+      .section-title {
+        font-size: 19px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .section-title .cn {
+        font-size: 18px;
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .index-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .index-item {
+        min-height: 156px;
+        padding: 24px;
+        background: var(--paper);
+      }
+
+      .index-item b {
+        display: block;
+        margin-bottom: 26px;
+        color: var(--red);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+      }
+
+      .index-item h3 {
+        margin-bottom: 12px;
+        font-size: 22px;
+        font-weight: 760;
+      }
+
+      .index-item p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 0.88fr 1.12fr;
+        gap: clamp(36px, 6vw, 82px);
+        align-items: start;
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(16px, 2vw, 24px);
+      }
+
+      .rule {
+        height: 3px;
+        margin: 24px 0;
+        background: currentColor;
+      }
+
+      .logo-card {
+        min-height: 260px;
+        padding: 26px;
+        background: rgba(255, 255, 255, 0.62);
+        border: 1px solid rgba(5, 5, 5, 0.06);
+      }
+
+      .logo-card img {
+        margin: 0 auto;
+      }
+
+      .caption {
+        margin-top: 12px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .safe-space {
+        position: relative;
+        min-height: 440px;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(90deg, transparent 31px, rgba(5, 5, 5, 0.12) 32px, transparent 33px),
+          linear-gradient(180deg, transparent 31px, rgba(5, 5, 5, 0.12) 32px, transparent 33px),
+          var(--paper);
+        background-size: 48px 48px;
+        border: 1px solid var(--line);
+      }
+
+      .safe-space::before {
+        content: "";
+        position: absolute;
+        inset: 58px;
+        border: 2px solid rgba(120, 20, 23, 0.58);
+      }
+
+      .safe-space::after {
+        content: "X";
+        position: absolute;
+        top: 36px;
+        left: 36px;
+        color: var(--red);
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .safe-space img {
+        position: relative;
+        z-index: 1;
+        width: min(62%, 500px);
+      }
+
+      .spec-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .spec {
+        padding: 20px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .spec b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--red);
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .spec p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .dont-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .dont {
+        min-height: 230px;
+        padding: 16px;
+        background: var(--paper);
+      }
+
+      .dont .demo {
+        position: relative;
+        display: grid;
+        place-items: center;
+        height: 132px;
+        margin-bottom: 18px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        overflow: hidden;
+      }
+
+      .dont .demo::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 2px solid var(--red);
+        background:
+          linear-gradient(45deg, transparent 49%, var(--red) 50%, transparent 51%),
+          linear-gradient(-45deg, transparent 49%, var(--red) 50%, transparent 51%);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+
+      .dont img {
+        width: 76%;
+      }
+
+      .dont.low .demo {
+        background: #94575a;
+      }
+
+      .dont b {
+        color: var(--red);
+        font-size: 13px;
+      }
+
+      .dont p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        min-height: 520px;
+      }
+
+      .color {
+        position: relative;
+        padding: 28px;
+      }
+
+      .color.redchip {
+        color: var(--black);
+        background: var(--red);
+      }
+
+      .color.blackchip {
+        color: var(--paper);
+        background: var(--black);
+      }
+
+      .color.whitechip {
+        background: var(--paper);
+      }
+
+      .color.graychip {
+        background: var(--gray);
+      }
+
+      .color div {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 28px;
+      }
+
+      .color b {
+        display: block;
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: 0.05em;
+      }
+
+      .color span {
+        display: block;
+        margin-top: 12px;
+        font-size: 13px;
+        line-height: 1.6;
+        text-transform: uppercase;
+      }
+
+      .ratio-bars {
+        display: grid;
+        grid-template-columns: 45fr 30fr 20fr 5fr;
+        height: 64px;
+        margin-top: 34px;
+        border: 1px solid var(--line);
+      }
+
+      .type-hero {
+        position: absolute;
+        left: clamp(28px, 4.8vw, 64px);
+        right: clamp(28px, 4.8vw, 64px);
+        top: 35vh;
+        color: var(--black);
+        font-size: clamp(64px, 12vw, 160px);
+        font-weight: 900;
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+
+      .type-panel {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 48vh;
+        padding: clamp(28px, 4.8vw, 64px);
+        color: var(--red-2);
+        background: var(--black);
+      }
+
+      .type-system {
+        display: grid;
+        grid-template-columns: 0.75fr 0.95fr 0.95fr;
+        gap: clamp(24px, 4vw, 54px);
+      }
+
+      .type-system b {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      .type-system p {
+        color: var(--muted-light);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .type-sample {
+        margin-top: clamp(56px, 8vw, 110px);
+        white-space: nowrap;
+      }
+
+      .type-sample .big-cn {
+        display: inline-block;
+        margin-right: 18px;
+        color: var(--red-2);
+        font-size: clamp(48px, 7vw, 102px);
+        font-weight: 850;
+      }
+
+      .type-sample .big-en {
+        color: var(--red-2);
+        font-size: clamp(24px, 4.2vw, 58px);
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+
+      .layout-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 40px;
+      }
+
+      .layout-board {
+        min-height: 560px;
+        padding: 28px;
+        background:
+          linear-gradient(90deg, transparent 39px, rgba(5, 5, 5, 0.12) 40px, transparent 41px),
+          var(--paper);
+        background-size: 64px 100%;
+        border: 1px solid var(--line);
+      }
+
+      .layout-board .red-band {
+        height: 42%;
+        background: var(--red);
+      }
+
+      .layout-board .black-band {
+        height: 34%;
+        padding: 34px;
+        color: var(--red-2);
+        background: var(--black);
+      }
+
+      .layout-board .white-band {
+        height: 24%;
+        padding: 24px;
+        background: var(--paper);
+      }
+
+      .principles {
+        display: grid;
+        gap: 16px;
+      }
+
+      .principle {
+        padding: 22px;
+        color: var(--paper);
+        background: var(--black);
+      }
+
+      .principle b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--red-2);
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .principle p {
+        color: var(--muted-light);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .graphic-system {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .graphic-card {
+        min-height: 360px;
+        position: relative;
+        padding: 24px;
+        background: var(--black);
+        overflow: hidden;
+      }
+
+      .graphic-card::before,
+      .graphic-card::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(245, 244, 240, 0.28);
+        border-radius: 50%;
+      }
+
+      .graphic-card::before {
+        width: 260px;
+        height: 260px;
+        left: -60px;
+        top: 60px;
+      }
+
+      .graphic-card::after {
+        width: 190px;
+        height: 190px;
+        right: -70px;
+        bottom: -34px;
+      }
+
+      .graphic-card.red-block {
+        background: var(--red);
+      }
+
+      .graphic-card.light-block {
+        background: var(--paper);
+      }
+
+      .graphic-card b {
+        position: relative;
+        z-index: 1;
+        color: var(--red-2);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .graphic-card.red-block b,
+      .graphic-card.light-block b {
+        color: var(--black);
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr 1fr;
+        gap: 18px;
+      }
+
+      .photo {
+        min-height: 460px;
+        position: relative;
+        overflow: hidden;
+        background: var(--gray);
+      }
+
+      .photo.people {
+        background:
+          radial-gradient(circle at 50% 28%, #e8c9bd 0 13%, transparent 14%),
+          linear-gradient(125deg, #f5ece7 0 46%, #d3b2a7 47% 48%, #f0e4dd 49%);
+      }
+
+      .photo.space {
+        background:
+          linear-gradient(90deg, #d8cab8 0 42%, #111 42% 44%, #ccd5d6 44%),
+          linear-gradient(180deg, #bcd8ee 0 30%, transparent 30%);
+      }
+
+      .photo.detail {
+        background:
+          radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.8), transparent 22%),
+          linear-gradient(135deg, #f5f4f0, #a7a7a7);
+      }
+
+      .photo-label {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        padding: 8px 10px;
+        color: var(--paper);
+        background: var(--black);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .stationery {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: clamp(18px, 3vw, 44px);
+        align-items: center;
+        min-height: 390px;
+      }
+
+      .mock {
+        position: relative;
+        background: var(--paper);
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
+      }
+
+      .mock.red-bg {
+        background: var(--red);
+      }
+
+      .mock img {
+        position: absolute;
+        left: 16px;
+        top: 16px;
+        width: 86px;
+        mix-blend-mode: normal;
+      }
+
+      .notebook,
+      .folder {
+        height: 240px;
+      }
+
+      .folder::after {
+        content: "";
+        position: absolute;
+        right: 18px;
+        top: 38px;
+        width: 86px;
+        height: 58px;
+        background: var(--paper);
+      }
+
+      .idcard {
+        width: 96px;
+        height: 172px;
+        justify-self: center;
+      }
+
+      .letterhead {
+        height: 304px;
+      }
+
+      .business {
+        height: 96px;
+        align-self: end;
+        background: linear-gradient(180deg, var(--red) 0 50%, var(--paper) 50%);
+      }
+
+      .application-layout {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: clamp(30px, 5vw, 72px);
+        align-items: start;
+      }
+
+      .application-specs {
+        display: grid;
+        gap: 12px;
+      }
+
+      .application-spec {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 14px;
+        padding: 16px 0;
+        border-top: 1px solid var(--line-light);
+      }
+
+      .application-spec:first-child {
+        border-top: 0;
+      }
+
+      .application-spec b {
+        color: var(--red-2);
+        font-size: 13px;
+        letter-spacing: 0.1em;
+      }
+
+      .application-spec h3 {
+        margin-bottom: 8px;
+        color: var(--paper);
+        font-size: 19px;
+        font-weight: 720;
+      }
+
+      .application-spec p {
+        color: var(--muted-light);
+        font-size: 13px;
+        line-height: 1.72;
+      }
+
+      .manual-scene {
+        display: grid;
+        grid-template-columns: 0.82fr 1.18fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .manual-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .manual-cover,
+      .manual-spread,
+      .manual-page-card {
+        position: relative;
+        overflow: hidden;
+        background: var(--paper);
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38);
+      }
+
+      .manual-cover {
+        min-height: 268px;
+        padding: 22px;
+        background:
+          linear-gradient(90deg, var(--red) 0 44%, var(--paper) 44% 100%);
+      }
+
+      .manual-cover img {
+        position: absolute;
+        left: 22px;
+        bottom: 22px;
+        width: 44%;
+        max-width: 190px;
+      }
+
+      .manual-cover .cover-copy {
+        position: absolute;
+        right: 24px;
+        top: 26px;
+        width: 42%;
+        color: var(--black);
+      }
+
+      .manual-cover .cover-copy b,
+      .manual-page-card b {
+        display: block;
+        margin-bottom: 14px;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .manual-cover .cover-copy span {
+        display: block;
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .manual-spread {
+        min-height: 290px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        transform-origin: center;
+      }
+
+      .manual-spread .spread-left {
+        padding: 24px;
+        background: var(--paper);
+      }
+
+      .manual-spread .spread-right {
+        padding: 24px;
+        color: var(--red-2);
+        background: var(--black);
+      }
+
+      .manual-spread img {
+        width: 72%;
+        margin-top: 54px;
+      }
+
+      .manual-spread h3 {
+        font-size: 34px;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .manual-page-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .manual-page-card {
+        min-height: 176px;
+        padding: 16px;
+      }
+
+      .manual-page-card:nth-child(2) {
+        background: var(--red);
+      }
+
+      .manual-page-card:nth-child(3) {
+        color: var(--paper);
+        background: var(--black);
+      }
+
+      .manual-page-card img {
+        width: 62%;
+      }
+
+      .office-detail {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: clamp(28px, 4vw, 58px);
+        align-items: start;
+      }
+
+      .office-board {
+        position: relative;
+        min-height: 600px;
+      }
+
+      .office-item {
+        position: absolute;
+        background: var(--paper);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
+      }
+
+      .office-item img {
+        position: absolute;
+        left: 18px;
+        top: 18px;
+        width: 96px;
+      }
+
+      .office-item.notebook-detail {
+        left: 0;
+        top: 40px;
+        width: 205px;
+        height: 285px;
+        background: var(--red);
+      }
+
+      .office-item.folder-detail {
+        left: 230px;
+        top: 54px;
+        width: 218px;
+        height: 280px;
+        background: var(--red);
+      }
+
+      .office-item.folder-detail::after {
+        content: "";
+        position: absolute;
+        right: 22px;
+        top: 44px;
+        width: 96px;
+        height: 62px;
+        background: var(--paper);
+      }
+
+      .office-item.card-detail {
+        left: 38px;
+        bottom: 34px;
+        width: 240px;
+        height: 138px;
+        background: linear-gradient(180deg, var(--red) 0 48%, var(--paper) 48%);
+      }
+
+      .office-item.letter-detail {
+        right: 0;
+        bottom: 0;
+        width: 250px;
+        height: 350px;
+      }
+
+      .office-item.badge-detail {
+        right: 124px;
+        top: 0;
+        width: 96px;
+        height: 178px;
+        background: var(--red);
+      }
+
+      .office-item.badge-detail::before {
+        content: "";
+        position: absolute;
+        top: -44px;
+        left: 34px;
+        width: 28px;
+        height: 56px;
+        background: var(--paper);
+      }
+
+      .office-item.note-detail {
+        left: 306px;
+        bottom: 64px;
+        width: 136px;
+        height: 136px;
+      }
+
+      .office-label {
+        position: absolute;
+        left: 18px;
+        bottom: 16px;
+        color: rgba(5, 5, 5, 0.64);
+        font-size: 11px;
+        line-height: 1.45;
+        text-transform: uppercase;
+      }
+
+      .material-rules {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .material-rule {
+        padding: 16px;
+        border: 1px solid var(--line-light);
+      }
+
+      .material-rule b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--red-2);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .material-rule p {
+        color: var(--muted-light);
+        font-size: 12px;
+        line-height: 1.62;
+      }
+
+      .gift-detail-grid {
+        display: grid;
+        grid-template-columns: 0.82fr 1.18fr;
+        gap: clamp(30px, 5vw, 70px);
+        align-items: end;
+      }
+
+      .gift-stage {
+        position: relative;
+        min-height: 570px;
+      }
+
+      .gift-stage::before {
+        content: "";
+        position: absolute;
+        left: -40px;
+        right: -40px;
+        bottom: -50px;
+        height: 260px;
+        background: linear-gradient(180deg, transparent, #3a0608 46%, var(--red));
+      }
+
+      .gift-piece {
+        position: absolute;
+        box-shadow: 0 20px 52px rgba(0, 0, 0, 0.42);
+      }
+
+      .gift-piece img {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        width: 118px;
+      }
+
+      .gift-piece.box {
+        left: 0;
+        bottom: 120px;
+        width: 276px;
+        height: 184px;
+        background: var(--red);
+      }
+
+      .gift-piece.envelope {
+        left: 210px;
+        bottom: 210px;
+        width: 190px;
+        height: 130px;
+        background:
+          linear-gradient(145deg, transparent 49%, rgba(5, 5, 5, 0.18) 50%, transparent 51%),
+          var(--red);
+      }
+
+      .gift-piece.card-white {
+        left: 302px;
+        bottom: 300px;
+        width: 182px;
+        height: 98px;
+        background: var(--paper);
+      }
+
+      .gift-piece.bag-large {
+        right: 0;
+        bottom: 72px;
+        width: 300px;
+        height: 315px;
+        background: var(--red);
+      }
+
+      .gift-piece.bag-large::before {
+        content: "";
+        position: absolute;
+        left: 24%;
+        right: 24%;
+        top: -18px;
+        height: 78px;
+        border: 9px solid var(--black);
+        border-bottom: 0;
+        border-radius: 70px 70px 0 0;
+      }
+
+      .gift-piece.candle-detail {
+        left: 40px;
+        bottom: 28px;
+        width: 104px;
+        height: 82px;
+        border-radius: 50% 50% 12px 12px;
+        background: var(--paper);
+      }
+
+      .gift-piece.candle-detail::after {
+        content: "";
+        position: absolute;
+        left: 50px;
+        top: 8px;
+        width: 5px;
+        height: 22px;
+        border-radius: 50%;
+        background: #e6b15e;
+      }
+
+      .display-detail {
+        position: absolute;
+        left: clamp(28px, 5vw, 72px);
+        right: clamp(28px, 5vw, 72px);
+        bottom: 52px;
+        min-height: 500px;
+      }
+
+      .display-detail::before {
+        content: "";
+        position: absolute;
+        left: -80px;
+        right: -80px;
+        bottom: -70px;
+        height: 320px;
+        background: linear-gradient(180deg, transparent 0, #210304 38%, var(--red) 100%);
+      }
+
+      .display-object {
+        position: absolute;
+        background: var(--paper);
+        box-shadow: 0 24px 54px rgba(0, 0, 0, 0.42);
+      }
+
+      .display-object img {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        width: 120px;
+      }
+
+      .display-object.pouch {
+        left: 0;
+        bottom: 42px;
+        width: 118px;
+        height: 156px;
+        background: var(--red);
+      }
+
+      .display-object.card {
+        left: 92px;
+        bottom: 26px;
+        width: 190px;
+        height: 88px;
+      }
+
+      .display-object.bag {
+        left: 222px;
+        bottom: 0;
+        width: 360px;
+        height: 220px;
+        background: var(--red);
+      }
+
+      .display-object.bag::before {
+        content: "";
+        position: absolute;
+        left: 28%;
+        right: 28%;
+        top: -16px;
+        height: 72px;
+        border: 8px solid var(--black);
+        border-bottom: 0;
+        border-radius: 64px 64px 0 0;
+      }
+
+      .display-object.manual {
+        left: 548px;
+        bottom: 72px;
+        width: 190px;
+        height: 290px;
+      }
+
+      .display-object.box-red {
+        right: 238px;
+        bottom: 48px;
+        width: 248px;
+        height: 188px;
+        background: var(--red);
+      }
+
+      .display-object.box-white {
+        right: 112px;
+        bottom: 26px;
+        width: 126px;
+        height: 142px;
+      }
+
+      .display-object.candle {
+        right: 0;
+        bottom: 24px;
+        width: 112px;
+        height: 86px;
+        border-radius: 50% 50% 12px 12px;
+      }
+
+      .digital-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 28px;
+      }
+
+      .screen {
+        min-height: 410px;
+        padding: 28px;
+        color: var(--paper);
+        background: var(--black);
+        border: 1px solid var(--line-light);
+      }
+
+      .screen .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 70px;
+      }
+
+      .screen img {
+        width: 128px;
+        background: var(--paper);
+      }
+
+      .screen h3 {
+        max-width: 520px;
+        color: var(--red-2);
+        font-size: clamp(42px, 6vw, 82px);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .social {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .post {
+        min-height: 193px;
+        padding: 20px;
+        background: var(--red);
+      }
+
+      .post:nth-child(2),
+      .post:nth-child(3) {
+        background: var(--paper);
+      }
+
+      .post b {
+        display: block;
+        margin-top: 80px;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+
+      .signage-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .sign {
+        min-height: 330px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sign.exterior {
+        background:
+          linear-gradient(180deg, #b9d8ef 0 28%, transparent 28%),
+          linear-gradient(90deg, #d9ccb8 0 48%, #111 48% 51%, #c7d1d1 51%);
+      }
+
+      .sign.interior {
+        background:
+          linear-gradient(180deg, #d1c2aa 0 12%, #eadfcc 12% 74%, #c9beb4 74%);
+      }
+
+      .wall-logo {
+        position: absolute;
+        left: 50%;
+        top: 35%;
+        width: 190px;
+        padding: 12px;
+        background: var(--paper);
+        transform: translate(-50%, -50%);
+      }
+
+      .gift-grid {
+        display: grid;
+        grid-template-columns: 0.75fr 1.2fr 0.8fr 1.35fr;
+        gap: clamp(20px, 3vw, 52px);
+        align-items: end;
+      }
+
+      .gift {
+        position: relative;
+        min-height: 160px;
+        background: var(--red);
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
+      }
+
+      .gift.white-gift {
+        background: var(--paper);
+      }
+
+      .gift img {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        width: 108px;
+      }
+
+      .bag {
+        min-height: 272px;
+      }
+
+      .bag::before {
+        content: "";
+        position: absolute;
+        left: 24%;
+        right: 24%;
+        top: -12px;
+        height: 70px;
+        border: 8px solid var(--black);
+        border-bottom: 0;
+        border-radius: 60px 60px 0 0;
+      }
+
+      .footer-floor {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 46%;
+        background: linear-gradient(180deg, transparent, #3b0608 50%, var(--red));
+      }
+
+      .lineup {
+        position: absolute;
+        left: clamp(28px, 6vw, 82px);
+        right: clamp(28px, 6vw, 82px);
+        bottom: 58px;
+        display: grid;
+        grid-template-columns: 0.65fr 1.45fr 0.85fr 1.1fr 0.75fr;
+        gap: 18px;
+        align-items: end;
+      }
+
+      .lineup .mock:nth-child(1) {
+        height: 78px;
+      }
+
+      .lineup .mock:nth-child(2) {
+        height: 190px;
+      }
+
+      .lineup .mock:nth-child(3) {
+        height: 240px;
+      }
+
+      .lineup .mock:nth-child(4) {
+        height: 160px;
+      }
+
+      .lineup .mock:nth-child(5) {
+        height: 88px;
+        border-radius: 50% 50% 12px 12px;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 920px) {
+        .header,
+        .index-grid,
+        .two-col,
+        .three-col,
+        .dont-grid,
+        .color-grid,
+        .type-system,
+        .layout-grid,
+        .graphic-system,
+        .photo-grid,
+        .stationery,
+        .application-layout,
+        .manual-scene,
+        .manual-page-grid,
+        .office-detail,
+        .material-rules,
+        .digital-grid,
+        .signage-grid,
+        .gift-grid,
+        .gift-detail-grid,
+        .lineup {
+          grid-template-columns: 1fr;
+        }
+
+        .cover-card {
+          position: relative;
+          right: auto;
+          top: auto;
+          width: min(100%, 360px);
+          margin-top: 60px;
+        }
+
+        .cover-title {
+          position: relative;
+          left: auto;
+          right: auto;
+          top: auto;
+        }
+
+        .cover-title span {
+          font-size: clamp(58px, 17vw, 112px);
+        }
+
+        .type-panel {
+          position: relative;
+          margin: 48vh -28px -28px;
+        }
+
+        .type-sample {
+          white-space: normal;
+        }
+
+        .lineup {
+          position: relative;
+          left: auto;
+          right: auto;
+          bottom: auto;
+          margin-top: 160px;
+        }
+
+        .office-board,
+        .gift-stage,
+        .display-detail {
+          min-height: auto;
+          position: relative;
+          left: auto;
+          right: auto;
+          bottom: auto;
+          display: grid;
+          gap: 18px;
+        }
+
+        .office-item,
+        .gift-piece,
+        .display-object {
+          position: relative;
+          left: auto !important;
+          right: auto !important;
+          top: auto !important;
+          bottom: auto !important;
+          width: 100% !important;
+          min-height: 160px;
+        }
+
+        .manual-spread {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="manual">
+      <section class="page red cover" aria-label="灏侀潰">
+        <div class="header">
+          <div><b>SHUNSE BRAND VISUAL DESIGN</b></div>
+          <div>Sharing the unified brand image of SHUNSE</div>
+          <div>Brand concept, logo standards, color, typography, layout, imagery and application system.</div>
+        </div>
+        <div class="cover-title"><span>SHUNSE</span></div>
+        <div class="cover-card">
+          <img class="logo-original" src="assets/shunse-wordmark-ogilvy.svg" alt="椤轰笘 SHUNSE 鏍囧噯 Logo" />
+        </div>
+        <div class="intro">
+          <div>
+            <h2>Introduction</h2>
+            <p>鏈搧鐗岃瑙夋墜鍐岀敤浜庣粺涓€椤轰笘 SHUNSE 鐨勫搧鐗岃瘑鍒笌瑙嗚搴旂敤鏍囧噯銆傛墍鏈夐〉闈㈠潎浠ョ幇鏈?Logo 涓烘牳蹇冿紝涓嶆敼鍙樻爣蹇楀舰鎬併€佹瘮渚嬪拰棰滆壊锛屼粎寤虹珛鍏跺湪涓嶅悓濯掍粙涓殑浣跨敤瑙勫垯涓庡欢灞曠郴缁熴€?/p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page paper" aria-label="鐩綍">
+        <div class="header">
+          <h2 class="section-title">Manual Contents <span class="cn">鎵嬪唽鐩綍</span></h2>
+          <p class="meta">VI 鍏ㄥ唽寤鸿鎸夊熀纭€绯荤粺銆佽瑙夎瑷€銆佸簲鐢ㄧ郴缁熴€佽惤鍦版鏌ュ洓灞傚睍寮€銆?/p>
+          <p class="meta">The manual is organized into identity basics, visual language, applications and usage rules.</p>
+        </div>
+        <div class="index-grid">
+          <article class="index-item"><b>01</b><h3>鍝佺墝鎬诲垯</h3><p>鍝佺墝瀹氫綅銆佽瑙夊叧閿瘝銆佷娇鐢ㄥ師鍒欍€佹枃浠惰鏄庛€?/p></article>
+          <article class="index-item"><b>02</b><h3>鍝佺墝鏍囧織</h3><p>鏍囧噯 Logo銆佺粍鍚堝叧绯汇€佷繚鎶ょ┖闂淬€佹渶灏忓昂瀵搞€?/p></article>
+          <article class="index-item"><b>03</b><h3>鏍囧織绂佺敤</h3><p>鍙樺舰銆佹棆杞€佹敼鑹层€佸姞鐗规晥銆佷綆瀵规瘮鑳屾櫙绛夌鐢ㄧず渚嬨€?/p></article>
+          <article class="index-item"><b>04</b><h3>鍝佺墝鑹插僵</h3><p>涓昏壊銆佽緟鍔╄壊銆佽壊褰╂瘮渚嬨€佸嵃鍒蜂笌鏁板瓧鑹插€笺€?/p></article>
+          <article class="index-item"><b>05</b><h3>鍝佺墝瀛椾綋</h3><p>涓嫳鏂囧瓧浣撱€佸眰绾с€佸瓧鍙枫€佸瓧璺濄€佹帓鐗堢ず渚嬨€?/p></article>
+          <article class="index-item"><b>06</b><h3>鐗堝紡绯荤粺</h3><p>鐣欑櫧銆佺綉鏍笺€佹爣棰樺尯銆侀〉鑴氥€佷俊鎭瘑搴﹁鑼冦€?/p></article>
+          <article class="index-item"><b>07</b><h3>杈呭姪鍥惧舰</h3><p>浠庢爣蹇楁皵璐ㄥ欢灞曞嚭鐨勭嚎鏉°€佸渾褰€佸垎鍓插拰搴曠汗銆?/p></article>
+          <article class="index-item"><b>08</b><h3>褰卞儚椋庢牸</h3><p>浜虹墿銆佺┖闂淬€佷骇鍝佺粏鑺傜殑鎽勫奖鏂瑰悜涓庣鐢ㄨ鍒欍€?/p></article>
+          <article class="index-item"><b>09</b><h3>搴旂敤绯荤粺</h3><p>鍔炲叕鐢ㄥ搧銆佹暟瀛椾紶鎾€佸瑙嗙┖闂淬€佺ぜ鍝佸寘瑁呬笌灞曠ず銆?/p></article>
+        </div>
+      </section>
+
+      <section class="page white" aria-label="鍝佺墝鎬诲垯">
+        <div class="header">
+          <h2 class="section-title">Brand Principle <span class="cn">鍝佺墝鎬诲垯</span></h2>
+          <p class="meta">椤轰笘瑙嗚绯荤粺浠モ€滈粦銆佺櫧銆佺孩鈥濅负鏍稿績锛屽缓绔嬬ǔ瀹氥€佸厠鍒躲€佸己璇嗗埆鐨勫搧鐗岀З搴忋€?/p>
+          <p class="meta">This section defines the core visual direction before individual assets are used.</p>
+        </div>
+        <div class="two-col">
+          <div class="logo-frame" style="min-height: 420px">
+            <img src="assets/shunse-wordmark-ogilvy.svg" alt="椤轰笘 SHUNSE 鍘熷 Logo" />
+          </div>
+          <div class="spec-list">
+            <article class="spec"><b>01 Core Tone</b><p>鏁翠綋椋庢牸淇濇寔楂樼骇銆佺幇浠ｃ€佺悊鎬с€傜孩鑹茶礋璐ｅ搧鐗岃蹇嗭紝榛戣壊璐熻矗绋抽噸姘斿満锛屾殩鐧借礋璐ｄ笓涓氱暀鐧姐€?/p></article>
+            <article class="spec"><b>02 Logo Integrity</b><p>Logo 浣跨敤鍘熷鏂囦欢锛屼笉閲嶆柊缁樺埗銆佷笉鏀瑰瓧褰€佷笉鎷変几銆佷笉鏀瑰彉鏍囧織鑹层€傛墍鏈夎鐢熷簲鐢ㄥ繀椤讳紭鍏堜繚鎶?Logo 鐨勬竻鏅板害銆?/p></article>
+            <article class="spec"><b>03 Visual Order</b><p>椤甸潰浠ュぇ鏍囬銆佸皬淇℃伅銆佸己鐣欑櫧鍜屾槑纭垎鍖烘瀯鎴愶紝閬垮厤瑁呴グ杩囧锛屼繚鎸佺被浼煎搧鐗岃鑼冩墜鍐岀殑涓撲笟鎰熴€?/p></article>
+            <article class="spec"><b>04 System Scope</b><p>鏈墜鍐岃鐩栧熀纭€瑙嗚銆佺増寮忚瑷€銆佸姙鍏墿鏂欍€佹暟瀛椾紶鎾€佺┖闂村瑙嗐€佺ぜ鍝佸寘瑁呬笌钀藉湴妫€鏌ヨ鍒欍€?/p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page white" aria-label="鍝佺墝鏍囧織">
+        <div class="header">
+          <h2 class="section-title">Brand Logo <span class="cn">鍝佺墝鏍囧織</span></h2>
+          <p class="meta">Logo 鏄搧鐗岃瘑鍒殑鏍稿績璧勪骇锛屽簲濮嬬粓淇濇寔鍘熷姣斾緥銆侀鑹插拰鍥惧舰鍏崇郴銆?/p>
+          <p class="meta">The logo must be used from the official artwork and should not be redrawn or altered.</p>
+        </div>
+        <div class="three-col">
+          <article><div class="logo-card logo-frame"><img src="assets/shunse-wordmark-ogilvy.svg" alt="鏍囧噯 Logo" /></div><div class="caption">涓昏瘑鍒?Logo</div></article>
+          <article><div class="logo-card logo-frame"><img style="width:72%" src="assets/shunse-wordmark-ogilvy.svg" alt="涓昂瀵?Logo" /></div><div class="caption">涓昂瀵稿簲鐢?/div></article>
+          <article><div class="logo-card logo-frame"><img style="width:56%" src="assets/shunse-wordmark-ogilvy.svg" alt="灏忓昂瀵?Logo" /></div><div class="caption">灏忓昂瀵稿簲鐢?/div></article>
+        </div>
+        <p class="small" style="margin-top: 34px">璇存槑锛氬綋鍓嶉〉闈娇鐢ㄤ綘鎻愪緵鐨?JPG 鍘熷浘銆傝嫢鍚庣画鎻愪緵 AI / SVG / 閫忔槑 PNG锛屽彲鍦ㄤ笉鏀瑰彉 Logo 鐨勫墠鎻愪笅鐢熸垚鏇寸簿纭殑鍙嶇櫧鐗堛€佸崟鑹茬増鍜屽嵃鍒锋枃浠躲€?/p>
+      </section>
+
+      <section class="page white" aria-label="鏍囧織瑙勮寖">
+        <div class="header">
+          <h2 class="section-title">Logo Standard <span class="cn">鏍囧織搴旂敤瑙勮寖</span></h2>
+          <p class="meta">淇濇姢绌洪棿鐢ㄤ簬纭繚鏍囧織鍛ㄥ洿涓嶅彈鏂囧瓧銆佸浘褰€佽竟鐣屾垨鍏跺畠瑙嗚鍏冪礌骞叉壈銆?/p>
+          <p class="meta">Clear space and minimum size keep the identity visible across different media.</p>
+        </div>
+        <div class="two-col">
+          <div class="safe-space"><img src="assets/shunse-wordmark-ogilvy.svg" alt="Logo 淇濇姢绌洪棿绀烘剰" /></div>
+          <div class="spec-list">
+            <article class="spec"><b>Clear Space</b><p>浠?Logo 鑻辨枃瀛楁瘝楂樺害鐨?1/2 浣滀负 X锛屾爣蹇楀洓鍛ㄨ嚦灏戜繚鐣?X 鐨勫畨鍏ㄨ窛绂汇€備弗绂佸湪瀹夊叏鍖哄唴鏀剧疆姝ｆ枃銆佸浘褰€佽竟妗嗘垨鍏跺畠鍝佺墝鏍囪瘑銆?/p></article>
+            <article class="spec"><b>Minimum Size</b><p>绾夸笂浣跨敤寤鸿瀹藉害涓嶄綆浜?120px锛涘嵃鍒蜂娇鐢ㄥ缓璁搴︿笉浣庝簬 25mm銆傚皬浜庤灏哄鏃朵紭鍏堜娇鐢ㄦ洿绠€鍖栫殑鍥惧舰璧勪骇锛屼絾闇€鐢卞師濮嬫簮鏂囦欢瀵煎嚭銆?/p></article>
+            <article class="spec"><b>Background</b><p>褰撳墠 JPG 鍘熷浘閫傚悎缃簬鐧借壊鎴栨祬鐏拌儗鏅€傛繁鑹茶儗鏅腑闇€浣跨敤鐧借壊鎵胯浇鍖猴紝閬垮厤鐩存帴鏀惧湪澶嶆潅鍥剧墖鎴栦綆瀵规瘮鑹插潡涓娿€?/p></article>
+            <article class="spec"><b>File Usage</b><p>姝ｅ紡浜や粯寤鸿鍖呭惈 AI銆丼VG銆丳DF銆丳NG銆丣PG 浜旂被鏂囦欢锛屽苟鏍囨敞閫傜敤鍦烘櫙锛氬嵃鍒枫€佺綉椤点€佽棰戙€佺ぞ濯掋€佸姙鍏枃妗ｃ€?/p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page white" aria-label="鏍囧織绂佺敤">
+        <div class="header">
+          <h2 class="section-title">Incorrect Usage <span class="cn">鏍囧織绂佺敤瑙勮寖</span></h2>
+          <p class="meta">绂佺敤瑙勮寖鐢ㄤ簬淇濊瘉浠讳綍浜轰娇鐢?Logo 鏃朵笉浼氱牬鍧忓搧鐗岃瘑鍒€?/p>
+          <p class="meta">Do not manipulate, recolor, distort or apply effects to the official logo.</p>
+        </div>
+        <div class="dont-grid">
+          <article class="dont rotate"><div class="demo"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div><b>绂佹鏃嬭浆</b><p>涓嶅緱鍊炬枩銆佹棆杞垨鏀瑰彉鏍囧織闃呰鏂瑰悜銆?/p></article>
+          <article class="dont squeeze"><div class="demo"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div><b>绂佹鎷変几</b><p>涓嶅緱妯悜鎴栫旱鍚戝帇缂╋紝蹇呴』绛夋瘮渚嬬缉鏀俱€?/p></article>
+          <article class="dont low"><div class="demo"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div><b>绂佹浣庡姣?/b><p>涓嶅緱缃簬褰卞搷璇嗗埆鐨勫鏉傛垨浣庡姣旇儗鏅€?/p></article>
+          <article class="dont effect"><div class="demo"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div><b>绂佹鐗规晥</b><p>涓嶅緱娣诲姞鎻忚竟銆侀槾褰便€佹诞闆曘€佹笎鍙樻垨婊ら暅銆?/p></article>
+        </div>
+      </section>
+
+      <section class="page white" aria-label="鍝佺墝鑹插僵">
+        <div class="header">
+          <h2 class="section-title">Brand Color <span class="cn">鍝佺墝鑹插僵</span></h2>
+          <p class="meta">椤轰笘閲囩敤榛戙€佺櫧銆佺孩涓轰富鑹层€傝壊褰╃郴缁熷簲绠€娲併€佺ǔ瀹氥€佸己璇嗗埆銆?/p>
+          <p class="meta">Color values are separated for digital display and print reference.</p>
+        </div>
+        <div class="color-grid">
+          <div class="color redchip"><div><b>SHUNSE RED</b><span>HEX #781417<br />RGB 120 20 23<br />CMYK reference 35 95 85 45</span></div></div>
+          <div class="color blackchip"><div><b>PURE BLACK</b><span>HEX #050505<br />RGB 5 5 5<br />CMYK reference 90 90 90 100</span></div></div>
+          <div class="color whitechip"><div><b>WARM WHITE</b><span>HEX #F5F4F0<br />RGB 245 244 240<br />Paper / background</span></div></div>
+          <div class="color graychip"><div><b>SOFT GRAY</b><span>HEX #E5E3DC<br />RGB 229 227 220<br />Support / line / card</span></div></div>
+        </div>
+        <div class="ratio-bars"><div style="background:#050505"></div><div style="background:#f5f4f0"></div><div style="background:#781417"></div><div style="background:#e5e3dc"></div></div>
+        <p class="small" style="margin-top: 12px">寤鸿姣斾緥锛氶粦 45% / 鏆栫櫧 30% / 鍝佺墝绾?20% / 杈呭姪鐏?5%銆傜孩鑹茬敤浜庡皝闈€侀噸鐐规爣棰樸€佺墿鏂欎富瑙嗚锛屼笉骞冲潎閾烘弧鎵€鏈夊唴瀹广€?/p>
+      </section>
+
+      <section class="page red" aria-label="鍝佺墝瀛椾綋">
+        <div class="header">
+          <h2 class="section-title">Section D <span class="cn">鍝佺墝瀛椾綋</span></h2>
+          <p class="meta">鏍囧噯瀛椾綋鍜?Logo 涓€鏍凤紝鏄搧鐗屼竴鑷存€х殑閲嶈閮ㄥ垎銆?/p>
+          <p class="meta">Typography defines hierarchy, rhythm and professional tone.</p>
+        </div>
+        <div class="type-hero">Brand Font</div>
+        <div class="type-panel">
+          <div class="type-system">
+            <div><b>Brand Font 鍝佺墝瀛椾綋</b><p>閫傜敤浜庡搧鐗屾墜鍐屻€佸畼缃戙€佸浼犲唽銆佸姙鍏枃妗ｄ笌绀惧獟鐗╂枡銆?/p></div>
+            <div><b>涓枃瀛椾綋</b><p>鎺ㄨ崘锛氭€濇簮榛戜綋 / 鏂规鍏颁涵榛戙€傛爣棰樹娇鐢?Medium / Bold锛屾鏂囦娇鐢?Regular锛岃鏄庢枃瀛楀彲鐢?Light銆?/p></div>
+            <div><b>English Font</b><p>Recommended: Gilroy / Helvetica Neue. Use uppercase with wider tracking for visual identity pages.</p></div>
+          </div>
+          <div class="type-sample"><span class="big-cn">椤烘椂椤哄娍椤轰笘</span><span class="big-en">Move With Time And Trend</span></div>
+        </div>
+      </section>
+
+      <section class="page white" aria-label="鐗堝紡绯荤粺">
+        <div class="header">
+          <h2 class="section-title">Layout System <span class="cn">鐗堝紡绯荤粺</span></h2>
+          <p class="meta">鐗堝紡閬靛惊寮虹暀鐧姐€佸ぇ鏍囬銆佸皬璇存槑銆佸鍒嗗尯鐨勬墜鍐岄鏍笺€?/p>
+          <p class="meta">The layout system controls page rhythm, hierarchy and information density.</p>
+        </div>
+        <div class="layout-grid">
+          <div class="layout-board">
+            <div class="red-band"></div>
+            <div class="black-band"><h3 style="font-size: 54px; text-transform: uppercase">Section Title</h3><p class="small" style="color:rgba(245,244,240,.58)">Small bilingual notes are placed at top or side.</p></div>
+            <div class="white-band"><b>Content Area</b><p class="small">鐢ㄤ簬鏍囧織瑙勮寖銆佽壊褰╄鏄庛€佸瓧浣撳眰绾с€佸簲鐢ㄧず渚嬬瓑鍐呭銆?/p></div>
+          </div>
+          <div class="principles">
+            <article class="principle"><b>01 Big Scale</b><p>閲嶈绔犺妭浣跨敤瓒呭ぇ鑻辨枃鏍囬锛屽缓绔嬬被浼艰瑙夋墜鍐岀殑鍐插嚮鍔涖€?/p></article>
+            <article class="principle"><b>02 Sparse Notes</b><p>璇存槑鏂囧瓧淇濇寔鐭彞锛屼笉鍫嗘弧椤甸潰锛屽舰鎴愰珮绾у厠鍒剁殑闃呰鑺傚銆?/p></article>
+            <article class="principle"><b>03 Red / Black Split</b><p>绾㈣壊涓庨粦鑹插彲鍋氫笂涓嬪垎鍖猴紝鐧借壊椤甸潰鐢ㄤ簬瑙勮寖鍜岃鏄庛€?/p></article>
+            <article class="principle"><b>04 Alignment</b><p>鏍囬銆佽鏄庛€佸浘褰㈠拰鐗╂枡閬靛惊宸﹀榻愭垨缃戞牸瀵归綈锛岄伩鍏嶉殢鎰忔暎钀姐€?/p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="杈呭姪鍥惧舰">
+        <div class="header">
+          <h2 class="section-title">Graphic Elements <span class="cn">杈呭姪鍥惧舰</span></h2>
+          <p class="meta">杈呭姪鍥惧舰涓嶆浛浠?Logo锛屽彧鏈嶅姟浜庣増闈㈢З搴忓拰鍝佺墝璇嗗埆寤跺睍銆?/p>
+          <p class="meta">Use simple line, circle and split-space elements without altering the logo.</p>
+        </div>
+        <div class="graphic-system">
+          <article class="graphic-card"><b>Line System</b></article>
+          <article class="graphic-card red-block"><b>Red Field</b></article>
+          <article class="graphic-card light-block"><b>Circle / Time Point</b></article>
+        </div>
+        <p class="small" style="margin-top: 28px; color: var(--muted-light)">寤鸿鏉ユ簮锛氭爣蹇椾腑鐨勬洸绾夸笌鈥滄椂闂寸偣鈥濇蹇靛彲寤跺睍涓哄渾褰€佸垏绾裤€佺綉鏍煎拰鍒嗗尯绾匡紝浣嗕笉寰楃洿鎺ユ媶瑙ｃ€佸彉褰㈡垨閲嶇粍鍘?Logo銆?/p>
+      </section>
+
+      <section class="page white" aria-label="褰卞儚椋庢牸">
+        <div class="header">
+          <h2 class="section-title">Photography Style <span class="cn">褰卞儚椋庢牸</span></h2>
+          <p class="meta">褰卞儚鐢ㄤ簬琛ュ厖鍝佺墝琛屼笟灞炴€т笌鐪熷疄瑙︾偣锛岄鏍煎簲骞插噣銆佸厠鍒躲€佹湁璐ㄦ劅銆?/p>
+          <p class="meta">Photography should support the brand tone and remain clear, restrained and premium.</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo people"><span class="photo-label">People / Professional</span></div>
+          <div class="photo space"><span class="photo-label">Space / Office</span></div>
+          <div class="photo detail"><span class="photo-label">Detail / Material</span></div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="鍝佺墝鎵嬪唽搴旂敤">
+        <div class="header">
+          <h2 class="section-title">Brand Manual <span class="cn">鍝佺墝鎵嬪唽搴旂敤</span></h2>
+          <p class="meta">鍙傝€冨搧鐗屾墜鍐屽睍绀烘柟寮忥紝椤轰笘鎵嬪唽搴斿寘鍚皝闈€佺洰褰曘€佹爣蹇楄鑼冦€佽壊褰╁瓧浣撱€佺墿鏂欏簲鐢ㄥ拰钀藉湴妫€鏌ラ〉銆?/p>
+          <p class="meta">The manual is a physical carrier for the identity system, not only a PDF document.</p>
+        </div>
+        <div class="application-layout">
+          <div class="application-specs">
+            <article class="application-spec">
+              <b>01</b>
+              <div><h3>灏侀潰 Cover</h3><p>灏侀潰閲囩敤澶ч潰绉搧鐗岀孩涓庨粦鑹叉爣棰樸€侺ogo 浣跨敤鍘熷浘缃簬鏆栫櫧鎵胯浇鍖猴紝涓嶅帇缂┿€佷笉鎻忚竟銆佷笉棰濆鏀硅壊銆傚皝闈俊鎭粎淇濈暀鍝佺墝鍚嶃€佹墜鍐屽悕绉般€佺増鏈彿銆?/p></div>
+            </article>
+            <article class="application-spec">
+              <b>02</b>
+              <div><h3>鍐呴〉 Spread</h3><p>鍐呴〉浠ラ粦鐧藉垎鏍忔壙杞借鑼冧俊鎭紝宸﹂〉鏀?Logo 鎴栧簲鐢ㄥ浘锛屽彸椤垫斁瑙勫垯璇存槑銆傛瘡椤典俊鎭帶鍒跺湪 3 鍒?5 涓噸鐐癸紝閬垮厤鍍忚鏄庝功涓€鏍峰瘑闆嗐€?/p></div>
+            </article>
+            <article class="application-spec">
+              <b>03</b>
+              <div><h3>绔犺妭 Section</h3><p>绔犺妭椤典娇鐢ㄨ秴澶ц嫳鏂囨爣棰橈紝濡?Brand Logo / Brand Font / Office Supplies锛屽簳閮ㄥ姞鍏ョ孩鑹插皬瀛楄鏄庯紝寤剁画鍙傝€冨浘涓殑楂樺姣旀墜鍐岄鏍笺€?/p></div>
+            </article>
+            <article class="application-spec">
+              <b>04</b>
+              <div><h3>瑁呰涓庣焊寮?/h3><p>寤鸿 A4 妯増鎴栨鏂瑰舰鐢诲唽銆傚皝闈㈠彲鐢ㄥ搼鍏夌孩鐗圭绾革紝鍐呴〉鐢ㄦ殩鐧界焊锛汱ogo 涓嶅仛澶嶆潅鐑噾锛屼紭鍏堜繚鎸佺孩榛戠櫧璇嗗埆銆?/p></div>
+            </article>
+          </div>
+          <div>
+            <div class="manual-scene">
+              <div class="manual-stack">
+                <div class="manual-cover">
+                  <img src="assets/shunse-wordmark-ogilvy.svg" alt="" />
+                  <div class="cover-copy"><b>Brand Manual</b><span>Visual<br />Design</span></div>
+                </div>
+                <div class="manual-page-grid">
+                  <div class="manual-page-card"><b>Logo</b><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+                  <div class="manual-page-card"><b>Color</b><span style="position:absolute;left:16px;bottom:16px;font-size:34px;font-weight:900">#781417</span></div>
+                  <div class="manual-page-card"><b>Font</b><span style="position:absolute;left:16px;bottom:16px;font-size:26px;font-weight:800">SHUNSE</span></div>
+                </div>
+              </div>
+              <div class="manual-spread">
+                <div class="spread-left"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+                <div class="spread-right"><h3>Logo<br />Standard</h3><p class="small" style="color:var(--muted-light);margin-top:24px">Clear space / minimum size / background / incorrect usage</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="鍔炲叕鐢ㄥ搧">
+        <div class="header">
+          <h2 class="section-title">Office Supplies <span class="cn">鍔炲叕鐢ㄥ搧</span></h2>
+          <p class="meta">鍔炲叕鐗╂枡闇€瑕佸儚鍙傝€冨浘涓€鏍锋垚濂楀嚭鐜帮紝褰㈡垚缁熶竴鐨勫晢鍔¤瘑鍒郴缁熴€?/p>
+          <p class="meta">Stationery includes notebook, folder, work card, letterhead, business card and memo note.</p>
+        </div>
+        <div class="office-detail">
+          <div class="office-board">
+            <div class="office-item notebook-detail"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span class="office-label">Notebook<br />Red cover / logo top-left</span></div>
+            <div class="office-item folder-detail"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span class="office-label">Folder<br />A4 document carrier</span></div>
+            <div class="office-item badge-detail"><img style="width:58px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span class="office-label">Work card</span></div>
+            <div class="office-item card-detail"><img style="width:78px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span class="office-label">Business card<br />90 x 54mm</span></div>
+            <div class="office-item letter-detail"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span class="office-label">Letterhead<br />A4 / footer info</span></div>
+            <div class="office-item note-detail"><img style="width:70px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span class="office-label">Sticky note</span></div>
+          </div>
+          <div class="material-rules">
+            <article class="material-rule"><b>Business Card</b><p>鍚嶇墖寤鸿 90 x 54mm銆傛闈㈢孩搴曪紝Logo 鏀惧乏涓婃垨灞呬腑锛涜儗闈㈡殩鐧藉簳锛屽鍚嶃€佽亴浣嶃€佺數璇濄€侀偖绠辨寜 4 琛屼互鍐呮帓甯冦€?/p></article>
+            <article class="material-rule"><b>Letterhead</b><p>A4 淇＄焊涓婃柟淇濈暀 Logo 鍖猴紝涓嬫柟璁剧疆鍏徃淇℃伅鑴氭敞銆傛鏂囧尯鍩熶繚鎸?70% 浠ヤ笂鐣欑櫧锛岄伩鍏嶈姳绾瑰共鎵版寮忔枃浠躲€?/p></article>
+            <article class="material-rule"><b>Notebook</b><p>绗旇鏈皝闈娇鐢ㄥ搧鐗岀孩锛孡ogo 缃簬宸︿笂瑙掓垨搴曢儴灞呬腑銆傚皝闈笉鍙犲姞澶嶆潅鍥惧舰锛屼繚鐣欑焊寮犺倢鐞嗗拰鍝佺墝鍘嬪嵃鎰熴€?/p></article>
+            <article class="material-rule"><b>Folder</b><p>鏂囦欢澶瑰閮ㄤ互绾㈣壊涓轰富锛屽唴渚у彲浣跨敤鏆栫櫧銆傚彸涓婃垨鍐呴〉澶瑰眰鍙姞鍏ュ皬灏哄 Logo锛屼繚鎸佸晢鍔¤瘑鍒€?/p></article>
+            <article class="material-rule"><b>Work Card</b><p>宸ョ墝浣跨敤绾㈣壊鎸傜怀锛屽崱闈㈡殩鐧藉簳銆備笂鏂?Logo锛屼腑閮ㄥ鍚嶏紝搴曢儴缂栧彿涓庨儴闂紝纭繚 1 绫冲鍙瘑鍒€?/p></article>
+            <article class="material-rule"><b>Memo Note</b><p>渚跨銆佽创绾哥瓑灏忕墿鏂欎紭鍏堜娇鐢ㄥ浘鏂囩粍鍚堝師 Logo锛屽昂瀵歌繃灏忔椂鍙繚鐣欐竻鏅扮増鏈紝涓嶅己琛岀缉鍒颁笉鍙銆?/p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="鏁板瓧浼犳挱">
+        <div class="header">
+          <h2 class="section-title">Digital Templates <span class="cn">鏁板瓧浼犳挱</span></h2>
+          <p class="meta">閫傜敤浜庡畼缃戦灞忋€佸叕浼楀彿灏侀潰銆佺ぞ濯掑浘銆佹紨绀烘枃绋垮拰閭欢绛惧悕銆?/p>
+          <p class="meta">Digital templates maintain brand consistency across web, social and presentation use.</p>
+        </div>
+        <div class="digital-grid">
+          <div class="screen">
+            <div class="top"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /><span>Brand System / 2026</span></div>
+            <h3>SHUNSE Visual Identity</h3>
+          </div>
+          <div class="social">
+            <div class="post"><b>Cover</b></div>
+            <div class="post"><b>Quote</b></div>
+            <div class="post"><b>News</b></div>
+            <div class="post"><b>Report</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="绌洪棿瀵艰">
+        <div class="header">
+          <h2 class="section-title">Signage System <span class="cn">绌洪棿瀵艰</span></h2>
+          <p class="meta">绌洪棿涓殑 Logo 搴斾紭鍏堜繚璇佹竻鏅板拰姣斾緥锛岄€傜敤浜庡澧欍€佸墠鍙般€侀棬鐗屼笌鎸囩ず鐗屻€?/p>
+          <p class="meta">Environmental graphics use the official logo on clean carrier surfaces.</p>
+        </div>
+        <div class="signage-grid">
+          <div class="sign exterior"><div class="wall-logo"><img class="logo-original" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div></div>
+          <div class="sign interior"><div class="wall-logo"><img class="logo-original" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div></div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="鍝佺墝绀煎搧">
+        <div class="header">
+          <h2 class="section-title">Brand Gifts <span class="cn">鍝佺墝绀煎搧</span></h2>
+          <p class="meta">绀煎搧鍖呰鍙傝€冨浘涓殑鎬濊矾锛氬ぇ闈㈢Н绾㈣壊寤虹珛璁板繂锛岄粦鑹叉墜缁冲拰鏆栫櫧鍗＄墖褰㈡垚楂樼骇瀵规瘮銆?/p>
+          <p class="meta">Gift bags, envelopes, cards, boxes and candles should share one unified placement rule.</p>
+        </div>
+        <div class="gift-detail-grid">
+          <div class="application-specs">
+            <article class="application-spec">
+              <b>01</b>
+              <div><h3>鎵嬫彁琚?Gift Bag</h3><p>琚嬭韩閲囩敤鍝佺墝绾紝鎵嬬怀浣跨敤榛戣壊銆侺ogo 寤鸿鏀惧湪搴曢儴 1/4 鍖哄煙鎴栨涓亸涓嬶紝淇濊瘉鎻愭彙鏃朵笉琚墜缁抽伄鎸°€?/p></div>
+            </article>
+            <article class="application-spec">
+              <b>02</b>
+              <div><h3>绀肩洅 Gift Box</h3><p>绀肩洅浠ョ孩鑹蹭负涓伙紝Logo 灞呬腑鎴栧亸涓嬨€傜洅韬枃瀛楁帶鍒跺湪涓€琛屽搧鐗岃嫳鏂囧拰涓€琛岃鏄庯紝涓嶅仛瀵嗛泦淇℃伅銆?/p></div>
+            </article>
+            <article class="application-spec">
+              <b>03</b>
+              <div><h3>淇″皝涓庡崱鐗?/h3><p>淇″皝绾㈠簳锛屽崱鐗囨殩鐧藉簳锛屼簩鑰呯粍鍚堟椂浣跨敤鈥滅孩鍖呯櫧鍗♀€濈殑灞傛銆侺ogo 濮嬬粓浣跨敤鍘熸枃浠讹紝鏀剧疆鍦ㄥ乏涓嬫垨鍙充笅銆?/p></div>
+            </article>
+            <article class="application-spec">
+              <b>04</b>
+              <div><h3>棣欒柊铚＄儧 / 灏忕ぜ鍝?/h3><p>灏忎欢绀煎搧浼樺厛浣跨敤鏆栫櫧鎴栭粦鑹叉壙杞介潰锛孡ogo 涓嶅皬浜庡彲璇诲昂瀵革紱鑻ョ┖闂翠笉瓒筹紝鏀圭敤鍚婄墝鎴栧鍖呰鎵胯浇 Logo銆?/p></div>
+            </article>
+          </div>
+          <div class="gift-stage">
+            <div class="gift-piece box"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+            <div class="gift-piece envelope"><img style="width:86px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+            <div class="gift-piece card-white"><img style="width:92px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+            <div class="gift-piece bag-large"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+            <div class="gift-piece candle-detail"><img style="width:64px;left:20px;bottom:18px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page black" aria-label="鏁翠綋灞曠ず">
+        <div class="header">
+          <h2 class="section-title">Full Display <span class="cn">鍛ㄨ竟灞曠ず</span></h2>
+          <p class="meta">鏈€缁堝睍绀洪〉鐢ㄤ簬妫€鏌ユ垚濂楃墿鏂欑殑鑹插僵銆丩ogo 浣嶇疆銆佹潗璐ㄥ眰娆″拰鍝佺墝姘斿満鏄惁缁熶竴銆?/p>
+          <p class="meta">The final display checks whether every touchpoint feels like one coherent brand system.</p>
+        </div>
+        <div class="display-detail">
+          <div class="display-object pouch"><img style="width:74px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          <div class="display-object card"><img style="width:88px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          <div class="display-object bag"><img style="width:180px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          <div class="display-object manual"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          <div class="display-object box-red"><img src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          <div class="display-object box-white"><img style="width:82px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+          <div class="display-object candle"><img style="width:70px" src="assets/shunse-wordmark-ogilvy.svg" alt="" /></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+

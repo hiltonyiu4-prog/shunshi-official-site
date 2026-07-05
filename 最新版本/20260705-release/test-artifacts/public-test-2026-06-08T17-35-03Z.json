@@ -1,0 +1,198 @@
+{
+  "startedAt": "2026-06-08T17:35:03.770Z",
+  "baseUrl": "https://shun-se.com",
+  "checks": [
+    {
+      "name": "diagnosis_page_head",
+      "ok": true,
+      "elapsedMs": 512,
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "api_health",
+      "ok": true,
+      "elapsedMs": 308,
+      "status": 200,
+      "data": {
+        "ok": true,
+        "message": "Use POST /api/diagnosis to create a diagnosis report."
+      }
+    },
+    {
+      "name": "api_submit_single",
+      "ok": true,
+      "elapsedMs": 3547,
+      "status": 200,
+      "jobId": "19aec098-3ec4-45dd-bd82-63c1fd0832c6",
+      "reportTitle": "单次公网测试企业 SHUNSE 企业线上认知自测报告",
+      "score": 52,
+      "primary": "内容主线断层",
+      "combo": "AI 放大混乱",
+      "enter": "线上认知诊断",
+      "llm": {
+        "optimized": false,
+        "skipped": true,
+        "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+      },
+      "feishu": {
+        "provider": "feishu-doc",
+        "saved": false,
+        "error": "forBidden"
+      }
+    },
+    {
+      "name": "browser_mobile_form_pdf",
+      "ok": true,
+      "elapsedMs": 7835,
+      "status": 200,
+      "jobId": "5cbc6159-b17c-4876-b0bd-09b4810b9157",
+      "downloadName": "浏览器公网测试企业 SHUNSE 企业线上认知自测报告-5cbc6159.pdf",
+      "rendered": {
+        "combo": true,
+        "servicePath": true,
+        "pdfBadge": true
+      },
+      "horizontalOverflow": false,
+      "errors": [],
+      "llm": {
+        "optimized": false,
+        "skipped": true,
+        "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+      },
+      "feishu": {
+        "provider": "feishu-doc",
+        "saved": false,
+        "error": "forBidden"
+      }
+    },
+    {
+      "name": "api_submit_10_concurrent",
+      "ok": true,
+      "elapsedMs": 1691,
+      "okCount": 10,
+      "total": 10,
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "minMs": 914,
+      "medianMs": 1052,
+      "maxMs": 1690,
+      "llmStates": [
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        },
+        {
+          "optimized": false,
+          "skipped": true,
+          "reason": "missing DEEPSEEK_API_KEY or REPORT_LLM_API_KEY"
+        }
+      ],
+      "feishuStates": [
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "Feishu append failed with HTTP 429"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "forBidden"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "forBidden"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "forBidden"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "forBidden"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "forBidden"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "forBidden"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "Feishu append failed with HTTP 429"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "request trigger frequency limit"
+        },
+        {
+          "provider": "feishu-doc",
+          "saved": false,
+          "error": "Feishu append failed with HTTP 429"
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-06-08T17:35:17.664Z",
+  "ok": true
+}
