@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 430" role="img" aria-labelledby="title desc">
+  <title id="title">SHUNSE custom wordmark</title>
+  <desc id="desc">A high-contrast, rounded serif-style SHUNSE wordmark inspired by bold editorial agency typography.</desc>
+  <defs>
+    <filter id="ink-spread" x="-4%" y="-10%" width="108%" height="120%">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="1.6" result="spread" />
+      <feGaussianBlur in="spread" stdDeviation="0.28" result="soft" />
+      <feComposite in="SourceGraphic" in2="soft" operator="over" />
+    </filter>
+    <style>
+      .word {
+        fill: #050505;
+        font-family: "Cooper Black", "Cooper Std Black", "Bookman Old Style", Georgia, serif;
+        font-size: 188px;
+        font-weight: 900;
+        letter-spacing: -0.035em;
+        filter: url(#ink-spread);
+      }
+      .amp {
+        fill: #050505;
+        font-family: "Cooper Black", "Cooper Std Black", "Bookman Old Style", Georgia, serif;
+        font-size: 78px;
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        filter: url(#ink-spread);
+      }
+      .cut {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+
+  <rect width="1180" height="430" fill="#fff" />
+  <g transform="translate(56 300)">
+    <text class="word" x="0" y="0">SHUNSE</text>
+    <text class="amp" x="428" y="-128">&amp;</text>
+  </g>
+
+  <!-- Hand-tuned cuts and terminals give the system-font base a more custom, inked silhouette. -->
+  <ellipse class="cut" cx="181" cy="187" rx="45" ry="28" transform="rotate(-16 181 187)" />
+  <ellipse class="cut" cx="507" cy="148" rx="20" ry="17" transform="rotate(18 507 148)" />
+  <path class="cut" d="M584 144c14 6 25 14 30 24 6 12 0 22-13 20-15-3-33-16-40-28-7-12 5-22 23-16Z" />
+  <ellipse class="cut" cx="783" cy="236" rx="23" ry="58" />
+</svg>
