@@ -252,9 +252,9 @@ function buildFeishuSummaryBlocks(record) {
   const summary = buildFeishuSummary(record);
 
   return [
-    headingBlock(3, `${summary.createdAt}｜${summary.companyName}｜${summary.score}分`),
-    textBlock(`| ${summary.createdAt} | ${summary.companyName} | ${summary.contactName} | ${summary.contactMethod} | ${summary.jobId} | ${summary.level} | ${summary.score} | ${summary.detailLocator} |`),
-    textBlock(`客户：${summary.companyName}\n报告 ID：${summary.jobId}\n填写日期：${summary.createdAt}\n结果：${summary.level}\n评分：${summary.score}\n主诊断：${summary.firstPriority}\n详情定位：${summary.detailLocator}`),
+    headingBlock(3, `${summary.createdAt}｜${summary.companyName}｜${summary.resultName}`),
+    textBlock(`| ${summary.createdAt} | ${summary.companyName} | ${summary.contactName} | ${summary.contactMethod} | ${summary.jobId} | ${summary.resultName} | ${summary.score} | ${summary.detailLocator} |`),
+    textBlock(`客户：${summary.companyName}\n报告 ID：${summary.jobId}\n填写日期：${summary.createdAt}\n结果：${summary.resultName}\n评分：${summary.score}\n主诊断：${summary.firstPriority}\n详情定位：${summary.detailLocator}`),
     dividerBlock(),
   ];
 }
@@ -341,8 +341,9 @@ function buildFeishuContent(record) {
   const submission = record.submission || {};
   const report = record.report || {};
   const metadata = report.metadata || {};
+  const cognitionType = report.cognitionType || {};
   const createdAt = formatDate(record.createdAt);
-  const title = `${createdAt}｜${submission.companyName || "未命名企业"}｜${report.level || "待评估"}`;
+  const title = `${createdAt}｜${submission.companyName || "未命名企业"}｜${cognitionType.headline || report.level || "待评估"}`;
   const customerLines = [
     fieldLine("报告编号", record.jobId),
     fieldLine("提交时间", createdAt),
@@ -366,6 +367,9 @@ function buildFeishuContent(record) {
 
   const selfCheckLines = buildSelfCheckLines(submission, metadata);
   const resultLines = [
+    fieldLine("认知类型", cognitionType.headline),
+    fieldLine("命中依据", cognitionType.hitText),
+    fieldLine("第一动作", cognitionType.firstAction),
     fieldLine("报告分数", report.score ?? ""),
     fieldLine("报告等级", report.level),
     fieldLine("主诊断", metadata.firstPriority),
@@ -386,6 +390,7 @@ function buildFeishuSummary(record) {
   const submission = record.submission || {};
   const report = record.report || {};
   const metadata = report.metadata || {};
+  const cognitionType = report.cognitionType || {};
   const createdAt = formatDate(record.createdAt);
   const jobId = record.jobId || "";
 
@@ -396,6 +401,7 @@ function buildFeishuSummary(record) {
     contactMethod: submission.contactMethod || "未填写",
     jobId,
     level: report.level || "待评估",
+    resultName: cognitionType.headline || report.level || "待评估",
     score: report.score ?? "",
     firstPriority: metadata.firstPriority || "",
     detailLocator: `在详情记录文档搜索：${shortId(jobId)} / ${submission.companyName || "未命名企业"}`,

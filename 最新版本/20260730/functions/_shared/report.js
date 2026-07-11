@@ -132,55 +132,162 @@ export const newMarketPlanLabels = {
 
 const combinationDiagnosis = {
   "M+B": {
-    name: "自有品牌没有落点",
-    summary: "想做品牌，但还没决定先打谁、靠什么被记住。",
+    name: "看见了，但定位没被看懂",
+    summary: "客户看得到你，但还没弄清你先服务谁、最该记住什么。",
     action: "线上认知诊断 + 品牌锚点",
   },
   "M+V": {
-    name: "好产品找不到购买理由",
-    summary: "产品很多、优势很多，但客户利益没有被翻译出来。",
+    name: "看懂一点，但购买理由不够",
+    summary: "客户大概知道你有什么，但还没听到和自己有关的选择理由。",
     action: "人群判断 + 产品价值重构",
   },
   "B+C": {
-    name: "内容越做越散",
-    summary: "有账号、有视觉、有内容，但没有稳定认知。",
+    name: "看见几次，但记不住你",
+    summary: "账号和内容都在动，但客户没有累积出一个稳定印象。",
     action: "品牌主线 + 内容系统",
   },
   "V+T": {
-    name: "卖点像口号，证据跟不上",
-    summary: "说得好听，但客户缺少相信的依据。",
+    name: "听懂卖点，但还不放心",
+    summary: "客户听到了一些卖点，但还缺少直接证据来相信。",
     action: "卖点证据化 + 案例材料",
   },
   "T+S": {
-    name: "有兴趣，但迟迟不成交",
-    summary: "客户被吸引了，但缺信任材料和推进路径。",
+    name: "有兴趣，但没有走到选择",
+    summary: "客户愿意往下问，但信任材料和推进路径还不够顺。",
     action: "信任链 + 销售承接",
   },
   "C+S": {
-    name: "有内容流量，没有经营结果",
-    summary: "内容和销售没有接起来，线索没被复盘。",
+    name: "看见了，但没有变成咨询",
+    summary: "内容有触达，但没有稳定把兴趣带到咨询、预约或合作。",
     action: "内容路径 + 私域 / 销售资料",
   },
   "K+C": {
-    name: "AI 放大混乱",
-    summary: "底稿散、主线散，AI 只会更快生成同质内容。",
+    name: "资料和内容太散，客户认知不稳定",
+    summary: "底稿散、主线散，客户看到的表达很难稳定累积。",
     action: "AI 底盘 + 内容主线",
   },
   "K+T": {
-    name: "有实力，但证据调用不动",
-    summary: "真实案例和口碑存在，但没有变成可复用材料。",
+    name: "有实力，但证据没被看见",
+    summary: "真实案例和口碑存在，但还没有变成客户能快速判断的材料。",
     action: "案例库 + 信任证据库",
   },
   "G+T": {
-    name: "想进新市场，但别人不敢信",
-    summary: "新城市、新圈层或跨区域客户缺少判断你的证据。",
+    name: "新市场看懂了，但还不敢信",
+    summary: "新城市、新圈层或跨区域客户还缺少判断你是否适合的证据。",
     action: "目标市场语境 + 信任链",
   },
   "H+K": {
-    name: "基础好，但系统没沉淀",
-    summary: "团队已经能做事，但经验还没有变成企业资产。",
+    name: "基础不错，但还没稳定复用",
+    summary: "团队已经能做事，但经验和资料还没变成可复用资产。",
     action: "90 天企业线上全流程跑通 / SHUNSE Pulse",
   },
+};
+
+const cognitionStages = {
+  unseen: {
+    code: "01/05",
+    name: "还没被有效看见",
+    plainJudgment: "客户不是不需要你，而是还没有在关键场景里稳定遇到你、想起你。",
+    customerLine: "我可能需要这个，但我还没在该看见你的地方看到你。",
+    problemFocus: "目标客户、触点和内容出现方式还不够稳定，客户没有形成连续印象。",
+    firstAction: "先判断该被谁看见、在哪些场景出现、用什么内容反复出现。",
+  },
+  unclear: {
+    code: "02/05",
+    name: "看见了，但没看懂",
+    plainJudgment: "客户看到你了，但还没弄明白你到底适合谁、强在哪里、和别人有什么不同。",
+    customerLine: "我看到你了，但还不知道你是不是为我准备的。",
+    problemFocus: "人群、品牌锚点和一句话表达还不够清楚，客户看完仍需要别人解释。",
+    firstAction: "先把目标客户、核心主张和一句话介绍说清楚。",
+  },
+  unconvinced: {
+    code: "03/05",
+    name: "看懂了，但没被说服",
+    plainJudgment: "客户大概知道你在做什么，但还没听到一个足够具体、和自己有关的购买理由。",
+    customerLine: "我听懂了，但还没有被你说服。",
+    problemFocus: "产品优势还停在企业自己的语言里，没有翻译成客户愿意继续咨询的理由。",
+    firstAction: "先把产品价值翻译成客户听得懂、愿意买、现在想问的理由。",
+  },
+  untrusted: {
+    code: "04/05",
+    name: "有兴趣，但还不够相信",
+    plainJudgment: "客户已经有点兴趣，但还缺少案例、过程、结果或真实反馈来确认你值得信任。",
+    customerLine: "我有兴趣，但还需要看到让我放心的证据。",
+    problemFocus: "信任证据还没有整理成一条清楚的判断路径，客户容易停在观望和比较。",
+    firstAction: "先把案例、过程、结果、评价和保障整理成客户能快速判断的证据。",
+  },
+  unchosen: {
+    code: "05/05",
+    name: "相信一点，但还没选择你",
+    plainJudgment: "客户已经愿意往下问，但下一步怎么咨询、怎么判断、怎么开始还不够顺。",
+    customerLine: "我觉得可以了解，但不知道现在该怎么继续。",
+    problemFocus: "FAQ、销售话术、资料包和咨询承接还不够清楚，兴趣没有稳定变成行动。",
+    firstAction: "先把客户下一步怎么问、看什么资料、如何预约或合作说清楚。",
+  },
+};
+
+const tagStageMap = {
+  M: "unclear",
+  B: "unclear",
+  V: "unconvinced",
+  T: "untrusted",
+  C: "unseen",
+  S: "unchosen",
+  K: "untrusted",
+  G: "untrusted",
+  H: "unchosen",
+};
+
+const plainIssueCopy = {
+  M: {
+    label: "目标客户还不够准",
+    detail: "你东西不少，但客户还没感觉这是专门为他准备的。",
+  },
+  B: {
+    label: "客户记不住你",
+    detail: "客户看完知道品类，但说不出你和别人有什么不同。",
+  },
+  V: {
+    label: "购买理由不够直",
+    detail: "客户听懂了一些优势，但还没听到非选你不可的理由。",
+  },
+  T: {
+    label: "信任证据不够清楚",
+    detail: "客户有兴趣，但还需要案例、过程、结果或反馈来放心。",
+  },
+  C: {
+    label: "内容没有形成稳定印象",
+    detail: "客户可能刷到过你，但没有累积出一个清楚的判断。",
+  },
+  S: {
+    label: "兴趣没有被接住",
+    detail: "客户愿意继续了解，但下一步怎么问、怎么看、怎么开始还不够顺。",
+  },
+  K: {
+    label: "资料底稿太散",
+    detail: "你们有经验和材料，但客户看到的东西还拼不成一套清楚判断。",
+  },
+  G: {
+    label: "新市场表达还没重讲",
+    detail: "新城市、新圈层或新平台的客户，还不能直接用原来的说法打动。",
+  },
+  H: {
+    label: "已有基础，可以放大",
+    detail: "你们不是从零开始，下一步是把已有基础整理得更稳定。",
+  },
+};
+
+const combinationStageMap = {
+  "M+B": "unclear",
+  "M+V": "unconvinced",
+  "B+C": "unclear",
+  "V+T": "untrusted",
+  "T+S": "unchosen",
+  "C+S": "unchosen",
+  "K+C": "unseen",
+  "K+T": "untrusted",
+  "G+T": "untrusted",
+  "H+K": "unchosen",
 };
 
 export const selfCheckCatalog = {
@@ -295,12 +402,14 @@ function mockReport({ jobId, submission }) {
   const notRecommended = buildNotRecommended(analysis);
   const materialRequests = buildMaterialRequests(analysis);
   const consultingHooks = buildConsultingHooks(analysis, submission);
+  const cognitionType = buildCognitionType(profile, analysis);
 
   return normalizeReport(
     {
       title: `${company} SHUNSE 企业线上认知自测报告`,
       score,
       level: reportLevel(score, profile),
+      cognitionType,
       executiveSummary: buildExecutiveSummary(company, analysis, firstPriority),
       analysisSummary: buildAnalysisSummary(analysis, mode, score),
       comboDiagnosis: analysis.combination,
@@ -309,9 +418,9 @@ function mockReport({ jobId, submission }) {
       findings: buildFindings(submission, profile, intentions, newMarketPlan, analysis),
       recommendations: buildRecommendations(firstTag, profile, mode, submission, analysis),
       nextSteps: [
-        `先用一次会后诊断确认：本次「${tagDefinitions[firstTag]?.issueName || "线上认知问题"}」是否和真实资料一致。`,
-        "补充 3-5 份关键材料：企业介绍、产品资料、案例证据、官网/账号链接、销售话术或客户常见问题。",
-        "SHUNSE 再判断你更适合 30 天表达打底、90 天企业线上全流程跑通，还是 SHUNSE Pulse 持续更新。",
+        "把这份结果截图，发给顺世团队。",
+        "再补充官网、账号、产品资料、案例或销售话术，让团队看真实材料。",
+        `顺世会进一步判断：你现在该不该先做品牌管理，以及是否适合从「${mode}」切入。`,
       ],
       dimensions: buildDimensions(profile, submission),
       path: buildRoadmap(firstTag, submission),
@@ -330,6 +439,8 @@ function mockReport({ jobId, submission }) {
         firstPriority,
         secondaryPriority: secondaryTag ? tagDefinitions[secondaryTag]?.name : "",
         consultationSignal: analysis.consultationSignal,
+        cognitionTypeCode: cognitionType.code,
+        cognitionTypeName: cognitionType.name,
         tagSummary: profile.summary,
         dominantTags: profile.dominantTags,
         selfCheckChoices: profile.selected.map(
@@ -365,7 +476,7 @@ function analyzeProfile(profile, submission) {
     specialRules.push("M 出现 2 次及以上：不建议马上投放、拍大片或铺矩阵，应先做市场与人群判断。");
   }
   if (isHighPotential) {
-    specialRules.push("H 出现 5 次及以上且其他单项不高：可判断为高潜共创型。");
+    specialRules.push("H 出现 5 次及以上且其他单项不高：说明企业已有高潜基础，可以重点看如何稳定复用。");
   }
 
   const combination = findCombination(primaryTag, secondaryTag, profile);
@@ -378,42 +489,34 @@ function analyzeProfile(profile, submission) {
     specialRules,
     combination,
     consultationSignal,
+    profile,
   };
 }
 
 function buildExecutiveSummary(company, analysis, firstPriority) {
-  const secondary = analysis.secondaryTag ? `，同时需要留意「${tagDefinitions[analysis.secondaryTag]?.name}」` : "";
-  const combo = analysis.combination ? ` 简单说：${analysis.combination.summary}` : "";
-  return `${company}现在最先要处理的是「${firstPriority}」${secondary}。不是先多发内容、换包装或上 AI，而是先让客户看懂你、相信你、知道下一步怎么找你。${combo}`;
+  const secondary = analysis.secondaryTag ? `，第二个信号是「${tagDefinitions[analysis.secondaryTag]?.issueName}」` : "";
+  const combo = analysis.combination ? `简单说，${analysis.combination.summary}` : "";
+  return `${company}当前主结果是「${tagDefinitions[analysis.primaryTag]?.issueName || firstPriority}」${secondary}。先别急着加动作，先把客户看懂、相信和行动这三件事接顺。${combo}`;
 }
 
-function buildAnalysisSummary(analysis, mode, score) {
+function buildAnalysisSummary(analysis) {
+  const primary = tagDefinitions[analysis.primaryTag] || tagDefinitions.M;
+  const secondary = analysis.secondaryTag ? tagDefinitions[analysis.secondaryTag] : null;
+  const primaryPlain = plainIssueCopy[analysis.primaryTag] || plainIssueCopy.M;
+  const secondaryPlain = analysis.secondaryTag ? plainIssueCopy[analysis.secondaryTag] : null;
   const rows = [
     {
-      label: "主诊断",
-      value: tagDefinitions[analysis.primaryTag]?.issueName || "待判断",
-      detail: tagDefinitions[analysis.primaryTag]?.diagnosis || "",
+      label: "你最主要缺什么",
+      value: primaryPlain.label || primary.issueName || "待判断",
+      detail: primaryPlain.detail || primary.customerFeeling || "",
     },
   ];
 
-  if (analysis.secondaryTag) {
-    rows.push({
-      label: "次诊断",
-      value: tagDefinitions[analysis.secondaryTag]?.issueName || "待判断",
-      detail: tagDefinitions[analysis.secondaryTag]?.diagnosis || "",
-    });
-  }
-
   rows.push(
     {
-      label: "建议进入",
-      value: mode,
-      detail: "先确认资料和业务事实，再决定 30 天打底、90 天企业线上全流程跑通或 SHUNSE Pulse。",
-    },
-    {
-      label: "咨询信号",
-      value: analysis.consultationSignal,
-      detail: score >= 70 ? "基础较好，适合讨论系统化放大。" : "断层较明确，适合先做可落地的表达与承接修复。",
+      label: secondary ? "还会影响什么" : "你的基础情况",
+      value: secondaryPlain?.label || (analysis.isHighPotential ? "已有基础，可以放大" : "需要结合资料复核"),
+      detail: secondaryPlain?.detail || (analysis.isHighPotential ? "你们不是从零开始，更适合把已有基础整理得更稳定。" : "自测只能给初步方向，顺世团队还需要结合真实资料继续看。"),
     },
   );
 
@@ -422,7 +525,77 @@ function buildAnalysisSummary(analysis, mode, score) {
 
 function buildBrandManagementInsight(analysis) {
   const primary = tagDefinitions[analysis.primaryTag] || tagDefinitions.M;
-  return `这不是“做漂亮一点”的问题，而是客户判断问题。先处理「${primary.name}」，再把内容、资料、销售承接和 AI 底盘接起来。`;
+  return `这不是做得更漂亮的问题，而是客户判断问题。先处理「${primary.name}」，再把内容、资料、销售承接和 AI 底盘接起来。`;
+}
+
+function buildCognitionType(profile, analysis) {
+  const primaryTag = analysis.primaryTag || "M";
+  const secondaryTag = analysis.secondaryTag || "";
+  const combo = analysis.combination;
+  const stageKey = getCognitionStageKey(primaryTag, combo?.key);
+  const stage = cognitionStages[stageKey] || cognitionStages.unclear;
+  const primaryEvidence = buildEvidence(primaryTag, profile);
+  const secondaryEvidence = secondaryTag ? buildEvidence(secondaryTag, profile) : null;
+  const hitQuestions = Array.from(
+    new Set([
+      ...primaryEvidence.questionNumbers,
+      ...((secondaryEvidence && secondaryEvidence.questionNumbers) || []),
+    ]),
+  ).sort((a, b) => a - b);
+  const totalHits = primaryEvidence.count + ((secondaryEvidence && secondaryEvidence.count) || 0);
+  const highPotentialLine =
+    primaryTag === "H" || analysis.isHighPotential
+      ? "你们已经有一定基础，关键不是从零补课，而是让客户更稳定地看懂、相信并选择。"
+      : "";
+  const secondaryLine = secondaryTag
+    ? `后台次要信号是「${tagDefinitions[secondaryTag]?.issueName || secondaryTag}」，后续沟通时可以一起复核。`
+    : "";
+
+  return {
+    code: stage.code,
+    name: stage.name,
+    headline: `${stage.code} ${stage.name}`,
+    stageKey,
+    stageIndex: Number(stage.code.slice(0, 2)),
+    primaryTag,
+    primaryName: tagDefinitions[primaryTag]?.issueName || "",
+    secondaryTag,
+    secondaryName: secondaryTag ? tagDefinitions[secondaryTag]?.issueName || "" : "",
+    hitQuestions,
+    hitText: hitQuestions.length ? `Q${hitQuestions.join("、Q")}，共 ${totalHits} 次` : "暂未形成足够题号依据",
+    plainJudgment: highPotentialLine || stage.plainJudgment,
+    problemFocus: stage.problemFocus,
+    customerLine: stage.customerLine,
+    firstAction: stage.firstAction,
+    secondaryLine,
+    evidence: [primaryEvidence.text, secondaryEvidence?.text].filter(Boolean),
+  };
+}
+
+function getCognitionStageKey(primaryTag, comboKey) {
+  if (comboKey && combinationStageMap[comboKey]) return combinationStageMap[comboKey];
+  return tagStageMap[primaryTag] || "unclear";
+}
+
+function buildEvidence(tag, profile) {
+  const selected = profile.selected.filter((item) => item.tag === tag);
+  const questionNumbers = selected.map((item) => item.questionNumber);
+  const count = selected.length || profile.counts[tag] || 0;
+  const issueName = tagDefinitions[tag]?.issueName || tag;
+  return {
+    tag,
+    count,
+    questionNumbers,
+    text: questionNumbers.length
+      ? `${issueName}命中 Q${questionNumbers.join("、Q")}，共 ${count} 次。`
+      : `${issueName}命中 ${count} 次。`,
+  };
+}
+
+function buildHitDetail(tag, profile) {
+  const evidence = buildEvidence(tag, profile);
+  if (!evidence.count) return "";
+  return `${evidence.text}${tagDefinitions[tag]?.diagnosis || ""}`;
 }
 
 function answer(questionNumber, question, label, tag) {
@@ -634,25 +807,24 @@ function buildFindings(submission, profile, intentions, newMarketPlan, analysis)
 
 function buildRecommendations(firstTag, profile, mode, submission, analysis) {
   const issueTags = profile.dominantTags.filter((item) => item.tag !== "H").slice(0, 2);
-  const recommendations = [`先解决「${tagDefinitions[firstTag]?.issueName || "线上认知问题"}」，不要同时铺太多动作。`];
+  const primaryStage = cognitionStages[getCognitionStageKey(firstTag, analysis.combination?.key)] || cognitionStages.unclear;
+  const recommendations = [
+    analysis.combination
+      ? `先做「${analysis.combination.action}」。`
+      : primaryStage.firstAction,
+  ];
 
-  recommendations.push(
-    ...(issueTags.length
-      ? issueTags.map((item) => tagDefinitions[item.tag].recommendation)
-      : [tagDefinitions.H.recommendation]),
-  );
-
-  if (analysis.combination) {
-    recommendations.push(`组合判断：${analysis.combination.name}，建议从「${analysis.combination.action}」切入。`);
+  if (issueTags[1]) {
+    recommendations.push(`再补「${tagDefinitions[issueTags[1].tag]?.issueName}」。`);
   }
 
   if (submission.newMarketPlan === "overseas" || issueTags.some((item) => item.tag === "G")) {
-    recommendations.push("涉及海外或跨语境表达时，不要只翻译资料，要重组客户理解、信任和行动路径。");
+    recommendations.push("新市场表达要重讲，不是只翻译。");
   }
 
-  recommendations.push(`建议先进入：${mode}。`);
+  recommendations.push(`会后先进入：${mode}。`);
 
-  return Array.from(new Set(recommendations)).slice(0, 5);
+  return Array.from(new Set(recommendations)).slice(0, 4);
 }
 
 function buildDimensions(profile, submission) {
@@ -757,6 +929,7 @@ function normalizeReport(report, context) {
     title: String(report.title || "SHUNSE 企业线上认知自测报告"),
     score: Number.isFinite(Number(report.score)) ? Math.max(0, Math.min(100, Number(report.score))) : 60,
     level: String(report.level || "待评估"),
+    cognitionType: normalizeCognitionType(report.cognitionType),
     executiveSummary: String(report.executiveSummary || report.summary || "暂无摘要。"),
     analysisSummary: Array.isArray(report.analysisSummary) ? report.analysisSummary : [],
     comboDiagnosis: report.comboDiagnosis || null,
@@ -779,6 +952,29 @@ function normalizeReport(report, context) {
       source: context.source,
       jobId: context.jobId,
     },
+  };
+}
+
+function normalizeCognitionType(value) {
+  if (!value || typeof value !== "object") return null;
+  return {
+    code: String(value.code || ""),
+    name: String(value.name || ""),
+    headline: String(value.headline || [value.code, value.name].filter(Boolean).join(" ")),
+    stageKey: String(value.stageKey || ""),
+    stageIndex: Number.isFinite(Number(value.stageIndex)) ? Number(value.stageIndex) : 0,
+    primaryTag: String(value.primaryTag || ""),
+    primaryName: String(value.primaryName || ""),
+    secondaryTag: String(value.secondaryTag || ""),
+    secondaryName: String(value.secondaryName || ""),
+    hitQuestions: Array.isArray(value.hitQuestions) ? value.hitQuestions.map(Number).filter(Boolean) : [],
+    hitText: String(value.hitText || ""),
+    plainJudgment: String(value.plainJudgment || ""),
+    problemFocus: String(value.problemFocus || ""),
+    customerLine: String(value.customerLine || ""),
+    firstAction: String(value.firstAction || ""),
+    secondaryLine: String(value.secondaryLine || ""),
+    evidence: normalizeList(value.evidence),
   };
 }
 

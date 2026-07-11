@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>顺世线上认知自测</title>
+    <link rel="icon" href="../favicon.ico?v=20260706" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png?v=20260706">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=20260706">
+    <link rel="manifest" href="../site.webmanifest?v=20260706">
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="./diagnosis.css" />
   </head>
@@ -317,14 +321,11 @@
                 <p class="section-label">02 / OUTPUT</p>
                 <h2>报告预览</h2>
               </div>
-              <button class="ghost-button" type="button" id="downloadButton" disabled>
-                下载 PDF
-              </button>
             </div>
 
             <article class="report-empty" id="emptyState">
               <h3>提交后这里会显示报告</h3>
-              <p>自测数据会先提交保存，再生成可下载的诊断报告。</p>
+              <p>自测数据会先提交保存，再生成初步诊断结果。</p>
             </article>
 
             <article class="report" id="reportView" hidden></article>
@@ -333,7 +334,6 @@
       </section>
     </main>
 
-    <script src="../vendor/html2pdf.bundle.min.js" defer></script>
     <script src="../app.js" defer></script>
   </body>
 </html>

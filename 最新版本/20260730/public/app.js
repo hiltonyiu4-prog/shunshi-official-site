@@ -4,7 +4,6 @@ const reportPanel = document.querySelector("#reportPanel");
 const submitButton = document.querySelector("#submitButton");
 const nextStepButton = document.querySelector("#nextStepButton");
 const prevStepButton = document.querySelector("#prevStepButton");
-const downloadButton = document.querySelector("#downloadButton");
 const reportView = document.querySelector("#reportView");
 const emptyState = document.querySelector("#emptyState");
 const statusStrip = document.querySelector("#statusStrip");
@@ -159,7 +158,7 @@ function renderAnalysisSummary(items = []) {
   if (!items.length) return "";
   return `
     <section class="report-section">
-      <h3>3 个简单判断</h3>
+      <h3>2 个简单判断</h3>
       <div class="insight-cards">
         ${items
           .map(
@@ -188,6 +187,31 @@ function renderComboDiagnosis(combo) {
         <p>${escapeHtml(combo.summary)}</p>
         <strong>建议切入：${escapeHtml(combo.action)}</strong>
       </div>
+    </section>
+  `;
+}
+
+function renderCognitionType(type) {
+  if (!type) return "";
+  return `
+    <section class="report-section type-result-card">
+      <div class="type-result-top">
+        <span>你的客户认知阶段</span>
+        <strong>${escapeHtml(type.code || "")}</strong>
+      </div>
+      <h3>${escapeHtml(type.name || type.headline || "待判断阶段")}</h3>
+      <p class="type-judgment">${escapeHtml(type.plainJudgment || "")}</p>
+      <div class="type-two-col">
+        <div>
+          <span>客户现在卡在哪</span>
+          <p>${escapeHtml(type.customerLine || "客户还需要更清楚的理由，才能继续往下判断。")}</p>
+        </div>
+        <div>
+          <span>问题主要在哪里</span>
+          <p>${escapeHtml(type.problemFocus || type.plainJudgment || "客户还没有形成足够清楚的判断。")}</p>
+        </div>
+      </div>
+      <p class="type-handoff">你不用在这里读完一份长报告。更细的题目记录会留给后续沟通时复核。</p>
     </section>
   `;
 }
@@ -306,7 +330,6 @@ function setSubmittingState(isSubmitting) {
   submitButton.disabled = isSubmitting;
   nextStepButton.disabled = isSubmitting;
   prevStepButton.disabled = isSubmitting;
-  downloadButton.disabled = true;
   form.hidden = isSubmitting;
   generationPanel.hidden = !isSubmitting;
   reportPanel.hidden = true;
@@ -323,60 +346,36 @@ function renderReport(report, jobId) {
   const generatedAt = report.generatedAt
     ? new Date(report.generatedAt).toLocaleString("zh-CN")
     : new Date().toLocaleString("zh-CN");
-  const llm = report.metadata?.llm;
-  const llmBadge = llm?.optimized ? "AI 已优化终版" : "规则报告终版";
-
-  const shortRecommendations = (report.recommendations || []).slice(0, 3);
-  const shortMaterials = (report.materialRequests || []).slice(0, 5);
-  const shortHooks = (report.consultingHooks || []).slice(0, 2);
-  const shortNextSteps = (report.nextSteps || []).slice(0, 3);
+  const typeName = report.cognitionType?.name || report.level || "待评估";
+  const nextStepItems = (report.nextSteps || []).slice(0, 3);
 
   reportView.innerHTML = `
     <div class="report-cover">
       <p class="section-label">SHUNSE PULSE</p>
-      <h3>${escapeHtml(report.title || "品牌管理初诊报告")}</h3>
-      <div class="score-row">
-        <div class="score">${Number(report.score || 0)}<span>/100</span></div>
-        <div class="level">${escapeHtml(report.level || "待评估")}</div>
-      </div>
-      <p class="meta">报告编号：${escapeHtml(jobId)} · 生成时间：${escapeHtml(generatedAt)} · ${escapeHtml(llmBadge)}</p>
+      <h3>你的初步结果：${escapeHtml(typeName)}</h3>
+      <p class="meta">报告编号：${escapeHtml(jobId)} · 生成时间：${escapeHtml(generatedAt)}</p>
     </div>
 
+    ${renderCognitionType(report.cognitionType)}
+
     <section class="report-section">
-      <h3>核心判断</h3>
-      <p>${escapeHtml(report.executiveSummary || "暂无摘要。")}</p>
+      <h3>一句话总结</h3>
+      <p>${escapeHtml(report.cognitionType?.plainJudgment || report.executiveSummary || "顺世已经收到你的自测信息，会结合企业资料继续判断。")}</p>
+      <p>这份自测只给你一个初步方向：你现在卡在哪里、该不该先做品牌管理、以及适合从哪一块切入，还需要结合真实资料继续判断。</p>
     </section>
 
     ${renderAnalysisSummary(report.analysisSummary)}
 
-    ${renderComboDiagnosis(report.comboDiagnosis)}
-
-    ${renderTextSection("客户心里可能会怎么想", report.customerFeeling)}
-
-    ${renderTextSection("为什么要先改这里", report.brandManagementInsight)}
-
-    <section class="report-section">
-      <h3>现在先做这几件事</h3>
-      <ol>${listItems(shortRecommendations)}</ol>
-    </section>
-
     ${renderServicePath(report.servicePath)}
 
-    ${renderListSection("不建议先做", (report.notRecommended || []).slice(0, 3))}
-
-    ${renderListSection("会后建议补充材料", shortMaterials)}
-
-    ${renderListSection("适合继续咨询的问题", shortHooks)}
-
     <section class="report-section">
-      <h3>下一步</h3>
-      <ul>${listItems(shortNextSteps)}</ul>
+      <h3>下一步怎么跟顺世沟通</h3>
+      <ul>${listItems(nextStepItems)}</ul>
     </section>
   `;
 
   emptyState.hidden = true;
   reportView.hidden = false;
-  downloadButton.disabled = false;
 
   if (window.matchMedia("(max-width: 900px)").matches) {
     reportPanel.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -450,10 +449,10 @@ async function submitDiagnosis(event) {
 
     const feishu = data.integrations?.feishu;
     const storageText = feishu?.saved
-      ? "报告已生成，可下载 PDF；信息已同步给 SHUNSE"
+      ? "初步结果已生成；信息已同步给 SHUNSE"
       : data.storage?.saved
-        ? "报告已生成，可下载 PDF；信息已进入后续跟进"
-        : "报告已生成，可下载 PDF";
+        ? "初步结果已生成；信息已进入后续跟进"
+        : "初步结果已生成";
     setStatus(storageText, "ready");
   } catch (error) {
     console.error(error);
@@ -468,51 +467,7 @@ async function submitDiagnosis(event) {
   }
 }
 
-async function downloadPdf() {
-  if (!currentReport || !currentJobId) return;
-
-  const fileName = `${currentReport.title || "brand-diagnosis"}-${currentJobId.slice(0, 8)}.pdf`;
-  downloadButton.disabled = true;
-  const target = reportView.cloneNode(true);
-  const wrapper = document.createElement("div");
-  wrapper.className = "pdf-render-root";
-  target.classList.add("pdf-render-target");
-  wrapper.appendChild(target);
-  document.body.appendChild(wrapper);
-
-  if (window.html2pdf) {
-    try {
-      await window
-        .html2pdf()
-        .set({
-          margin: 10,
-          filename: fileName,
-          image: { type: "jpeg", quality: 0.96 },
-          html2canvas: {
-            scale: Math.min(2, window.devicePixelRatio || 1.5),
-            useCORS: true,
-            backgroundColor: "#ffffff",
-            scrollX: 0,
-            scrollY: 0,
-          },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          pagebreak: { mode: ["css", "legacy"] },
-        })
-        .from(target)
-        .save();
-    } finally {
-      wrapper.remove();
-      downloadButton.disabled = false;
-    }
-  } else {
-    wrapper.remove();
-    downloadButton.disabled = false;
-    window.print();
-  }
-}
-
 form.addEventListener("submit", submitDiagnosis);
-downloadButton.addEventListener("click", downloadPdf);
 nextStepButton.addEventListener("click", () => {
   if (validateCurrentStep()) showStep(currentStep + 1);
 });
@@ -534,7 +489,6 @@ form.addEventListener("reset", () => {
     emptyState.hidden = false;
     reportView.hidden = true;
     reportView.innerHTML = "";
-    downloadButton.disabled = true;
     currentReport = null;
     currentJobId = null;
     setStatus("等待提交问卷");

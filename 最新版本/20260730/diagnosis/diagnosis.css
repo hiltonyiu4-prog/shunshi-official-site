@@ -318,6 +318,18 @@ textarea {
   background: #ffffff;
 }
 
+html:has(.diagnosis-body) {
+  height: auto !important;
+  min-height: 100% !important;
+  background-color: #120506 !important;
+  background:
+    radial-gradient(ellipse 90% 62% at 50% 0%, rgb(120 20 23 / 0.36), transparent 68%),
+    radial-gradient(ellipse 80% 72% at 86% 34%, rgb(92 12 16 / 0.30), transparent 72%),
+    radial-gradient(ellipse 88% 82% at 16% 78%, rgb(72 10 13 / 0.28), transparent 74%),
+    linear-gradient(180deg, #2f090b 0%, #210708 38%, #120506 100%) !important;
+  background-attachment: scroll !important;
+}
+
 .diagnosis-body {
   --ink: #fff6ee;
   --muted: rgb(255 246 238 / 0.72);
@@ -330,13 +342,13 @@ textarea {
   --soft: rgb(255 246 238 / 0.08);
   --shadow: 0 28px 80px rgb(0 0 0 / 0.24);
   min-height: 100vh;
-  background-color: #120506;
+  background-color: #120506 !important;
   background:
     radial-gradient(ellipse 90% 62% at 50% 0%, rgb(120 20 23 / 0.36), transparent 68%),
     radial-gradient(ellipse 80% 72% at 86% 34%, rgb(92 12 16 / 0.30), transparent 72%),
     radial-gradient(ellipse 88% 82% at 16% 78%, rgb(72 10 13 / 0.28), transparent 74%),
-    linear-gradient(180deg, #2f090b 0%, #210708 38%, #120506 100%);
-  background-attachment: fixed;
+    linear-gradient(180deg, #2f090b 0%, #210708 38%, #120506 100%) !important;
+  background-attachment: scroll !important;
   color: var(--ink);
 }
 
@@ -1261,6 +1273,91 @@ textarea:focus {
 
 .combo-box strong {
   color: var(--accent-dark);
+}
+
+.type-result-card {
+  padding: 22px;
+  border: 1px solid #badfd4;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f4fbf8, #ffffff 64%);
+}
+
+.type-result-card h3 {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1.12;
+}
+
+.type-result-top,
+.type-two-col {
+  display: grid;
+  gap: 8px;
+}
+
+.type-result-top {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.type-result-top span,
+.type-two-col span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.type-result-top strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #102820;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.type-judgment {
+  margin: 0;
+  color: #202a3a;
+  font-size: 18px;
+  font-weight: 750;
+  line-height: 1.58;
+}
+
+.type-two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.type-two-col div {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid #dcece7;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.type-two-col p,
+.type-handoff {
+  margin: 0;
+}
+
+.type-two-col p {
+  color: #202a3a;
+  font-size: 15px;
+  font-weight: 720;
+  line-height: 1.62;
+}
+
+.type-handoff {
+  color: #536174;
+  font-size: 15px;
+  line-height: 1.68;
 }
 
 .service-path {

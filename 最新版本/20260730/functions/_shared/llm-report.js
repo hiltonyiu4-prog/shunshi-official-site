@@ -67,6 +67,7 @@ async function requestReportLlm({ env, jobId, submission, baseReport }) {
           outputRules: [
             "必须返回 JSON object。",
             "不要返回 title、score、metadata。",
+            "不要返回 cognitionType 或 analysisSummary，这两个字段必须保留规则评分结果。",
             "优先返回 executiveSummary、recommendations、servicePath、consultingHooks、materialRequests、brandManagementInsight。",
             "总字数控制在 450 字以内。",
             "executiveSummary 不超过 100 个中文字符。",
@@ -148,7 +149,6 @@ function pickReportFields(value) {
   const fields = [
     "level",
     "executiveSummary",
-    "analysisSummary",
     "comboDiagnosis",
     "customerFeeling",
     "brandManagementInsight",
@@ -212,6 +212,7 @@ function compactReport(report) {
   return {
     score: report.score,
     level: report.level,
+    cognitionType: report.cognitionType,
     executiveSummary: report.executiveSummary,
     primary: report.metadata?.firstPriority,
     secondary: report.metadata?.secondaryPriority,
