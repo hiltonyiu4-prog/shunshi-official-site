@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>云南企业新时代增长与品牌重构闭门论坛</title>
+  <link rel="preload" as="image" href="assets/shunse-yunnan-bg.webp" type="image/webp" fetchpriority="high" />
   <style>
     :root {
       --red-900: #190202;
@@ -18,6 +19,16 @@
       --gold-soft: rgba(201, 163, 90, 0.62);
       --black: #050303;
       --radius: 8px;
+      --yunnan-bg: url("assets/shunse-yunnan-bg.png");
+    }
+
+    @supports (background-image: image-set(url("assets/shunse-yunnan-bg.webp") type("image/webp"))) {
+      :root {
+        --yunnan-bg: image-set(
+          url("assets/shunse-yunnan-bg.webp") type("image/webp"),
+          url("assets/shunse-yunnan-bg.png") type("image/png")
+        );
+      }
     }
 
     * {
@@ -63,7 +74,7 @@
       overflow: hidden;
       background:
         linear-gradient(180deg, rgba(24, 2, 2, 0.34), rgba(4, 2, 2, 0.72)),
-        url("assets/shunse-yunnan-bg.png") center / cover no-repeat,
+        var(--yunnan-bg) center / cover no-repeat,
         radial-gradient(circle at 80% 5%, rgba(223, 152, 62, 0.24), transparent 28%),
         radial-gradient(circle at 8% 35%, rgba(139, 17, 20, 0.36), transparent 34%),
         linear-gradient(180deg, #3b0505 0%, #120202 38%, #050303 100%);
@@ -118,6 +129,7 @@
       transform: translateY(calc(var(--slide, 0) * -100%));
       transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 2;
+      will-change: transform;
     }
 
     .screen {
@@ -186,7 +198,7 @@
       opacity: 0;
       background:
         linear-gradient(180deg, transparent 0%, rgba(22, 2, 2, 0.08) 18%, rgba(4, 1, 1, 0.42) 64%, rgba(1, 1, 1, 0.72)),
-        url("assets/shunse-yunnan-bg.png") bottom center / cover no-repeat;
+        var(--yunnan-bg) bottom center / cover no-repeat;
       filter: saturate(1.08) contrast(1.04) brightness(0.92);
       transform: translateY(34px) scale(1.025);
       mask-image: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(0, 0, 0, 0.28) 48%, black 76%);
@@ -217,7 +229,7 @@
       opacity: 0;
       background:
         linear-gradient(180deg, transparent 0%, rgba(15, 2, 2, 0.05) 34%, rgba(3, 1, 1, 0.36) 68%, rgba(0, 0, 0, 0.58)),
-        url("assets/shunse-yunnan-bg.png") bottom center / cover no-repeat;
+        var(--yunnan-bg) bottom center / cover no-repeat;
       filter: saturate(1.28) contrast(1.16) brightness(1.12);
       mix-blend-mode: screen;
       transform: translateY(24px) scale(1.018);
@@ -1069,6 +1081,33 @@
         transition-duration: 0.001ms !important;
       }
     }
+
+    @media (hover: none), (max-width: 480px) {
+      .slides {
+        transition-duration: 520ms;
+      }
+
+      .screen,
+      .app::after {
+        transition-duration: 520ms;
+      }
+
+      .grain {
+        opacity: 0.12;
+        mix-blend-mode: normal;
+      }
+
+      .intro-pattern,
+      .intro-gilt,
+      .intro-depth {
+        filter: none;
+      }
+
+      .hero-title span,
+      .fade-up {
+        transition-duration: 560ms;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1267,7 +1306,7 @@
           <span>09 / 09</span>
         </header>
         <div class="content">
-          <div class="closing-logo fade-up" aria-hidden="true"><img src="assets/shunse-logo-original.png" alt="" /></div>
+          <div class="closing-logo fade-up" aria-hidden="true"><img src="assets/shunse-logo-original-small.webp" width="512" height="512" decoding="async" alt="" /></div>
           <p class="section-label fade-up delay-1">Confirm</p>
           <h2 class="fade-up delay-1">确认参与</h2>
           <p class="quote fade-up delay-2">如您愿意出席，<br />请于活动开始前回复确认。</p>
@@ -1337,11 +1376,15 @@
         arrow.style.display = current === screens.length - 1 ? "none" : "grid";
         window.setTimeout(() => screens[previous]?.classList.remove("leaving"), 620);
       };
-      if (document.startViewTransition) {
+      if (document.startViewTransition && !isCompactTouch()) {
         document.startViewTransition(update);
       } else {
         update();
       }
+    }
+
+    function isCompactTouch() {
+      return window.matchMedia("(hover: none), (max-width: 480px)").matches;
     }
 
     function step(direction) {
