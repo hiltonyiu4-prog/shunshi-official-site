@@ -48,6 +48,8 @@ AGENT_WEBHOOK_TOKEN=你的 Agent Webhook Token，可选
 FEISHU_APP_ID=飞书应用 App ID，可选
 FEISHU_APP_SECRET=飞书应用 App Secret，可选
 FEISHU_DOC_TOKEN=飞书文档 token，可选
+FEISHU_SALON_DOC_TOKEN=沙龙报名记录文档 token，可选
+FEISHU_SALON_DOC_URL=沙龙报名记录文档 URL，可选
 FEISHU_OPEN_BASE_URL=https://open.feishu.cn
 DEEPSEEK_API_KEY=DeepSeek API Key，可选
 DEEPSEEK_BASE_URL=https://api.deepseek.com
@@ -66,6 +68,14 @@ FEISHU_DOC_TOKEN=KdIydqVjIoRJwUxayescdZNPnTd
 ```
 
 如果飞书写入失败，不会影响用户生成和下载报告。
+
+沙龙邀请 H5 入口：
+
+```txt
+https://shun-se.com/salon-yunnan/
+```
+
+沙龙报名会提交到 `/api/salon-rsvp`。如果配置了 `FEISHU_SALON_DOC_TOKEN`，报名信息会写入专用沙龙报名文档；如果没有配置，则回落写入现有 `FEISHU_SUMMARY_DOC_TOKEN` 或 `FEISHU_DOC_TOKEN` 对应文档。
 
 大模型优化是可选增强：配置 `DEEPSEEK_API_KEY` 后，系统会先生成规则诊断初稿，再调用 DeepSeek 对报告表达做会后咨询导向优化。DeepSeek 超时或失败时会自动回退到规则报告，避免用户提交卡住。
 

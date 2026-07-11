@@ -1,0 +1,1425 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>云南企业新时代增长与品牌重构闭门论坛</title>
+  <style>
+    :root {
+      --red-900: #190202;
+      --red-800: #2a0505;
+      --red-700: #560909;
+      --red-600: #8b1114;
+      --cream: #f5efe4;
+      --soft: rgba(245, 239, 228, 0.76);
+      --muted: rgba(245, 239, 228, 0.56);
+      --line: rgba(245, 239, 228, 0.18);
+      --gold: #c9a35a;
+      --gold-soft: rgba(201, 163, 90, 0.62);
+      --black: #050303;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--cream);
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      position: relative;
+      width: min(100vw, 430px);
+      height: 100vh;
+      height: 100dvh;
+      min-height: 640px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(24, 2, 2, 0.34), rgba(4, 2, 2, 0.72)),
+        url("assets/shunse-yunnan-bg.png") center / cover no-repeat,
+        radial-gradient(circle at 80% 5%, rgba(223, 152, 62, 0.24), transparent 28%),
+        radial-gradient(circle at 8% 35%, rgba(139, 17, 20, 0.36), transparent 34%),
+        linear-gradient(180deg, #3b0505 0%, #120202 38%, #050303 100%);
+      isolation: isolate;
+    }
+
+    .app::before,
+    .app::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .app::before {
+      background-image:
+        linear-gradient(rgba(245, 239, 228, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 239, 228, 0.035) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(180deg, black, transparent 80%);
+    }
+
+    .app::after {
+      background:
+        radial-gradient(circle at 72% 14%, rgba(201, 163, 90, 0.16), transparent 22%),
+        linear-gradient(135deg, transparent 0 38%, rgba(245, 239, 228, 0.045) 39%, transparent 40%),
+        radial-gradient(circle at 65% 82%, rgba(201, 163, 90, 0.1), transparent 30%);
+      opacity: 0.78;
+      transform: translate3d(0, var(--depth-y, 0px), 0) scale(1.018);
+      transition: transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.2;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.13) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 70% 60%, rgba(255, 225, 160, 0.12) 0 1px, transparent 1.4px);
+      background-size: 41px 47px, 59px 53px;
+      mix-blend-mode: screen;
+      z-index: 3;
+    }
+
+    .slides {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform: translateY(calc(var(--slide, 0) * -100%));
+      transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 2;
+    }
+
+    .screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: max(30px, env(safe-area-inset-top)) 28px max(34px, env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translate3d(0, var(--screen-drift, 0px), 0);
+      transition: transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .screen::before {
+      content: "";
+      position: absolute;
+      inset: 18px 18px;
+      border: 1px solid rgba(245, 239, 228, 0.12);
+      border-radius: var(--radius);
+      pointer-events: none;
+    }
+
+    .screen::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34%;
+      pointer-events: none;
+      opacity: 0.16;
+      background:
+        url("data:image/svg+xml,%3Csvg width='430' height='230' viewBox='0 0 430 230' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a35a' stroke-width='1' stroke-opacity='.34'%3E%3Cpath d='M-12 181 C38 156 64 140 101 157 C139 176 161 119 207 145 C247 168 278 92 326 125 C360 149 383 116 442 135'/%3E%3Cpath d='M-24 209 C38 178 86 171 124 187 C169 206 196 162 233 178 C283 200 314 140 357 163 C386 179 407 169 450 151'/%3E%3Cpath d='M326 166 L358 166 L342 151 Z M333 166 L333 206 M351 166 L351 206 M329 184 L355 184 M326 206 L358 206'/%3E%3Cpath d='M59 189 C86 170 106 170 134 189 M76 189 C92 180 102 180 118 189'/%3E%3Cpath d='M251 178 C279 151 302 149 330 178 C301 166 280 166 251 178 Z'/%3E%3C/g%3E%3C/svg%3E") bottom center / 100% auto no-repeat;
+      mask-image: linear-gradient(180deg, transparent, black 42%);
+      z-index: 1;
+    }
+
+    .intro-assemble {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 68%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .intro-base {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(44, 4, 4, 0.42) 38%, rgba(3, 1, 1, 0.82));
+      opacity: 1;
+    }
+
+    .intro-pattern {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      opacity: 0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(22, 2, 2, 0.08) 18%, rgba(4, 1, 1, 0.42) 64%, rgba(1, 1, 1, 0.72)),
+        url("assets/shunse-yunnan-bg.png") bottom center / cover no-repeat;
+      filter: saturate(1.08) contrast(1.04) brightness(0.92);
+      transform: translateY(34px) scale(1.025);
+      mask-image: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(0, 0, 0, 0.28) 48%, black 76%);
+      animation: patternReveal 3000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 760ms;
+    }
+
+    .intro-pattern::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 42%;
+      background: linear-gradient(180deg, transparent, rgba(201, 163, 90, 0.24), transparent);
+      opacity: 0;
+      transform: translateY(120%);
+      animation: revealGleam 1800ms ease forwards;
+      animation-delay: 1500ms;
+    }
+
+    .intro-gilt {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      opacity: 0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(15, 2, 2, 0.05) 34%, rgba(3, 1, 1, 0.36) 68%, rgba(0, 0, 0, 0.58)),
+        url("assets/shunse-yunnan-bg.png") bottom center / cover no-repeat;
+      filter: saturate(1.28) contrast(1.16) brightness(1.12);
+      mix-blend-mode: screen;
+      transform: translateY(24px) scale(1.018);
+      mask-image:
+        radial-gradient(circle at 82% 12%, black 0 16%, transparent 34%),
+        linear-gradient(180deg, transparent 0%, transparent 36%, rgba(0, 0, 0, 0.32) 56%, black 100%);
+      animation: giltReveal 2600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 1280ms;
+    }
+
+    .intro-depth {
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      bottom: -3%;
+      height: 42%;
+      opacity: 0;
+      background:
+        radial-gradient(circle at 18% 76%, rgba(201, 163, 90, 0.24), transparent 28%),
+        radial-gradient(circle at 80% 90%, rgba(201, 163, 90, 0.18), transparent 24%);
+      background-position: bottom center;
+      filter: blur(4px);
+      animation: depthRise 2100ms ease forwards;
+      animation-delay: 1180ms;
+    }
+
+    .intro-horizon {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 30%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 239, 228, 0.18), rgba(201, 163, 90, 0.72), transparent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+      animation: lineDraw 1400ms ease forwards;
+      animation-delay: 2140ms;
+    }
+
+    .intro-spark {
+      position: absolute;
+      right: 22%;
+      bottom: 34%;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 163, 90, 0.38), transparent 62%);
+      opacity: 0;
+      transform: scale(0.72);
+      animation: sparkIn 1400ms ease forwards;
+      animation-delay: 2380ms;
+    }
+
+    .app.intro-pending .screen[data-screen="1"] .topline,
+    .app.intro-pending .screen[data-screen="1"] .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: none;
+    }
+
+    .app.intro-pending .arrow,
+    .app.intro-pending .nav {
+      opacity: 0;
+    }
+
+    .topline {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 32px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: rgba(245, 239, 228, 0.58);
+      font-size: 10.5px;
+      font-weight: 400;
+      white-space: nowrap;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 0;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      overflow: visible;
+      box-shadow: none;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      margin: auto 0;
+    }
+
+    .section-label {
+      margin: 0 0 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2 {
+      font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 330px;
+      font-size: clamp(29px, 7.6vw, 38px);
+      line-height: 1.32;
+    }
+
+    h2 {
+      font-size: clamp(24px, 6.4vw, 31px);
+      line-height: 1.34;
+    }
+
+    h3 {
+      color: var(--cream);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .lead {
+      margin-top: 20px;
+      color: var(--soft);
+      font-size: 15px;
+      line-height: 2;
+    }
+
+    .small-copy {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .hero-title {
+      margin-top: 34px;
+    }
+
+    .hero-kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(245, 239, 228, 0.82);
+      font-size: clamp(23px, 6.4vw, 31px);
+      line-height: 1.34;
+      font-weight: 700;
+    }
+
+    .hero-strong {
+      display: block;
+    }
+
+    .hero-title span {
+      clip-path: inset(0 0 100% 0);
+      transform: translateY(12px);
+      transition: clip-path 820ms cubic-bezier(0.22, 1, 0.36, 1), transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .screen.active .hero-title span {
+      clip-path: inset(0 0 0 0);
+      transform: translateY(0);
+    }
+
+    .screen.active .hero-title span:nth-child(2) {
+      transition-delay: 130ms;
+    }
+
+    .hero-sub {
+      margin-top: 18px;
+      color: var(--cream);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+
+    .hero-note {
+      margin-top: 28px;
+      max-width: 315px;
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.9;
+      padding-left: 14px;
+      border-left: 2px solid var(--gold);
+    }
+
+    .hero-note b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--cream);
+      font-weight: 700;
+    }
+
+    .keyword-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 30px;
+    }
+
+    .keyword-row span,
+    .pill {
+      min-height: 30px;
+      padding: 7px 12px;
+      border: 1px solid rgba(201, 163, 90, 0.42);
+      border-radius: 999px;
+      color: rgba(245, 239, 228, 0.86);
+      background: rgba(0, 0, 0, 0.18);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .salute {
+      margin-bottom: 28px;
+      color: var(--cream);
+      font-size: 17px;
+      line-height: 2;
+      font-weight: 700;
+    }
+
+    .quote {
+      margin-top: 34px;
+      padding: 18px 0 0;
+      border-top: 1px solid var(--gold-soft);
+      color: var(--cream);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+      font-size: 22px;
+      line-height: 1.75;
+    }
+
+    .topic-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .topic {
+      min-height: 118px;
+      padding: 16px 14px;
+      border: 1px solid rgba(245, 239, 228, 0.13);
+      border-radius: var(--radius);
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 620ms ease, transform 620ms ease, border-color 620ms ease;
+    }
+
+    .screen.active .topic {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: rgba(201, 163, 90, 0.2);
+    }
+
+    .screen.active .topic:nth-child(1) {
+      transition-delay: 120ms;
+    }
+
+    .screen.active .topic:nth-child(2) {
+      transition-delay: 220ms;
+    }
+
+    .screen.active .topic:nth-child(3) {
+      transition-delay: 320ms;
+    }
+
+    .screen.active .topic:nth-child(4) {
+      transition-delay: 420ms;
+    }
+
+    .topic b {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+
+    .topic p {
+      color: var(--cream);
+      font-size: 13px;
+      line-height: 1.75;
+      font-weight: 600;
+    }
+
+    .agenda {
+      position: relative;
+      margin-top: 22px;
+      max-height: min(62vh, 500px);
+      overflow: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201, 163, 90, 0.5) transparent;
+    }
+
+    .agenda-item {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(245, 239, 228, 0.1);
+      opacity: 0.42;
+      transform: translateY(10px);
+      transition: opacity 560ms ease, transform 560ms ease, border-color 560ms ease;
+    }
+
+    .screen.active .agenda-item {
+      opacity: 1;
+      transform: translateY(0);
+      border-bottom-color: rgba(201, 163, 90, 0.16);
+    }
+
+    .screen.active .agenda-item:nth-child(1) {
+      transition-delay: 110ms;
+    }
+
+    .screen.active .agenda-item:nth-child(2) {
+      transition-delay: 170ms;
+    }
+
+    .screen.active .agenda-item:nth-child(3) {
+      transition-delay: 230ms;
+    }
+
+    .screen.active .agenda-item:nth-child(4) {
+      transition-delay: 290ms;
+    }
+
+    .screen.active .agenda-item:nth-child(5) {
+      transition-delay: 350ms;
+    }
+
+    .screen.active .agenda-item:nth-child(6) {
+      transition-delay: 410ms;
+    }
+
+    .screen.active .agenda-item:nth-child(7) {
+      transition-delay: 470ms;
+    }
+
+    .screen.active .agenda-item:nth-child(8) {
+      transition-delay: 530ms;
+    }
+
+    .screen.active .agenda-item:nth-child(9) {
+      transition-delay: 590ms;
+    }
+
+    .screen.active .agenda-item:nth-child(10) {
+      transition-delay: 650ms;
+    }
+
+    .screen.active .agenda-item:nth-child(11) {
+      transition-delay: 710ms;
+    }
+
+    .time {
+      color: var(--gold);
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .event {
+      color: rgba(245, 239, 228, 0.86);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .notice-box {
+      margin-top: 32px;
+      padding: 24px 20px;
+      border: 1px solid rgba(201, 163, 90, 0.45);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(120deg, rgba(201, 163, 90, 0.13), transparent 46%),
+        rgba(0, 0, 0, 0.22);
+    }
+
+    .notice-box strong {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--cream);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+      font-size: 29px;
+      line-height: 1.22;
+      background: linear-gradient(110deg, rgba(245, 239, 228, 0.84), #f4dc9d 38%, #9c6f26 50%, rgba(245, 239, 228, 0.9) 62%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .screen.active .notice-box strong {
+      animation: foilStamp 1600ms ease forwards;
+      animation-delay: 180ms;
+    }
+
+    .form {
+      margin-top: 18px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field label {
+      color: rgba(245, 239, 228, 0.62);
+      font-size: 11px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid rgba(245, 239, 228, 0.18);
+      border-radius: var(--radius);
+      background: rgba(4, 2, 2, 0.48);
+      color: var(--cream);
+      outline: 0;
+      padding: 10px 12px;
+    }
+
+    .field input::placeholder {
+      color: rgba(245, 239, 228, 0.35);
+    }
+
+    .submit {
+      width: 100%;
+      min-height: 46px;
+      margin-top: 5px;
+      border: 0;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #f2dfb4, #b88a3f);
+      color: #210706;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(201, 163, 90, 0.18);
+    }
+
+    .submit:disabled {
+      cursor: wait;
+      opacity: 0.72;
+      animation: none;
+    }
+
+    .screen.active .submit {
+      animation: ctaBreathe 2600ms ease-in-out infinite;
+      animation-delay: 800ms;
+    }
+
+    .final-card {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201, 163, 90, 0.55);
+    }
+
+    .closing-logo {
+      width: 34px;
+      height: 34px;
+      margin: 0 0 28px;
+      border-radius: 0;
+      background: transparent;
+      display: grid;
+      place-items: center;
+      box-shadow: none;
+    }
+
+    .closing-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .contact {
+      margin-top: 24px;
+      display: grid;
+      gap: 8px;
+      color: rgba(245, 239, 228, 0.78);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .nav {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: max(14px, env(safe-area-inset-bottom));
+      z-index: 6;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .progress {
+      height: 1px;
+      background: rgba(245, 239, 228, 0.18);
+      overflow: hidden;
+    }
+
+    .progress i {
+      display: block;
+      width: var(--progress, 11.111%);
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--cream));
+      transition: width 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .count {
+      color: rgba(245, 239, 228, 0.72);
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .arrow {
+      position: absolute;
+      left: 50%;
+      bottom: max(42px, calc(env(safe-area-inset-bottom) + 42px));
+      z-index: 5;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(245, 239, 228, 0.38);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+      animation: lift 1.8s ease-in-out infinite;
+    }
+
+    .arrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-right: 1.4px solid var(--cream);
+      border-bottom: 1.4px solid var(--cream);
+      transform: rotate(45deg) translate(-1px, -1px);
+    }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 84px;
+      z-index: 10;
+      transform: translate(-50%, 14px);
+      padding: 10px 14px;
+      border: 1px solid rgba(245, 239, 228, 0.16);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.78);
+      color: var(--cream);
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      clip-path: inset(0 0 100% 0);
+      transition: opacity 720ms ease, transform 720ms ease, clip-path 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .screen[data-screen="8"] .content {
+      max-height: calc(100dvh - 96px);
+      overflow: auto;
+      padding-right: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201, 163, 90, 0.5) transparent;
+    }
+
+    .screen.active .fade-up {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+
+    .screen.active .delay-1 {
+      transition-delay: 110ms;
+    }
+
+    .screen.active .delay-2 {
+      transition-delay: 220ms;
+    }
+
+    .screen.active .delay-3 {
+      transition-delay: 330ms;
+    }
+
+    .screen.leaving .content {
+      opacity: 0.28;
+      transform: translateY(-12px) scale(0.992);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    ::view-transition-old(root) {
+      animation: viewSoftOut 420ms ease forwards;
+    }
+
+    ::view-transition-new(root) {
+      animation: viewSoftIn 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes lift {
+      0%,
+      100% {
+        transform: translate(-50%, 0);
+        opacity: 0.55;
+      }
+      50% {
+        transform: translate(-50%, 7px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes patternReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(34px) scale(1.025);
+        filter: saturate(1.08) contrast(1.04) brightness(0.72);
+      }
+      30% {
+        opacity: 0.18;
+      }
+      100% {
+        opacity: 0.62;
+        transform: translateY(0) scale(1);
+        filter: saturate(1.08) contrast(1.04) brightness(0.96);
+      }
+    }
+
+    @keyframes giltReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(24px) scale(1.018);
+        filter: saturate(1.1) contrast(1.02) brightness(0.8);
+      }
+      45% {
+        opacity: 0.24;
+      }
+      100% {
+        opacity: 0.5;
+        transform: translateY(0) scale(1);
+        filter: saturate(1.28) contrast(1.16) brightness(1.12);
+      }
+    }
+
+    @keyframes foilStamp {
+      0% {
+        background-position: 100% 50%;
+        filter: brightness(0.82);
+      }
+      42% {
+        filter: brightness(1.18);
+      }
+      100% {
+        background-position: 0% 50%;
+        filter: brightness(1);
+      }
+    }
+
+    @keyframes ctaBreathe {
+      0%,
+      100% {
+        box-shadow: 0 12px 30px rgba(201, 163, 90, 0.18);
+        transform: translateY(0);
+      }
+      50% {
+        box-shadow: 0 16px 42px rgba(201, 163, 90, 0.32);
+        transform: translateY(-1px);
+      }
+    }
+
+    @keyframes viewSoftOut {
+      to {
+        opacity: 0.7;
+        filter: brightness(0.82);
+      }
+    }
+
+    @keyframes viewSoftIn {
+      from {
+        opacity: 0.86;
+        filter: brightness(0.92);
+      }
+      to {
+        opacity: 1;
+        filter: brightness(1);
+      }
+    }
+
+    @keyframes revealGleam {
+      0% {
+        opacity: 0;
+        transform: translateY(120%);
+      }
+      42% {
+        opacity: 0.56;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-40%);
+      }
+    }
+
+    @keyframes depthRise {
+      0% {
+        opacity: 0;
+        transform: translateY(34px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes lineDraw {
+      0% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes sparkIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.72);
+      }
+      45% {
+        opacity: 0.84;
+      }
+      100% {
+        opacity: 0.18;
+        transform: scale(1.25);
+      }
+    }
+
+    @media (max-height: 720px) {
+      .app {
+        min-height: 580px;
+      }
+
+      .screen {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .hero-title {
+        margin-top: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+
+      .lead {
+        font-size: 14px;
+        line-height: 1.85;
+      }
+
+      .quote {
+        font-size: 19px;
+      }
+
+      .topic {
+        min-height: 104px;
+        padding: 13px 12px;
+      }
+
+      .agenda {
+        max-height: 55vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app intro-pending" aria-label="顺世闭门论坛邀请函">
+    <div class="grain"></div>
+
+    <div class="slides">
+      <section class="screen active" data-screen="1">
+        <div class="intro-assemble" aria-hidden="true">
+          <i class="intro-base"></i>
+          <i class="intro-pattern"></i>
+          <i class="intro-gilt"></i>
+          <i class="intro-depth"></i>
+          <i class="intro-horizon"></i>
+          <i class="intro-spark"></i>
+        </div>
+        <header class="topline">
+          <span class="brand">玫瑰汇客厅｜致良知私董会｜SHUNSE顺世品牌</span>
+          <span>Invitation Only</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Growth Transformation</p>
+          <h1 class="hero-title fade-up delay-1">
+            <span class="hero-kicker">云南企业新时代</span>
+            <span class="hero-strong">增长与品牌重构闭门论坛</span>
+          </h1>
+          <p class="hero-sub fade-up delay-2">从当下问题出发，重新理解品牌和增长</p>
+          <p class="hero-note fade-up delay-3"><b>邀请制闭门论坛</b>面向云南企业主 / 决策者 / 品牌与增长负责人</p>
+          <div class="keyword-row fade-up delay-3">
+            <span>闭门论坛</span>
+            <span>邀请制</span>
+            <span>新时代增长</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="2">
+        <header class="topline">
+          <span>Opening</span>
+          <span>02 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Dear Guest</p>
+          <p class="salute fade-up delay-1">尊敬的老师 / 企业负责人：<br />您好！</p>
+          <p class="lead fade-up delay-2">我们诚挚邀请您参加一场面向云南企业主的闭门论坛。</p>
+          <p class="quote fade-up delay-3">这不是一场普通交流会，<br />而是一场面向企业家与决策者的<br />高质量闭门讨论。</p>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="3">
+        <header class="topline">
+          <span>Positioning</span>
+          <span>03 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Forum Theme</p>
+          <h2 class="fade-up delay-1">云南企业新时代<br />增长与品牌重构闭门论坛</h2>
+          <p class="hero-sub fade-up delay-2">从产品出发，重新理解品牌和增长</p>
+          <p class="lead fade-up delay-3">本次活动由<br />玫瑰汇客厅、致良知私董会与 SHUNSE顺世品牌联合发起<br />聚焦新时代背景下，<br />云南企业如何重新理解增长、品牌与 AI 的关系。</p>
+          <div class="keyword-row fade-up delay-3">
+            <span>增长</span>
+            <span>品牌</span>
+            <span>AI</span>
+            <span>升级</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="4">
+        <header class="topline">
+          <span>Why You</span>
+          <span>04 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Invitation Reason</p>
+          <h2 class="fade-up delay-1">为什么邀请您</h2>
+          <p class="quote fade-up delay-2">我们相信，您所在的企业 / 领域，与本次论坛所讨论的话题具有很强的现实关联。</p>
+          <p class="lead fade-up delay-3">在新的市场环境下，企业面对的不只是产品竞争，更是增长逻辑、品牌表达与组织协同方式的重构。</p>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="5">
+        <header class="topline">
+          <span>Topics</span>
+          <span>05 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Key Discussion</p>
+          <h2 class="fade-up delay-1">本次论坛重点讨论什么</h2>
+          <div class="topic-list fade-up delay-2">
+            <article class="topic">
+              <b>议题 1</b>
+              <p>AI 如何真正进入企业工作方式与组织协同</p>
+            </article>
+            <article class="topic">
+              <b>议题 2</b>
+              <p>新时代如何建立更清晰、更可信的品牌表达</p>
+            </article>
+            <article class="topic">
+              <b>议题 3</b>
+              <p>企业如何把产品力转化为被看见、被理解、被选择的能力</p>
+            </article>
+            <article class="topic">
+              <b>议题 4</b>
+              <p>企业主如何在新环境下重构增长逻辑与合作路径</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="6">
+        <header class="topline">
+          <span>Agenda</span>
+          <span>06 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Timeline</p>
+          <h2 class="fade-up delay-1">活动时间轴</h2>
+          <div class="agenda fade-up delay-2" aria-label="活动时间轴">
+            <div class="agenda-item"><span class="time">14:00—14:15</span><span class="event">入场签到、茶歇交流、自由落座</span></div>
+            <div class="agenda-item"><span class="time">14:15—14:30</span><span class="event">主持开场、主办方致辞、嘉宾自我介绍规则说明</span></div>
+            <div class="agenda-item"><span class="time">14:30—15:00</span><span class="event">专业人士科普 AI 基础认知</span></div>
+            <div class="agenda-item"><span class="time">15:00—15:30</span><span class="event">大厂资深 AI 产品经理分享 AI 如何提效</span></div>
+            <div class="agenda-item"><span class="time">15:30—16:00</span><span class="event">前 4A 广告公司营销人分享新时代品牌营销</span></div>
+            <div class="agenda-item"><span class="time">16:00—16:30</span><span class="event">杨宏业老师分享增长思路与路演表达方法</span></div>
+            <div class="agenda-item"><span class="time">16:30—16:40</span><span class="event">中场休息 / 茶歇</span></div>
+            <div class="agenda-item"><span class="time">16:40—17:10</span><span class="event">共同讨论增长难点、现场问答</span></div>
+            <div class="agenda-item"><span class="time">17:10—17:30</span><span class="event">企业主路演 1</span></div>
+            <div class="agenda-item"><span class="time">17:30—17:50</span><span class="event">企业主路演 2</span></div>
+            <div class="agenda-item"><span class="time">17:50—18:10</span><span class="event">SHUNSE 路演与合作说明</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="7">
+        <header class="topline">
+          <span>Closed Door</span>
+          <span>07 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Limited Seats</p>
+          <div class="notice-box fade-up delay-1">
+            <strong>INVITATION ONLY · PRIVATE FORUM</strong>
+            <p class="lead">本次活动为 <b>邀请制闭门论坛</b>，仅限受邀嘉宾参与，名额有限。</p>
+          </div>
+          <p class="lead fade-up delay-2">我们期待在这样一个小范围、高质量的场域中，与您一起围绕云南企业的新增长、新品牌、新协同展开更深入的交流。</p>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="8">
+        <header class="topline">
+          <span>RSVP</span>
+          <span>08 / 09</span>
+        </header>
+        <div class="content">
+          <p class="section-label fade-up">Confirm Attendance</p>
+          <h2 class="fade-up delay-1">立即报名 / 确认出席</h2>
+          <p class="lead fade-up delay-2">如您愿意出席，请填写报名信息并提交确认。</p>
+          <form class="form fade-up delay-3">
+            <div class="field">
+              <label for="name">姓名</label>
+              <input id="name" name="name" placeholder="请输入姓名" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="company">公司名称</label>
+              <input id="company" name="company" placeholder="请输入公司名称" required />
+            </div>
+            <div class="field">
+              <label for="role">职务</label>
+              <input id="role" name="role" placeholder="请输入职务" />
+            </div>
+            <div class="field">
+              <label for="phone">手机号码</label>
+              <input id="phone" name="phone" inputmode="tel" placeholder="请输入手机号码" autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="wechat">微信号</label>
+              <input id="wechat" name="wechat" placeholder="请输入微信号" />
+            </div>
+            <div class="field">
+              <label for="status">是否确认出席</label>
+              <select id="status" name="status">
+                <option>确认出席</option>
+                <option>待确认</option>
+              </select>
+            </div>
+            <button class="submit" type="submit">提交报名</button>
+          </form>
+          <p class="small-copy fade-up delay-3" style="margin-top: 12px;">名额有限，报名后将由主办方统一确认席位。</p>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="9">
+        <header class="topline">
+          <span class="brand">玫瑰汇客厅｜致良知私董会｜SHUNSE顺世品牌</span>
+          <span>09 / 09</span>
+        </header>
+        <div class="content">
+          <div class="closing-logo fade-up" aria-hidden="true"><img src="assets/shunse-logo-original.png" alt="" /></div>
+          <p class="section-label fade-up delay-1">Confirm</p>
+          <h2 class="fade-up delay-1">确认参与</h2>
+          <p class="quote fade-up delay-2">如您愿意出席，<br />请于活动开始前回复确认。</p>
+          <p class="lead fade-up delay-3">我们将为您预留席位，并发送具体地点与入场信息。</p>
+          <div class="final-card fade-up delay-3">
+            <p class="small-copy">期待与您现场相见，也期待与您就云南企业的新增长、新品牌、新协同展开更深入的交流。</p>
+            <div class="contact">
+              <span><b>玫瑰汇客厅｜致良知私董会｜SHUNSE顺世品牌</b></span>
+              <span>NIKI WU｜18127015520</span>
+              <span>微信：SHUNSE0-1｜2026.7.25</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="arrow" aria-hidden="true"></div>
+    <div class="nav" aria-hidden="true">
+      <div class="progress"><i></i></div>
+      <span class="count">01 / 09</span>
+    </div>
+    <div class="toast" role="status"></div>
+  </main>
+
+  <script>
+    const app = document.querySelector(".app");
+    const slides = document.querySelector(".slides");
+    const screens = Array.from(document.querySelectorAll(".screen"));
+    const count = document.querySelector(".count");
+    const arrow = document.querySelector(".arrow");
+    const form = document.querySelector(".form");
+    const toast = document.querySelector(".toast");
+    let current = 0;
+    let startY = 0;
+    let startX = 0;
+    let locked = false;
+    let toastTimer;
+    let introTimer = window.setTimeout(() => {
+      app.classList.remove("intro-pending");
+    }, 3300);
+
+    function formatCount(index) {
+      return `${String(index + 1).padStart(2, "0")} / 09`;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function go(index) {
+      const next = Math.max(0, Math.min(screens.length - 1, index));
+      if (next === current) return;
+      const previous = current;
+      const update = () => {
+        screens.forEach((screen) => screen.classList.remove("leaving"));
+        screens[previous]?.classList.add("leaving");
+        current = next;
+        app.style.setProperty("--slide", current);
+        app.style.setProperty("--progress", `${((current + 1) / screens.length) * 100}%`);
+        app.style.setProperty("--depth-y", `${current * -7}px`);
+        app.style.setProperty("--screen-drift", `${current % 2 === 0 ? 0 : -3}px`);
+        screens.forEach((screen, i) => screen.classList.toggle("active", i === current));
+        count.textContent = formatCount(current);
+        arrow.style.display = current === screens.length - 1 ? "none" : "grid";
+        window.setTimeout(() => screens[previous]?.classList.remove("leaving"), 620);
+      };
+      if (document.startViewTransition) {
+        document.startViewTransition(update);
+      } else {
+        update();
+      }
+    }
+
+    function step(direction) {
+      if (locked) return;
+      app.classList.remove("intro-pending");
+      clearTimeout(introTimer);
+      locked = true;
+      go(current + direction);
+      setTimeout(() => {
+        locked = false;
+      }, 720);
+    }
+
+    app.addEventListener("touchstart", (event) => {
+      startY = event.touches[0].clientY;
+      startX = event.touches[0].clientX;
+    }, { passive: true });
+
+    app.addEventListener("touchend", (event) => {
+      const endY = event.changedTouches[0].clientY;
+      const endX = event.changedTouches[0].clientX;
+      const deltaY = endY - startY;
+      const deltaX = endX - startX;
+      if (Math.abs(deltaY) < 46 || Math.abs(deltaY) < Math.abs(deltaX)) return;
+      step(deltaY < 0 ? 1 : -1);
+    }, { passive: true });
+
+    app.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 10) return;
+      step(event.deltaY > 0 ? 1 : -1);
+    }, { passive: true });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || event.key === "PageDown") step(1);
+      if (event.key === "ArrowUp" || event.key === "PageUp") step(-1);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const submitButton = form.querySelector(".submit");
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      if (!payload.phone && !payload.wechat) {
+        showToast("请至少填写手机号码或微信号");
+        return;
+      }
+
+      payload.source = "salon-yunnan-20260725";
+      submitButton.disabled = true;
+      submitButton.textContent = "提交中...";
+      try {
+        const response = await fetch("/api/salon-rsvp", {
+          method: "POST",
+          headers: { "content-type": "application/json; charset=utf-8" },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) {
+          throw new Error(data.message || "提交失败，请稍后再试");
+        }
+        showToast("报名信息已记录，请等待主办方确认");
+        form.reset();
+        setTimeout(() => go(8), 520);
+      } catch (error) {
+        showToast(error.message || "提交失败，请稍后再试");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "提交报名";
+      }
+    });
+
+    slides.addEventListener("click", (event) => {
+      const tag = event.target.tagName.toLowerCase();
+      if (["input", "select", "button", "label"].includes(tag)) return;
+      if (current === 0) step(1);
+    });
+
+    go(0);
+  </script>
+</body>
+</html>
