@@ -89,14 +89,14 @@ button {
 
 .brand {
   display: inline-block;
-  min-width: 132px;
-  font-family: inherit;
-  font-size: 25px;
-  font-weight: 800;
-  font-style: italic;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  color: #fff;
+  width: 156px;
+  line-height: 0;
+}
+
+.brand img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .primary-nav {
@@ -7428,8 +7428,7 @@ body {
   }
 
   .brand {
-    font-size: 21px !important;
-    min-width: 0 !important;
+    width: 132px !important;
   }
 
   .primary-nav,
