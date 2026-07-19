@@ -252,7 +252,8 @@ if (
 if (
   document.body.classList.contains("home-page") &&
   !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-  window.matchMedia("(pointer: coarse)").matches
+  window.matchMedia("(pointer: coarse)").matches &&
+  window.matchMedia("(min-width: 821px)").matches
 ) {
   let touchSnapTimer = 0;
   let touchSnapping = false;
