@@ -89,7 +89,7 @@ button {
 
 .brand {
   display: inline-block;
-  width: 156px;
+  width: 108px;
   line-height: 0;
 }
 
@@ -7428,7 +7428,7 @@ body {
   }
 
   .brand {
-    width: 132px !important;
+    width: 104px !important;
   }
 
   .primary-nav,
