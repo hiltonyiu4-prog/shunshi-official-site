@@ -1,0 +1,9 @@
+.brand {
+  width: 94px;
+}
+
+@media (max-width: 820px) {
+  .brand {
+    width: 90px !important;
+  }
+}
