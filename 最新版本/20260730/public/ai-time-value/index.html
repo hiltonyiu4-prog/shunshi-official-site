@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f6f3">
+  <meta name="description" content="用几个选择题和一句话，快速找到公司最值得做的 3 件事。">
+  <title>快速找到公司最值得做的 3 件事</title>
+  <style>
+    :root {
+      --bg: #f6f6f3;
+      --surface: #ffffff;
+      --ink: #202426;
+      --muted: #707673;
+      --line: #dedfda;
+      --accent: #e9673c;
+      --accent-soft: #fff0e9;
+      --green: #dcebea;
+      --green-ink: #3f7776;
+      --radius: 16px;
+      --shadow: 0 12px 28px rgba(31, 36, 38, .05);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      line-height: 1.6;
+    }
+    button, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(760px, calc(100% - 36px)); margin: 0 auto; }
+    .top { display: flex; align-items: center; justify-content: space-between; padding: 23px 0 17px; color: var(--muted); font-size: 12px; }
+    .label { color: var(--ink); font-weight: 800; letter-spacing: .06em; }
+    .top span:last-child { color: #969b97; }
+    .hero { padding: 34px 0 22px; }
+    .eyebrow { margin-bottom: 13px; color: var(--accent); font-size: 12px; font-weight: 900; letter-spacing: .08em; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 660px; margin-bottom: 9px; font-size: clamp(36px, 7vw, 56px); line-height: 1.08; letter-spacing: -.065em; }
+    .hero p { max-width: 540px; margin-bottom: 0; color: var(--muted); font-size: 14px; }
+    .quiz { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+    fieldset { margin: 0; padding: 0 0 22px; border: 0; }
+    fieldset + fieldset { padding-top: 22px; border-top: 1px solid #ecece8; }
+    legend { width: 100%; padding: 0; margin-bottom: 13px; font-size: 16px; font-weight: 900; letter-spacing: -.02em; }
+    legend small { margin-left: 7px; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: 0; }
+    .question-no { display: inline-block; width: 26px; color: var(--accent); font-size: 11px; letter-spacing: .06em; }
+    .choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .choice { position: relative; }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice span { display: block; min-height: 48px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; color: #4d5451; background: #fff; font-size: 13px; transition: border .18s, background .18s, color .18s; }
+    .choice span:hover { border-color: #b7c8c7; }
+    .choice input:checked + span { border-color: var(--accent); color: var(--accent-dark, #bd4e2c); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+    textarea { width: 100%; min-height: 110px; resize: vertical; padding: 13px; border: 1px solid var(--line); border-radius: 11px; outline: none; color: var(--ink); background: #fff; font-size: 14px; line-height: 1.7; }
+    textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(233,103,60,.12); }
+    .field-help { margin-top: 7px; color: #969b97; font-size: 12px; }
+    .form-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 20px; }
+    .note { color: #969b97; font-size: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 45px; padding: 0 18px; border: 1px solid transparent; border-radius: 999px; font-weight: 800; }
+    .btn-primary { color: #fff; background: var(--accent); box-shadow: 0 8px 15px rgba(233,103,60,.18); }
+    .btn-primary:hover { background: #d8562e; }
+    .btn-secondary { color: var(--ink); border-color: var(--line); background: #fff; }
+    .btn-quiet { color: var(--muted); border-color: transparent; background: transparent; }
+    .btn-small { min-height: 37px; padding: 0 13px; font-size: 12px; }
+    .hidden { display: none !important; }
+
+    .result { padding: 40px 0 75px; }
+    .result-title { margin-bottom: 22px; }
+    .result-title h2 { margin-bottom: 9px; font-size: clamp(28px, 5vw, 43px); line-height: 1.15; letter-spacing: -.055em; }
+    .result-title p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+    .summary { margin-bottom: 14px; padding: 14px 16px; border-left: 3px solid var(--accent); color: #555d59; background: var(--accent-soft); font-size: 13px; }
+    .result-list { display: grid; gap: 12px; }
+    .result-card { padding: 21px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+    .card-head { display: flex; align-items: start; gap: 12px; }
+    .card-no { width: 31px; height: 31px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 9px; color: #fff; background: var(--accent); font-size: 12px; font-weight: 900; }
+    .card-head h3 { margin: 1px 0 3px; font-size: 20px; line-height: 1.25; letter-spacing: -.035em; }
+    .card-tag { margin-left: auto; padding: 4px 8px; border-radius: 999px; color: var(--green-ink); background: var(--green); font-size: 11px; font-weight: 900; white-space: nowrap; }
+    .card-why { margin: 14px 0; color: var(--muted); font-size: 13px; }
+    .flow { display: flex; align-items: stretch; gap: 8px; margin: 17px 0 14px; }
+    .flow-node { position: relative; flex: 1; min-width: 0; padding: 11px 10px; border: 1px solid var(--line); border-radius: 11px; background: #f6f6f3; }
+    .flow-node b { display: block; margin-bottom: 3px; font-size: 11px; letter-spacing: .04em; }
+    .flow-node span { display: block; color: #4e5652; font-size: 12px; line-height: 1.45; }
+    .flow-node.human { border-color: #efbdab; background: var(--accent-soft); }
+    .flow-node.human b { color: var(--accent); }
+    .flow-node.ai { border-color: #b9d8d6; background: var(--green); }
+    .flow-node.ai b { color: var(--green-ink); }
+    .flow-node.result { background: #f0efe9; }
+    .flow-node.result b { color: #777d77; }
+    .flow-arrow { display: grid; place-items: center; flex: 0 0 auto; color: var(--accent); font-weight: 900; }
+    .role-summary, .effect-summary { margin: 8px 0 0; color: #5d6560; font-size: 13px; }
+    .role-summary strong, .effect-summary strong { color: var(--ink); }
+    .effect-summary { margin-top: 5px; }
+    .result-bottom { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 15px; padding: 17px 19px; border-radius: var(--radius); background: #ecebe5; }
+    .result-bottom p { margin-bottom: 0; color: #606863; font-size: 13px; }
+    footer { padding: 20px 0 32px; color: #9a9e99; text-align: center; font-size: 11px; }
+    .toast { position: fixed; z-index: 5; left: 50%; bottom: 20px; transform: translate(-50%, 14px); opacity: 0; pointer-events: none; padding: 10px 15px; border-radius: 999px; color: #fff; background: var(--ink); font-size: 13px; transition: opacity .2s, transform .2s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, 560px); }
+      .top { padding-top: 17px; }
+      .hero { padding: 27px 0 20px; }
+      .quiz { padding: 20px; }
+      .choices { grid-template-columns: 1fr; }
+      .form-foot, .result-bottom { align-items: stretch; flex-direction: column; }
+      .form-foot .btn, .result-bottom .btn { width: 100%; }
+      .flow { align-items: stretch; gap: 5px; }
+      .flow-node { padding: 9px 7px; }
+      .flow-node span { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top"><span class="label">AI 优先级小测</span><span>约 1 分钟</span></header>
+
+    <section id="formView">
+      <div class="hero">
+        <div class="eyebrow">先判断，再提效</div>
+        <h1>快速找到公司最值得做的 3 件事</h1>
+        <p>选几个答案，再补充一句公司情况。我们帮你先排出优先级。</p>
+      </div>
+
+      <form id="quizForm" class="quiz">
+        <fieldset>
+          <legend><span class="question-no">01</span>公司现在最想变快、最值得优先做的业务场景？<small>请选择 3 项</small></legend>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="area" value="customer"><span>客户回复、销售和报价</span></label>
+            <label class="choice"><input type="checkbox" name="area" value="content"><span>内容生产、品牌和营销</span></label>
+            <label class="choice"><input type="checkbox" name="area" value="process"><span>资料、经验和内部协同</span></label>
+            <label class="choice"><input type="checkbox" name="area" value="data"><span>经营数据、订单和报表</span></label>
+            <label class="choice"><input type="checkbox" name="area" value="delivery"><span>生产、交付和质量</span></label>
+            <label class="choice"><input type="checkbox" name="area" value="global"><span>出海、翻译和海外承接</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="question-no">02</span>现在最卡在哪里？</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="blocker" value="overload"><span>事情太多，人忙不过来</span></label>
+            <label class="choice"><input type="radio" name="blocker" value="scattered"><span>资料分散，经验在个人手里</span></label>
+            <label class="choice"><input type="radio" name="blocker" value="repeat"><span>流程反复，每次都从头做</span></label>
+            <label class="choice"><input type="radio" name="blocker" value="error"><span>容易出错，结果不稳定</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="question-no">03</span>希望先得到什么结果？</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="goal" value="time"><span>节省时间</span></label>
+            <label class="choice"><input type="radio" name="goal" value="revenue"><span>提升响应和成交</span></label>
+            <label class="choice"><input type="radio" name="goal" value="stable"><span>减少错误，交付更稳定</span></label>
+            <label class="choice"><input type="radio" name="goal" value="handover"><span>让第二个人也能接手</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="question-no">04</span>现在已有哪种基础？</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="foundation" value="materials"><span>有一些企业资料</span></label>
+            <label class="choice"><input type="radio" name="foundation" value="rules"><span>有固定规则或 SOP</span></label>
+            <label class="choice"><input type="radio" name="foundation" value="tool"><span>已经在使用一些工具</span></label>
+            <label class="choice"><input type="radio" name="foundation" value="none"><span>还没有整理</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="question-no">05</span>补充一句：你的公司现在是什么情况？</legend>
+          <textarea id="description" maxlength="300" placeholder="例如：我们是一家云南咖啡企业，客户咨询主要靠老板回复，内容每周重复制作，报价资料也比较分散。"></textarea>
+          <div class="field-help"><span id="count">0</span> / 300 · 写关键词就可以，不用写完整方案。</div>
+        </fieldset>
+
+        <div class="form-foot">
+          <span class="note">不上传数据，只做一个优先级判断。</span>
+          <button class="btn btn-primary" type="submit">快速生成建议 <span>→</span></button>
+        </div>
+      </form>
+    </section>
+
+    <section id="resultView" class="result hidden">
+      <div class="result-title">
+        <div class="eyebrow">你的顺势 AI 起点</div>
+        <h2>这 3 个业务场景，分别可以这样做。</h2>
+        <p>每个场景都拆成一条人和 AI 协作的流程。</p>
+      </div>
+      <div id="summary" class="summary"></div>
+      <div id="resultList" class="result-list"></div>
+
+      <div class="result-bottom">
+        <p>建议：先从最想变快的那个业务场景开始。</p>
+        <button id="saveImageBtn" class="btn btn-primary btn-small" type="button">保存结果图片</button>
+      </div>
+      <div class="result-actions"><button id="editBtn" class="btn btn-quiet btn-small" type="button">← 修改答案</button><button id="restartBtn" class="btn btn-quiet btn-small" type="button">重新开始</button></div>
+    </section>
+  </div>
+  <footer>先判断，再提效。</footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const formView = document.getElementById('formView');
+    const resultView = document.getElementById('resultView');
+    const quizForm = document.getElementById('quizForm');
+    const description = document.getElementById('description');
+    const count = document.getElementById('count');
+    const summary = document.getElementById('summary');
+    const resultList = document.getElementById('resultList');
+    const toast = document.getElementById('toast');
+    let latestResults = [];
+    let toastTimer;
+
+    const areaData = {
+      customer: { title: '客户回复与销售承接', tag: '离收入最近', why: '客户问题和报价如果反复依赖老板或少数人，企业损失的不只是时间，还有响应速度和成交机会。', ai: '整理真实客户问题，生成 FAQ、回复草稿和异议处理初稿。', human: '确认产品事实、价格、交付和所有对外承诺。', first: '收集最近 10 条真实客户对话，去掉隐私信息，标出可以按标准回答的部分。' },
+      content: { title: '内容生产与品牌表达', tag: '最容易试跑', why: '内容不是越多越好。先把产品价值、目标客户和信任证据说清楚，再让 AI 帮你持续生产。', ai: '把真实素材变成选题、提纲、公众号初稿和多平台版本。', human: '判断对谁说、说什么、哪些事实能公开，以及品牌表达的取舍。', first: '选一篇过去有效的内容，补上真实案例和目标客户，让 AI 只做提纲和第一版。' },
+      process: { title: '企业经验与资料库', tag: '最值得沉淀', why: '如果经验只在老板和老员工脑子里，AI 没有企业自己的依据，团队也很难稳定复用。', ai: '整理产品、客户、案例和系统资料，提取步骤、判断节点和 FAQ。', human: '确认资料准确性、调用权限和必须人工复核的内容。', first: '先建立“产品、客户、案例、系统”四个资料夹，每个放入 3 份真实资料。' },
+      data: { title: '经营数据与报表整理', tag: '减少重复整理', why: '订单、报表和资料反复整理时，时间被消耗在搬运上，重要异常也容易被埋在表格里。', ai: '整理字段、归类资料、标记缺失和前后不一致的地方。', human: '核对关键数字、财务结论和所有经营判断。', first: '选一批已经脱敏的历史资料，让 AI 只做分类和异常标记。' },
+      delivery: { title: '生产、交付与质量协同', tag: '影响稳定交付', why: '交付信息分散、异常靠人追踪时，企业很难稳定复制一次做对的经验。', ai: '汇总任务状态、调用 SOP、提醒常规节点并标记异常。', human: '处理质量、合规和重大异常，确认放行、返工和对外承诺。', first: '画出一项交付工作的“输入—处理—输出—审核”，先找到最常卡住的一步。' },
+      global: { title: '出海表达与海外承接', tag: '打开新市场', why: '出海不只是翻译文字，还要让海外客户理解产品、相信交付并知道如何开始合作。', ai: '整理多语言产品资料、客户 FAQ 和邮件初稿。', human: '确认事实、专业术语、合规要求和不同市场的表达。', first: '选一个目标市场，整理客户最可能问的 10 个问题。' }
+    };
+
+    const flowMap = {
+      '客户回复与销售承接': { first: '提供真实客户问题', ai: '整理 FAQ / 回复草稿', review: '确认价格与承诺', result: '响应更快，线索更稳', effect: '先把重复咨询变成可复用的回复能力。' },
+      '内容生产与品牌表达': { first: '明确客户与产品价值', ai: '整理素材 / 生成初稿', review: '判断事实与表达', result: '内容更稳，价值更清楚', effect: '不是多做内容，而是让真实产品力被正确理解。' },
+      '企业经验与资料库': { first: '提供经验与资料', ai: '提取步骤 / 整理 FAQ', review: '确认规则与权限', result: '经验可复用，第二个人能接手', effect: '把个人经验变成企业可以持续调用的资料。' },
+      '经营数据与报表整理': { first: '提供脱敏历史资料', ai: '整理字段 / 标记异常', review: '核对关键数字', result: '整理更快，异常更早发现', effect: '把时间从重复搬运中释放出来，但不替人做经营判断。' },
+      '生产、交付与质量协同': { first: '设定标准与边界', ai: '提醒节点 / 标记异常', review: '处理质量与重大异常', result: '交付更稳，风险更早发现', effect: '让 AI 做常规协同，人保留最终责任。' },
+      '出海表达与海外承接': { first: '明确市场与客户问题', ai: '生成多语言资料 / FAQ', review: '确认术语与合规', result: '表达更清楚，询盘更有效', effect: '不止是翻译，而是降低海外客户的理解和信任成本。' }
+    };
+
+    function selected(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+    function selectedMany(name) { return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value); }
+    function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400); }
+    function renderCard(data, index, label) {
+      const flow = flowMap[data.title];
+      return `<article class="result-card"><div class="card-head"><span class="card-no">0${index + 1}</span><div><h3>${data.title}</h3><div class="card-tag">${data.tag}</div></div></div><p class="card-why"><strong>${label}：</strong>${data.why}</p><div class="flow"><div class="flow-node human"><b>人</b><span>${flow.first}</span></div><span class="flow-arrow">→</span><div class="flow-node ai"><b>AI</b><span>${flow.ai}</span></div><span class="flow-arrow">→</span><div class="flow-node human"><b>人</b><span>${flow.review}</span></div><span class="flow-arrow">→</span><div class="flow-node result"><b>结果</b><span>${flow.result}</span></div></div><p class="role-summary"><strong>人和 AI：</strong>人负责目标、标准和最终判断；AI 负责整理、生成、提醒和辅助执行。</p><p class="effect-summary"><strong>达到的效果：</strong>${flow.effect}</p></article>`;
+    }
+    function createResults(areas) {
+      latestResults = areas.map(area => areaData[area]);
+      const blockerText = { overload: '事情太多，人手不够', scattered: '资料和经验分散', repeat: '流程反复，重复劳动多', error: '容易出错，结果不稳定' }[selected('blocker')];
+      const goalText = { time: '节省时间', revenue: '提升响应和成交', stable: '减少错误、提高稳定性', handover: '让第二个人也能接手' }[selected('goal')];
+      summary.textContent = `你选择的 3 个业务场景是：${latestResults.map(item => item.title).join('、')}。当前主要卡点是${blockerText}，希望先得到${goalText}。下面分别给出每个场景的人机协作流程。`;
+      resultList.innerHTML = latestResults.map((item, index) => renderCard(item, index, `业务场景 0${index + 1}`)).join('');
+    }
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.roundRect(x, y, width, height, radius);
+      if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.stroke(); }
+    }
+    function wrapText(ctx, text, maxWidth) {
+      const lines = [];
+      let line = '';
+      for (const char of String(text)) {
+        if (char === '\n') { lines.push(line); line = ''; continue; }
+        const next = line + char;
+        if (line && ctx.measureText(next).width > maxWidth) { lines.push(line); line = char; }
+        else line = next;
+      }
+      if (line) lines.push(line);
+      return lines.length ? lines : [''];
+    }
+    function drawWrapped(ctx, text, x, y, maxWidth, lineHeight, maxLines = 99) {
+      const lines = wrapText(ctx, text, maxWidth).slice(0, maxLines);
+      lines.forEach((line, index) => ctx.fillText(line, x, y + index * lineHeight));
+      return lines.length;
+    }
+    function drawResultImage() {
+      const width = 750;
+      const padding = 48;
+      const cardGap = 18;
+      const contentWidth = width - padding * 2;
+      const bodyWidth = contentWidth - 48;
+      const family = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif';
+      const measureCanvas = document.createElement('canvas');
+      const measure = measureCanvas.getContext('2d');
+      const title = '公司最值得先做的 3 个业务场景';
+      measure.font = `800 36px ${family}`;
+      const titleLines = wrapText(measure, title, contentWidth).slice(0, 2);
+      const titleLineHeight = 43;
+      const subtitleY = 105 + titleLines.length * titleLineHeight + 10;
+      const firstCardY = subtitleY + 35;
+      const nodeGap = 10;
+      const nodeWidth = (contentWidth - nodeGap * 3) / 4;
+
+      const layouts = latestResults.map(item => {
+        const flow = flowMap[item.title];
+        measure.font = `400 16px ${family}`;
+        const whyLines = wrapText(measure, item.why, bodyWidth).slice(0, 3);
+        measure.font = `400 14px ${family}`;
+        const nodeTexts = [flow.first, flow.ai, flow.review, flow.result];
+        const nodeLines = nodeTexts.map(text => wrapText(measure, text, nodeWidth - 20).slice(0, 3));
+        const nodeHeight = Math.max(94, 46 + Math.max(...nodeLines.map(lines => lines.length)) * 19 + 14);
+        const flowOffset = 96 + whyLines.length * 22 + 14;
+        const roleOffset = flowOffset + nodeHeight + 18;
+        measure.font = `400 15px ${family}`;
+        const humanLines = wrapText(measure, `人：${item.human}`, bodyWidth).slice(0, 3);
+        const aiLines = wrapText(measure, `AI：${item.ai}`, bodyWidth).slice(0, 3);
+        measure.font = `700 15px ${family}`;
+        const effectLines = wrapText(measure, `达到的效果：${flow.effect}`, bodyWidth).slice(0, 3);
+        const aiOffset = roleOffset + humanLines.length * 22 + 5;
+        const effectOffset = aiOffset + aiLines.length * 22 + 7;
+        const cardHeight = effectOffset + effectLines.length * 22 + 24;
+        return { flow, flowOffset, nodeHeight, roleOffset, aiOffset, effectOffset, cardHeight };
+      });
+      const height = firstCardY + layouts.reduce((sum, layout) => sum + layout.cardHeight, 0) + Math.max(0, latestResults.length - 1) * cardGap + 78;
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#f6f6f3';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = '#e9673c';
+      ctx.font = `700 16px ${family}`;
+      ctx.fillText('AI 优先级小测', padding, 58);
+      ctx.fillStyle = '#202426';
+      ctx.font = `800 36px ${family}`;
+      drawWrapped(ctx, title, padding, 105, contentWidth, titleLineHeight, 2);
+      ctx.fillStyle = '#707673';
+      ctx.font = `400 16px ${family}`;
+      ctx.fillText('先判断，再提效。', padding, subtitleY);
+
+      let y = firstCardY;
+      layouts.forEach((layout, index) => {
+        const item = latestResults[index];
+        const flow = layout.flow;
+        roundRect(ctx, padding, y, contentWidth, layout.cardHeight, 18, '#ffffff', '#dedfda');
+        ctx.fillStyle = '#e9673c';
+        ctx.font = `800 18px ${family}`;
+        ctx.fillText(`0${index + 1}`, padding + 24, y + 38);
+        ctx.fillStyle = '#202426';
+        ctx.font = `800 24px ${family}`;
+        ctx.fillText(item.title, padding + 76, y + 38);
+        ctx.fillStyle = '#3f7776';
+        ctx.font = `700 14px ${family}`;
+        const tagWidth = ctx.measureText(item.tag).width;
+        ctx.fillText(item.tag, padding + contentWidth - tagWidth - 24, y + 38);
+
+        ctx.fillStyle = '#606863';
+        ctx.font = `400 16px ${family}`;
+        drawWrapped(ctx, item.why, padding + 24, y + 96, bodyWidth, 22, 3);
+
+        const flowY = y + layout.flowOffset;
+        const nodes = [
+          ['人', flow.first, '#fff0e9', '#e9673c'],
+          ['AI', flow.ai, '#dcebea', '#3f7776'],
+          ['人', flow.review, '#fff0e9', '#e9673c'],
+          ['结果', flow.result, '#f0efe9', '#777d77']
+        ];
+        nodes.forEach((node, nodeIndex) => {
+          const nodeX = padding + nodeIndex * (nodeWidth + nodeGap);
+          roundRect(ctx, nodeX, flowY, nodeWidth, layout.nodeHeight, 11, node[2], node[2]);
+          ctx.fillStyle = node[3];
+          ctx.font = `800 14px ${family}`;
+          ctx.fillText(node[0], nodeX + 10, flowY + 24);
+          ctx.fillStyle = '#4e5652';
+          ctx.font = `400 14px ${family}`;
+          drawWrapped(ctx, node[1], nodeX + 10, flowY + 47, nodeWidth - 20, 19, 3);
+          if (nodeIndex < nodes.length - 1) {
+            ctx.fillStyle = '#e9673c';
+            ctx.font = `800 18px ${family}`;
+            ctx.fillText('→', nodeX + nodeWidth + 2, flowY + layout.nodeHeight / 2 + 6);
+          }
+        });
+
+        ctx.fillStyle = '#4e5652';
+        ctx.font = `400 15px ${family}`;
+        drawWrapped(ctx, `人：${item.human}`, padding + 24, y + layout.roleOffset, bodyWidth, 22, 3);
+        drawWrapped(ctx, `AI：${item.ai}`, padding + 24, y + layout.aiOffset, bodyWidth, 22, 3);
+        ctx.fillStyle = '#3f7776';
+        ctx.font = `700 15px ${family}`;
+        drawWrapped(ctx, `达到的效果：${flow.effect}`, padding + 24, y + layout.effectOffset, bodyWidth, 22, 3);
+        y += layout.cardHeight + cardGap;
+      });
+      ctx.fillStyle = '#9a9e99';
+      ctx.font = `400 14px ${family}`;
+      ctx.fillText('重要判断、对外承诺、财务与合规事项仍由人负责。', padding, height - 36);
+      return canvas;
+    }
+    function saveResultImage() {
+      const canvas = drawResultImage();
+      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      if (isMobile) {
+        const imageUrl = canvas.toDataURL('image/png');
+        const imageWindow = window.open(imageUrl, '_blank');
+        if (imageWindow) showToast('结果图片已打开，请长按图片保存');
+        else { const link = document.createElement('a'); link.href = imageUrl; link.download = '顺势AI起点-结果.png'; link.click(); showToast('图片已生成，请在浏览器中保存'); }
+        return;
+      }
+      const downloadImage = blob => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '顺势AI起点-结果.png';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        showToast('结果图片已下载');
+      };
+      if (canvas.toBlob) canvas.toBlob(downloadImage, 'image/png');
+      else {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = '顺势AI起点-结果.png';
+        link.click();
+        showToast('结果图片已下载');
+      }
+    }
+
+    description.addEventListener('input', () => { count.textContent = description.value.length; });
+    quizForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const areas = selectedMany('area');
+      if (areas.length !== 3 || !selected('blocker') || !selected('goal') || !selected('foundation')) return showToast('请选择 3 个业务场景，并完成其他选择题');
+      if (description.value.trim().length < 8) { showToast('请再补充一句公司情况'); description.focus(); return; }
+      createResults(areas); formView.classList.add('hidden'); resultView.classList.remove('hidden'); window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('saveImageBtn').addEventListener('click', saveResultImage);
+    document.getElementById('editBtn').addEventListener('click', () => { resultView.classList.add('hidden'); formView.classList.remove('hidden'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    document.getElementById('restartBtn').addEventListener('click', () => { quizForm.reset(); description.value = ''; count.textContent = '0'; resultView.classList.add('hidden'); formView.classList.remove('hidden'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+</body>
+</html>
