@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node --check public/app.js && node --check functions/api/diagnosis.js && node --check 'functions/api/diagnosis/[jobId].js' && node --check functions/api/salon-rsvp.js && node --check functions/_shared/github.js && node --check functions/_shared/report.js && node --check functions/_shared/llm-report.js && node --check functions/_shared/feishu.js && node --check functions/_shared/salon-feishu.js && node --check scripts/run-public-test-suite.mjs",
+    "check": "node --check public/app.js && node --check functions/api/diagnosis.js && node --check 'functions/api/diagnosis/[jobId].js' && node --check functions/api/ai-time-value.js && node --check functions/api/salon-rsvp.js && node --check functions/_shared/github.js && node --check functions/_shared/report.js && node --check functions/_shared/llm-report.js && node --check functions/_shared/feishu.js && node --check functions/_shared/salon-feishu.js && node --check scripts/run-public-test-suite.mjs",
     "smoke": "node scripts/smoke-test.mjs",
     "dev": "wrangler pages dev public"
   }

@@ -31,6 +31,7 @@
     }
     button, textarea { font: inherit; }
     button { cursor: pointer; }
+    button:disabled { cursor: wait; opacity: .68; }
     .wrap { width: min(760px, calc(100% - 36px)); margin: 0 auto; }
     .top { display: flex; align-items: center; justify-content: space-between; padding: 23px 0 17px; color: var(--muted); font-size: 12px; }
     .label { color: var(--ink); font-weight: 800; letter-spacing: .06em; }
@@ -172,8 +173,8 @@
         </fieldset>
 
         <div class="form-foot">
-          <span class="note">不上传数据，只做一个优先级判断。</span>
-          <button class="btn btn-primary" type="submit">快速生成建议 <span>→</span></button>
+          <span class="note">填写内容会发送给 AI 用于本次分析，本站不另行保存。</span>
+          <button id="submitBtn" class="btn btn-primary" type="submit">快速生成建议 <span>→</span></button>
         </div>
       </form>
     </section>
@@ -206,39 +207,22 @@
     const summary = document.getElementById('summary');
     const resultList = document.getElementById('resultList');
     const toast = document.getElementById('toast');
+    const submitBtn = document.getElementById('submitBtn');
     let latestResults = [];
     let toastTimer;
-
-    const areaData = {
-      customer: { title: '客户回复与销售承接', tag: '离收入最近', why: '客户问题和报价如果反复依赖老板或少数人，企业损失的不只是时间，还有响应速度和成交机会。', ai: '整理真实客户问题，生成 FAQ、回复草稿和异议处理初稿。', human: '确认产品事实、价格、交付和所有对外承诺。', first: '收集最近 10 条真实客户对话，去掉隐私信息，标出可以按标准回答的部分。' },
-      content: { title: '内容生产与品牌表达', tag: '最容易试跑', why: '内容不是越多越好。先把产品价值、目标客户和信任证据说清楚，再让 AI 帮你持续生产。', ai: '把真实素材变成选题、提纲、公众号初稿和多平台版本。', human: '判断对谁说、说什么、哪些事实能公开，以及品牌表达的取舍。', first: '选一篇过去有效的内容，补上真实案例和目标客户，让 AI 只做提纲和第一版。' },
-      process: { title: '企业经验与资料库', tag: '最值得沉淀', why: '如果经验只在老板和老员工脑子里，AI 没有企业自己的依据，团队也很难稳定复用。', ai: '整理产品、客户、案例和系统资料，提取步骤、判断节点和 FAQ。', human: '确认资料准确性、调用权限和必须人工复核的内容。', first: '先建立“产品、客户、案例、系统”四个资料夹，每个放入 3 份真实资料。' },
-      data: { title: '经营数据与报表整理', tag: '减少重复整理', why: '订单、报表和资料反复整理时，时间被消耗在搬运上，重要异常也容易被埋在表格里。', ai: '整理字段、归类资料、标记缺失和前后不一致的地方。', human: '核对关键数字、财务结论和所有经营判断。', first: '选一批已经脱敏的历史资料，让 AI 只做分类和异常标记。' },
-      delivery: { title: '生产、交付与质量协同', tag: '影响稳定交付', why: '交付信息分散、异常靠人追踪时，企业很难稳定复制一次做对的经验。', ai: '汇总任务状态、调用 SOP、提醒常规节点并标记异常。', human: '处理质量、合规和重大异常，确认放行、返工和对外承诺。', first: '画出一项交付工作的“输入—处理—输出—审核”，先找到最常卡住的一步。' },
-      global: { title: '出海表达与海外承接', tag: '打开新市场', why: '出海不只是翻译文字，还要让海外客户理解产品、相信交付并知道如何开始合作。', ai: '整理多语言产品资料、客户 FAQ 和邮件初稿。', human: '确认事实、专业术语、合规要求和不同市场的表达。', first: '选一个目标市场，整理客户最可能问的 10 个问题。' }
-    };
-
-    const flowMap = {
-      '客户回复与销售承接': { first: '提供真实客户问题', ai: '整理 FAQ / 回复草稿', review: '确认价格与承诺', result: '响应更快，线索更稳', effect: '先把重复咨询变成可复用的回复能力。' },
-      '内容生产与品牌表达': { first: '明确客户与产品价值', ai: '整理素材 / 生成初稿', review: '判断事实与表达', result: '内容更稳，价值更清楚', effect: '不是多做内容，而是让真实产品力被正确理解。' },
-      '企业经验与资料库': { first: '提供经验与资料', ai: '提取步骤 / 整理 FAQ', review: '确认规则与权限', result: '经验可复用，第二个人能接手', effect: '把个人经验变成企业可以持续调用的资料。' },
-      '经营数据与报表整理': { first: '提供脱敏历史资料', ai: '整理字段 / 标记异常', review: '核对关键数字', result: '整理更快，异常更早发现', effect: '把时间从重复搬运中释放出来，但不替人做经营判断。' },
-      '生产、交付与质量协同': { first: '设定标准与边界', ai: '提醒节点 / 标记异常', review: '处理质量与重大异常', result: '交付更稳，风险更早发现', effect: '让 AI 做常规协同，人保留最终责任。' },
-      '出海表达与海外承接': { first: '明确市场与客户问题', ai: '生成多语言资料 / FAQ', review: '确认术语与合规', result: '表达更清楚，询盘更有效', effect: '不止是翻译，而是降低海外客户的理解和信任成本。' }
-    };
+    const API_ENDPOINT = '/api/ai-time-value';
 
     function selected(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
     function selectedMany(name) { return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value); }
     function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400); }
+    function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char])); }
     function renderCard(data, index, label) {
-      const flow = flowMap[data.title];
-      return `<article class="result-card"><div class="card-head"><span class="card-no">0${index + 1}</span><div><h3>${data.title}</h3><div class="card-tag">${data.tag}</div></div></div><p class="card-why"><strong>${label}：</strong>${data.why}</p><div class="flow"><div class="flow-node human"><b>人</b><span>${flow.first}</span></div><span class="flow-arrow">→</span><div class="flow-node ai"><b>AI</b><span>${flow.ai}</span></div><span class="flow-arrow">→</span><div class="flow-node human"><b>人</b><span>${flow.review}</span></div><span class="flow-arrow">→</span><div class="flow-node result"><b>结果</b><span>${flow.result}</span></div></div><p class="role-summary"><strong>人和 AI：</strong>人负责目标、标准和最终判断；AI 负责整理、生成、提醒和辅助执行。</p><p class="effect-summary"><strong>达到的效果：</strong>${flow.effect}</p></article>`;
+      const flow = data.flow;
+      return `<article class="result-card"><div class="card-head"><span class="card-no">0${index + 1}</span><div><h3>${escapeHtml(data.title)}</h3><div class="card-tag">${escapeHtml(data.tag)}</div></div></div><p class="card-why"><strong>${label}：</strong>${escapeHtml(data.why)}</p><div class="flow"><div class="flow-node human"><b>人</b><span>${escapeHtml(flow.first)}</span></div><span class="flow-arrow">→</span><div class="flow-node ai"><b>AI</b><span>${escapeHtml(flow.ai)}</span></div><span class="flow-arrow">→</span><div class="flow-node human"><b>人</b><span>${escapeHtml(flow.review)}</span></div><span class="flow-arrow">→</span><div class="flow-node result"><b>结果</b><span>${escapeHtml(flow.result)}</span></div></div><p class="role-summary"><strong>人的职责：</strong>${escapeHtml(data.human)}<br><strong>AI 的职责：</strong>${escapeHtml(data.ai)}<br><strong>第一步：</strong>${escapeHtml(data.first)}</p><p class="effect-summary"><strong>达到的效果：</strong>${escapeHtml(flow.effect)}</p></article>`;
     }
-    function createResults(areas) {
-      latestResults = areas.map(area => areaData[area]);
-      const blockerText = { overload: '事情太多，人手不够', scattered: '资料和经验分散', repeat: '流程反复，重复劳动多', error: '容易出错，结果不稳定' }[selected('blocker')];
-      const goalText = { time: '节省时间', revenue: '提升响应和成交', stable: '减少错误、提高稳定性', handover: '让第二个人也能接手' }[selected('goal')];
-      summary.textContent = `你选择的 3 个业务场景是：${latestResults.map(item => item.title).join('、')}。当前主要卡点是${blockerText}，希望先得到${goalText}。下面分别给出每个场景的人机协作流程。`;
+    function renderResults(data) {
+      latestResults = data.results;
+      summary.textContent = data.summary;
       resultList.innerHTML = latestResults.map((item, index) => renderCard(item, index, `业务场景 0${index + 1}`)).join('');
     }
     function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
@@ -283,7 +267,7 @@
       const nodeWidth = (contentWidth - nodeGap * 3) / 4;
 
       const layouts = latestResults.map(item => {
-        const flow = flowMap[item.title];
+        const flow = item.flow;
         measure.font = `400 16px ${family}`;
         const whyLines = wrapText(measure, item.why, bodyWidth).slice(0, 3);
         measure.font = `400 14px ${family}`;
@@ -409,12 +393,39 @@
     }
 
     description.addEventListener('input', () => { count.textContent = description.value.length; });
-    quizForm.addEventListener('submit', event => {
+    quizForm.addEventListener('submit', async event => {
       event.preventDefault();
       const areas = selectedMany('area');
       if (areas.length !== 3 || !selected('blocker') || !selected('goal') || !selected('foundation')) return showToast('请选择 3 个业务场景，并完成其他选择题');
       if (description.value.trim().length < 8) { showToast('请再补充一句公司情况'); description.focus(); return; }
-      createResults(areas); formView.classList.add('hidden'); resultView.classList.remove('hidden'); window.scrollTo({ top: 0, behavior: 'smooth' });
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'AI 正在分析，请稍候…';
+      quizForm.setAttribute('aria-busy', 'true');
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json; charset=utf-8' },
+          body: JSON.stringify({
+            areas,
+            blocker: selected('blocker'),
+            goal: selected('goal'),
+            foundation: selected('foundation'),
+            description: description.value.trim()
+          })
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) throw new Error(payload.message || 'AI 分析失败，请稍后再试');
+        renderResults(payload.result);
+        formView.classList.add('hidden');
+        resultView.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        showToast(error.message || 'AI 分析失败，请稍后再试');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '快速生成建议 <span>→</span>';
+        quizForm.removeAttribute('aria-busy');
+      }
     });
     document.getElementById('saveImageBtn').addEventListener('click', saveResultImage);
     document.getElementById('editBtn').addEventListener('click', () => { resultView.classList.add('hidden'); formView.classList.remove('hidden'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
