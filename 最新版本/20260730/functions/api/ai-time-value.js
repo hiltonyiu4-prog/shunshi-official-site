@@ -1,4 +1,4 @@
-const DEFAULT_LLM_BASE_URL = "https://ark.cn-beijing.volces.com/api/coding/v3";
+const DEFAULT_LLM_BASE_URL = "https://api.deepseek.com";
 const DEFAULT_LLM_MODEL = "deepseek-v4-pro";
 const REQUEST_TIMEOUT_MS = 35000;
 
@@ -34,7 +34,7 @@ const FOUNDATION_LABELS = {
 
 export async function onRequestPost({ request, env }) {
   try {
-    const apiKey = env.DEEPSEEK_API_KEY || env.REPORT_LLM_API_KEY;
+    const apiKey = env.AI_TIME_VALUE_LLM_API_KEY || env.DEEPSEEK_API_KEY || env.REPORT_LLM_API_KEY;
     if (!apiKey) return json({ ok: false, message: "AI 服务尚未配置" }, 503);
 
     const input = validateInput(await request.json());
@@ -74,7 +74,7 @@ function validateInput(value) {
 async function generateAnalysis(env, apiKey, input) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  const baseUrl = (env.DEEPSEEK_BASE_URL || env.REPORT_LLM_BASE_URL || DEFAULT_LLM_BASE_URL).replace(/\/+$/, "");
+  const baseUrl = (env.AI_TIME_VALUE_LLM_BASE_URL || DEFAULT_LLM_BASE_URL).replace(/\/+$/, "");
   const endpoint = baseUrl.endsWith("/chat/completions") ? baseUrl : `${baseUrl}/chat/completions`;
   const areaEntries = input.areas.map((key) => ({ key, title: AREA_LABELS[key] }));
 
@@ -86,7 +86,7 @@ async function generateAnalysis(env, apiKey, input) {
         "content-type": "application/json; charset=utf-8",
       },
       body: JSON.stringify({
-        model: env.DEEPSEEK_MODEL || env.REPORT_LLM_MODEL || DEFAULT_LLM_MODEL,
+        model: env.AI_TIME_VALUE_LLM_MODEL || DEFAULT_LLM_MODEL,
         temperature: 0.35,
         max_tokens: 2200,
         thinking: { type: "disabled" },
