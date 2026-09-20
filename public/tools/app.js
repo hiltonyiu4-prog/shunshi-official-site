@@ -11,9 +11,9 @@ import {
   sampleOrders,
   toCSV,
   toMarkdown,
-} from "./engine.js";
-import { mountAI, enhanceWithAI, mountAIResult, readAIChoice } from "./ai.js";
-import { homeView } from "./home.js";
+} from "./engine.js?v=20260920";
+import { mountAI, enhanceWithAI, mountAIResult, readAIChoice } from "./ai.js?v=20260920";
+import { homeView } from "./home.js?v=20260920";
 const $ = (s) => document.querySelector(s),
   esc = (s) =>
     String(s ?? "").replace(
